@@ -144,3 +144,163 @@ html, body, #root {
     font-size: 16px;
     margin-top: 4px;
 }
+.suggestions {
+    width: 80%;
+    padding: 0px 10%;
+    display: flex;
+    border-bottom: 0.1rem solid #DCDEDD;
+}
+.suggLeftContainer {
+    height: 500px;
+    width: 50%;
+    border-right: 0.1rem solid #DCDEDD;
+    margin: -10px 0px 24px 0px;
+    display: flex;
+    justify-content: flex-end;
+}
+.featuredCard {
+    width: 100%;
+    padding: 24px 7% 0px 0px;
+}
+.featuredCard:hover .featuredProjectHeading {
+    color: #037362;
+    text-decoration: underline;
+}
+.featuredHeading {
+    color: #656969;
+    font-family: 'Open Sans';
+    font-size: 13px;
+    font-weight: 900;
+    margin: 0px 0px 10px 0px;
+}
+.featuredCardProjectImg {
+    width: 100%;
+    height: 50%;
+    background-color: #DCDEDD;
+}
+.featuredProjectHeading {
+    color: #282828;
+    font-size: 24px;
+    cursor: pointer;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 20px 0px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.featuredProjectHeading:hover {
+    color: #037362;
+    text-decoration: underline;
+}
+.featuredProjectDescription {
+    font-size: 18px;
+    color: #282828;
+    letter-spacing: 0.5px;    
+    max-height: 42px;
+    position: relative;
+    overflow-y: hidden;
+}
+.featuredProjectDescription::after {
+    content: '...';
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+}
+.featuredProjectAuthor {
+    margin: 15px 0px;
+    color: #656969;
+    font-family: 'Open Sans';
+    font-size: 15px;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.suggRightContainer {
+    height: 500px;
+    width: 50%;
+    margin: -10px 0px 24px 0px;
+    display: flex;
+    justify-content: flex-end;
+}
+.recommendationList {
+    width: 100%;
+    padding: 24px 0px 0px 7%;
+}
+.recommendationHeading {
+    color: #656969;
+    font-family: 'Open Sans';
+    font-size: 13px;
+    font-weight: 900;
+    margin: 0px 0px 0px 7%;
+}
+.recommendationCard {
+    height: 25%;
+    margin: 0px 0px 0px 7%;
+    display: flex;
+    border-bottom: 0.1rem solid #DCDEDD;
+    padding: 10px 0px;
+}
+.rcmdCardImg {
+    width: 40%;
+    min-width: 120px;
+    background-color: #DCDEDD;
+    margin-right: 10px;
+}
+.rcmdCardDetails {
+    padding: 0px 10px;
+    width: 60%;
+}
+.rcmdCardHeading {
+    color: #282828;
+    font-family: 'Open Sans';
+    font-size: 15px;
+    letter-spacing: 0.1px;
+    max-height: 25px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-bottom: 5px;
+    cursor: pointer;
+    font-weight: 500;
+}
+.rcmdCardHeading:hover {
+    color: #037362;
+    text-decoration: underline;
+}
+.rcmdCardFundedPercentage {
+    color: #037362;
+    font-family: 'Open Sans';
+    font-size: 14px;
+    letter-spacing: 0.1px;
+    max-height: 25px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+.rcmdCardAuthor {
+    color: #656969;
+    font-family: 'Open Sans';
+    font-size: 13px;
+    letter-spacing: 0.1px;
+    max-height: 25px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+.recentUploads {
+    height: 563px;
+    border-bottom: 0.1rem solid #DCDEDD;
+    width: 80%;
+    padding: 0px 10%;
+}
+.footer {
+    height: 155px;
+    background: url(./assets/bg3.png) no-repeat 100% 100%;
+    background-size: 321px 220px;
+}
