@@ -304,3 +304,37 @@ html, body, #root {
     background: url(./assets/bg3.png) no-repeat 100% 100%;
     background-size: 321px 220px;
 }
+
+.footerContainer {
+    position: relative;
+    margin-top: 30px;
+    margin-left: 30%;
+    margin-right: 30%;
+    display: flex;
+}
+
+.twitter-icon {
+    flex: 1;
+    cursor: pointer;
+}
+
+.github-icon {
+    flex: 1;
+    cursor: pointer;
+}
+
+.insta-icon {
+    cursor: pointer;
+}
+
+.footerBottom{
+    position: relative;
+}
+
+.trademark {
+    position: relative;
+    margin-left: 45%;
+    margin-top: 50px;
+    font-size: large;
+    font-weight: bolder;
+}
