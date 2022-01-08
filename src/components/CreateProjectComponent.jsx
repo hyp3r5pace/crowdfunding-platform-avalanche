@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 
 function CreateProjectComponent(props) {
-    const { submit, handleSubmit } = useForm()
+    const { submit, errors, handleSubmit } = useForm()
     return (
         // onSubmit function to do further operation with form data --> not defined yet
         <div className="create-form">
@@ -23,9 +23,9 @@ function CreateProjectComponent(props) {
                 <label>Project Link</label>
                 <input type="url" name="project-link" placeholder="Enter link to the project" ref={submit} />
                 <label>Funding Goal (AVAX)</label>
-                <input type="number" step="0.00001" name="funding-goal" placeholder="Enter the funding goal" required ref={submit} />
-                <label>Duration</label>
-                <input type="number" name="duration" placeholder="Enter the duration for the funding" required ref={submit} />
+                <input type="number" step="0.00001" name="funding-goal" placeholder="Enter the funding goal" min="0.00001" required ref={submit} />
+                <label>Duration (Days)</label>
+                <input type="number" name="duration" placeholder="Enter the duration for the funding" min="1" required ref={submit} />
                 <label>Refund policy</label>
                 <select name="refund" required ref={submit}>
                     <option value="refundable">Refundable</option>
