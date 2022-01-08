@@ -299,6 +299,9 @@ html, body, #root {
     width: 80%;
     padding: 0px 10%;
 }
+
+/* Footer CSS class */
+
 .footer {
     height: 155px;
     background: url(./assets/bg3.png) no-repeat 100% 100%;
@@ -338,3 +341,6 @@ html, body, #root {
     font-size: large;
     font-weight: bolder;
 }
+
+/* start a project CSS class */
+
