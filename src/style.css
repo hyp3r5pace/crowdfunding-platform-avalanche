@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Erica+One');
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300);
 html, body, #root {
     width: 100%;
     height: 100%;
@@ -421,3 +422,86 @@ form {
     cursor: pointer;
 }
  
+
+.connectWallet {
+    position: absolute;
+}
+
+.typingContainer {
+    margin-left: 32em;
+    margin-top: 8em;
+}
+
+.typing {
+    font-family: 'Inconsolata', Consolas, monospace;
+    font-size: 4em;
+    color: #05ce78;
+    position: relative;
+    margin: 0 auto;
+    overflow: hidden;
+    border-right: .10em solid black;
+    white-space: nowrap;
+    text-decoration: none;
+    letter-spacing: .05em;
+    animation: 
+        typing 3.5s steps(40, end),
+        blink-caret .75s step-end infinite;   
+}
+
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent; border-bottom: 0; }
+    50% { border-color: black; }
+}
+
+.walletButton {
+    padding: 20px 40px;
+    background: none;
+    border: none;
+    position: relative;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 3px;
+    cursor: pointer;
+    margin-top: 15em;
+    margin-left: 47em;
+}
+.walletButton:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    border: 2px solid #000;
+    transition: transform .2s;
+} 
+
+.walletButton:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    border: 2px solid #000;
+    transition: transform .2s;
+} 
+
+.walletButton:after {
+    transform: translate(3px, 3px);
+}	
+.walletButton:before {
+    transform: translate(-3px, -3px)
+}
+.walletButton:hover:after {
+        transform: translate(0);
+}
+
+.walletButton:hover:before {
+    transform: translate(0);
+}

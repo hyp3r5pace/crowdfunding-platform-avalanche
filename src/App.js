@@ -6,13 +6,12 @@ import CategoryComponent from "./components/CategoryComponent";
 import { BrowserRouter, Route } from "react-router-dom";
 import { Switch } from "react-md";
 import CreateProjectComponent from "./components/CreateProjectComponent";
+import ConnectWallet from "./components/ConnectWallet";
 
 function App() {
   return (
     <div className="app">
-      <NavbarComponent />
-      <CreateProjectComponent />
-      <FooterComponent />
+      <ConnectWallet />
     </div>
   );
 }
