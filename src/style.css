@@ -11,6 +11,9 @@ html, body, #root {
     height: 100%;
     background-color: #FFFFFF;
 }
+
+/* Navbar Css */
+
 .navbar {
     height: 66px;
     width: 100%;
@@ -53,6 +56,9 @@ html, body, #root {
     letter-spacing: 0.5px;
     font: 'Open Sans';
 }
+
+/* Category Css */
+
 .category {
     height: 60px;
     width: 100%;
@@ -90,6 +96,9 @@ html, body, #root {
   opacity: 1;
   transform: translate3d(0, 0.2em, 0);
 }
+
+/* HomeComponent Css */
+
 .siteStats {
     background: url(./assets/bg1.png) left no-repeat,
     url(./assets/bg2.png) right no-repeat;
@@ -306,40 +315,80 @@ html, body, #root {
     height: 155px;
     background: url(./assets/bg3.png) no-repeat 100% 100%;
     background-size: 321px 220px;
+    border-top: 0.1rem solid #DCDEDD;
 }
 
 .footerContainer {
-    position: relative;
-    margin-top: 30px;
-    margin-left: 30%;
-    margin-right: 30%;
     display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.icon {
+    width: 33%;    
 }
 
 .twitter-icon {
-    flex: 1;
+    color: #1DA1F2;
     cursor: pointer;
 }
 
+.twitter-icon svg {
+    width: 25px;
+    height: 25px;
+}
+
 .github-icon {
-    flex: 1;
     cursor: pointer;
+    color: #282828;
+}
+
+.github-icon svg {
+    width: 24px;
+    height: 24px;
 }
 
 .insta-icon {
     cursor: pointer;
+    color: #FFFFFF;
 }
 
-.footerBottom{
-    position: relative;
+.insta-icon svg {
+    width: 24px;
+    height: 24px;
+    stroke-width: 18px;
 }
 
-.trademark {
-    position: relative;
-    margin-left: 45%;
-    margin-top: 50px;
-    font-size: large;
-    font-weight: bolder;
+.insta-icon-bg {
+    width: 24px;
+    border-radius: 31%;
+    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+    height: 24px;
+}
+
+.trademarkSection {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+}
+
+.externalLinks {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.linkWrapper {
+    width: 40%;
+    max-width: 200px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* start project CSS section */

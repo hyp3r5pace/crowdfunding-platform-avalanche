@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 
 function CreateProjectComponent(props) {
-    const { submit, errors, handleSubmit } = useForm()
+    const { submit, errors, handleSubmit } = useForm();
     return (
         // onSubmit function to do further operation with form data --> not defined yet
         <div className="create-form">
