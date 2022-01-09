@@ -473,22 +473,33 @@ form {
  
 
 .connectWallet {
-    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+.walletButtonContainer {
+    height: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 .typingContainer {
-    margin-left: 32em;
-    margin-top: 8em;
+    height: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .typing {
     font-family: 'Inconsolata', Consolas, monospace;
+    font-weight: 800;
     font-size: 4em;
     color: #05ce78;
-    position: relative;
-    margin: 0 auto;
+    width: 550px;
     overflow: hidden;
-    border-right: .10em solid black;
+    border-right: .10em solid #282828;
     white-space: nowrap;
     text-decoration: none;
     letter-spacing: .05em;
@@ -499,12 +510,12 @@ form {
 
 @keyframes typing {
     from { width: 0 }
-    to { width: 100% }
+    to { width: 550px }
 }
 
 @keyframes blink-caret {
     from, to { border-color: transparent; border-bottom: 0; }
-    50% { border-color: black; }
+    50% { border-color: #282828; }
 }
 
 .walletButton {
@@ -516,8 +527,7 @@ form {
     font-weight: bold;
     letter-spacing: 3px;
     cursor: pointer;
-    margin-top: 15em;
-    margin-left: 47em;
+    height: 60px;
 }
 .walletButton:after {
     content: '';
@@ -526,7 +536,7 @@ form {
     left: 0;
     bottom: 0;
     right: 0;
-    border: 2px solid #000;
+    border: 2px solid #282828;
     transition: transform .2s;
 } 
 
@@ -537,7 +547,7 @@ form {
     left: 0;
     bottom: 0;
     right: 0;
-    border: 2px solid #000;
+    border: 2px solid #282828;
     transition: transform .2s;
 } 
 

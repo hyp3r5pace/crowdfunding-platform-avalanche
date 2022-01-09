@@ -10,14 +10,14 @@ function App() {
   return (
     <div className="app">
       <ConnectWallet />
-      <NavbarComponent />
+      {/* <NavbarComponent />
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<HomeComponent/>} />
             <Route path="create_project" element={<CreateProjectComponent />} />
           </Routes>
         </BrowserRouter>
-      <FooterComponent />
+      <FooterComponent /> */}
     </div>
   );
 }

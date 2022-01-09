@@ -1,16 +1,14 @@
-import { useEffect } from 'react'
-
-function ConnectWallet(props) {
+export default function ConnectWallet(props) {
     return (
         <div className='connectWallet'>
             <div className='typingContainer'>
-                <h1 className='typing'>DeFindstarter</h1>
+                <div className='typing'>DeFindstarter</div>
             </div>
-            <button className='walletButton'>
-                Connect Metamask
-            </button>
+            <div className="walletButtonContainer">
+                <button className='walletButton'>
+                    Connect to Metamask
+                </button>
+            </div>
         </div>
     );
 }
-
-export default ConnectWallet;
