@@ -1,6 +1,9 @@
+import CategoryComponent from "./CategoryComponent";
+
 export default function HomeComponent(props) {
   return (
     <>
+      <CategoryComponent />
       {/* siteStats */}
       <div className="siteStats">
         <div className="tagLine">
