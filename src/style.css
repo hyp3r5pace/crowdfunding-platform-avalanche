@@ -309,9 +309,101 @@ html, body, #root {
     width: 80%;
     padding: 0px 10%;
 }
-
+.recentUploadsHeader {
+    display: flex;
+    width: 100%;  
+    justify-content: space-between;  
+}
+.scrollButtons {
+    width: 200px;
+    height: 58px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.scrollNavBtn {
+    width: 20px;
+    height: 20px;
+    color: #282828;
+    padding: 0px 0px 0px 40px;
+}
+.scrollNavBtn:hover {
+    color: #285AEB;
+}
+.recentUploadsHeading {
+    color: #656969;
+    font-family: 'Open Sans';
+    font-size: 13px;
+    font-weight: 900;
+    margin: 20px 0px;
+}
+.recentUploadsContainer {
+    width: 100%;
+    height: 80%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    -ms-overflow-style: none;  
+    scrollbar-width: none;  
+}
+.recentUploadsContainer::-webkit-scrollbar {
+    display: none;
+  }
+.projectCard {
+    width: 300px;
+    display: inline-block;
+    height: 100%;
+    padding: 40px 15px 0px 0px;
+}
+.cardImg {
+    width: 100%;
+    background-color: #DCDEDD;
+    height: 40%;
+}
+.cardDetail {
+    width: 100%;
+    height: 55%;
+}
+.cardTitle {
+    font-family: 'Open Sans';
+    padding: 12px 0px;
+    font-size: 19px;
+    font-weight: 500;
+    color: #282828;
+}
+.cardTitle:hover {
+    color: #037362;
+    text-decoration: underline;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.cardDesc {
+    font-size: 18px;
+    color: #282828;
+    letter-spacing: 0.5px;    
+    max-height: 42px;
+    position: relative;
+    white-space: initial;
+    overflow-y: hidden;
+}
+.cardDesc::after {
+    content: '...';
+    position: absolute;
+    right: 0px;
+    bottom: -1px;
+}
+.cardAuthor {
+    margin: 25px 0px;
+    color: #656969;
+    font-family: 'Open Sans';
+    font-size: 15px;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 /* Footer CSS class */
-
 .footer {
     height: 155px;
     background: url(./assets/bg3.png) no-repeat 100% 100%;
