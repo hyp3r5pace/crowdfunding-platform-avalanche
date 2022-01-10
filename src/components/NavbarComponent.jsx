@@ -1,11 +1,13 @@
+import { useNavigate } from "react-router-dom";
 export default function NavbarComponent(props) {
-  return (
+    const navigate = useNavigate();
+    return (
     <div className="navbar">
-      <div className="leftNavbarContainer">
-        <div className="navItem">Home</div>
-        <div className="navItem">Discover</div>
-        <div className="navItem">Start a project</div>
-      </div>
+      <nav className="leftNavbarContainer">
+        <div className="navItem" onClick={() => navigate('/')}>Home</div>
+        <div className="navItem" onClick={() => navigate('discover')}>Discover</div>
+        <div className="navItem" onClick={() => navigate('create_project')}>Start a project</div>
+      </nav>
       <div className="centerNavbarContainer">DEFINDSTARTER</div>
       <div className="rightNavbarContainer">
         <div className="navItem">Connect to Metamask</div>

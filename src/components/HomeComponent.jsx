@@ -76,7 +76,7 @@ export default function HomeComponent(props) {
             </div>
             
             <div className="recommendationCard">
-              <div className="rcmdCardImg"></div>
+              <div className="rcmdCardImg" ></div>
               <div className="rcmdCardDetails">
                 <div className="rcmdCardHeading">
                   Discos : there us sue the tablethere us sue the tablethere us

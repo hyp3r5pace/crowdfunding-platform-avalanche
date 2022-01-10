@@ -161,7 +161,6 @@ html, body, #root {
     border-bottom: 0.1rem solid #DCDEDD;
 }
 .suggLeftContainer {
-    height: 500px;
     width: 50%;
     border-right: 0.1rem solid #DCDEDD;
     margin: -10px 0px 24px 0px;
@@ -185,8 +184,10 @@ html, body, #root {
 }
 .featuredCardProjectImg {
     width: 100%;
-    height: 50%;
+    padding-top: 57%;
     background-color: #DCDEDD;
+    background: url(./assets/pg1.jpg) no-repeat;
+    background-size: contain;
 }
 .featuredProjectHeading {
     color: #282828;
@@ -253,10 +254,13 @@ html, body, #root {
     padding: 10px 0px;
 }
 .rcmdCardImg {
-    width: 40%;
-    min-width: 120px;
+    width: 200px;
+    min-width: 200px;
     background-color: #DCDEDD;
     margin-right: 10px;
+    height: 112.5px;
+    background: url(./assets/pg1.jpg);
+    background-size: contain;
 }
 .rcmdCardDetails {
     padding: 0px 10px;
@@ -358,7 +362,9 @@ html, body, #root {
 .cardImg {
     width: 100%;
     background-color: #DCDEDD;
-    height: 40%;
+    height: 169px;
+    background: url(./assets/pg1.jpg);
+    background-size: contain;
 }
 .cardDetail {
     width: 100%;
@@ -655,4 +661,32 @@ form {
 
 .walletButton:hover:before {
     transform: translate(0);
+}
+
+/* Discover Component css */
+.discoverHeading {
+    height: 40px;
+    font-size: 20px;
+    font-family: 'Open Sans';
+    color: #282828;
+    margin: 10px 12%;
+    /* display: flex;
+    justify-content: center; */
+}
+.discoverContainer {
+    height: 800px;
+    width: 80%;
+    padding: 20px 10%;
+    /* background-color: #034752; */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    overflow-x: auto;
+    overflow-y: auto;
+}
+.projectCardWrapper {
+    height: 380px;
+    display: inline-block;
+    margin: 0px 0px 0px 20px;
+    /* background-color: #037362; */
 }

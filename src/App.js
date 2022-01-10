@@ -5,19 +5,22 @@ import FooterComponent from "./components/FooterComponent";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import CreateProjectComponent from "./components/CreateProjectComponent";
 import ConnectWallet from "./components/ConnectWallet";
-
+import DiscoverComponent from "./components/DiscoverComponent";
 function App() {
   return (
     <div className="app">
       {/* <ConnectWallet /> */}
-      <NavbarComponent />
+      
         <BrowserRouter>
+        <NavbarComponent />
           <Routes>
             <Route path="/" element={<HomeComponent/>} />
             <Route path="create_project" element={<CreateProjectComponent />} />
+            <Route path="discover" element={<DiscoverComponent/>} />
           </Routes>
+          <FooterComponent />
         </BrowserRouter>
-      <FooterComponent />
+      
     </div>
   );
 }
