@@ -916,7 +916,6 @@ form {
 /* Profile page */
 
 .profileContainer {
-    margin-bottom: 10%;
 }
 
 .profileHeadingContainer h1 {
@@ -951,17 +950,8 @@ form {
     text-align: center;
 }
 
-.ongoingFundedProjectContainer {
-    margin-top: 7%;
-}
-
-.ongoingFundedProjectHeading {
-    position: relative;
-    margin-left: 4%;
-}
-
-.ongoingFundedProjectHeading h2 {
-    font-size: 2.5em;
+.projectsContainer {
+    margin-top: 80px;
 }
 
 

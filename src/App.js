@@ -16,7 +16,7 @@ function App() {
         <BrowserRouter>
         <NavbarComponent />
           <Routes>
-            <Route path="/" element={<ProjectComponent />} />
+            <Route path="/" element={<ProfileComponent />} />
             <Route path="create_project" element={<CreateProjectComponent />} />
             <Route path="discover" element={<DiscoverComponent/>} />
           </Routes>
