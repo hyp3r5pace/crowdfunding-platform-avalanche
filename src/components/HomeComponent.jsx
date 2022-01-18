@@ -1,6 +1,9 @@
 import CategoryComponent from "./CategoryComponent";
 import ScrollShowbarComponent from "./ScrollShowbarComponent";
+import context from "../context";
+import { useContext } from "react";
 export default function HomeComponent(props) {
+  const contest = useContext(context);
   return (
     <>
       <CategoryComponent />
