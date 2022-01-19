@@ -28,6 +28,38 @@ function App() {
       signer = provider.getSigner();
       add = await signer.getAddress();
       setAddress(add);
+
+      // switch network to avalanche
+      try {
+        await window.ethereum.request({
+          method: 'wallet_switchEthereumChain',
+          params: [{ chainId: '0xa869' }],
+        });
+      } catch(switchError) {
+        // This error code indicates that the chain has not been added to MetaMask.
+        if (switchError.code === 4902) {
+          try {
+            await window.ethereum.request({
+              method: 'wallet_addEthereumChain',
+              params: [
+                {
+                  chainId: '0xa869',
+                  chainName: 'Avalanche Fuji Testnet',
+                  nativeCurrency: {
+                    name: 'Avalanche',
+                    symbol: 'AVAX',
+                    decimals: 18,
+                  },
+                  rpcUrls: ['https://api.avax-test.network/ext/bc/C/rpc'],
+                },
+              ],
+            });
+          } catch(addError) {
+            alert("Error in add avalanche FUJI testnet");
+          }
+        }
+      }
+
       try {
         const contract = new ethers.Contract(CONTRACT_ADDRESS, abi, signer);
         setMyContract(contract);
