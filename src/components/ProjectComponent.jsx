@@ -61,10 +61,30 @@ function ProjectComponent(props) {
                     <p className="projectLinkLabel">Project link:    
                         <a className="projectLink" href="https://www.kickstarter.com/"> https://www.kickstarter.com/</a></p>
                 </div>
-                <div className="ownerNameContainer">
-                    <p className="ownerNameLabel">Owner: 
-                        <a className="ownerName" href="https://www.instagram.com/sayan.kar2000/"> Sayan Kar</a>
+                <div className="projectLinkContainer">
+                    <p className="projectLinkLabel">Owner: 
+                        <a className="projectLink" href="https://www.instagram.com/sayan.kar2000/"> Sayan Kar</a>
                     </p>
+                </div>
+            </div>
+            <div className="contributorHeader">
+                Contributors
+            </div>
+            <div className="contributors">
+                <div className="tableRow header">
+                    <div className="item ">Name</div>
+                    <div className="item border">Address</div>
+                    <div className="item border">Amount</div>
+                </div>
+                <div className="tableRow lightRow">
+                    <div className="item ">Sayan kar</div>
+                    <div className="item border">dbjahggiauskjjjjjjdbjahggiauskjjjjjjdbjahggiauskjjjjjjdbjahggiauskjjjjjjdbjahggiauskjjjjjj</div>
+                    <div className="item border">45</div>
+                </div>
+                <div className="tableRow darkRow">
+                    <div className="item ">deb</div>
+                    <div className="item border">Address</div>
+                    <div className="item border">Amount</div>
                 </div>
             </div>
         </div>

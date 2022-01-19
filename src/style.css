@@ -703,34 +703,38 @@ form {
 
 .projectHeading h1{
     font-size: 200%;
+    font-family: 'Open Sans';
+    color:#282828
 }
 
 .projectTopContainer {
     display: flex;
+    padding: 20px 10%;
+    width: 80%;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 .projectImage {
-    position: relative;
-    padding-left: 6%;
-    padding-top: 1%;
-    flex: 1;
+    width: 45%;
+    min-width: 700px;
 }
 
 .projectImage img {
-    height: 500px;
+    width: 100%;
+    background-color: #DCDEDD;
 }
 
 .projectInformationContainer {
-    flex: 1;
-    padding-left: 3%;
-    padding-top: 1%;
+    width: 50%;
+    min-width: 700px;
 }
 
 .projectInformationContainer progress {
     width: 95%;
     height: 1em;
     background: white;
-    color: green;
+    color: #037362;
 }
 
 .fundingValue h2 {
@@ -801,16 +805,20 @@ form {
 }
 
 .projectBottomContainer {
-    margin-top: 10%;
+    margin-top: 100px;
+    padding: 0px 10%;
 }
 
 .aboutContainer {
-    padding-left: 5%;
-    padding-right: 7%;
+    font-size: 18px;
+    font-family: 'Open Sans';
+    color:#282828;
+    font-weight: 500;
+
 }
 .about {
     font-size: 2.7em;
-    text-align: left;
+    text-align: center;
 }
 
 .description {
@@ -818,60 +826,96 @@ form {
 }
 
 .projectLinkContainer {
-    margin-left: 5%;
-    margin-right: 7%;
     padding-left: 1%;
-    margin-top: 5%;
-    background: #05ce78;
+    background: #037362;
     padding-top: 0.5%;
     padding-bottom: 0.5%;
     box-shadow: 5px 5px 10px;
+    border-radius: 5px;
+    color: white;
+    margin: 10px 0px;
 }
 
 .projectLinkContainer:hover {
     box-shadow: inset 0 0 10px;
+    color: #0a0a0a;
+}
+
+.projectLinkContainer:hover .projectLink {
+    color:#282828;
 }
 
 .projectLinkLabel {
     font-size: 1.4em;
     font-weight: 800;
-
 }
 
 .projectLink {
     text-decoration: none;
-    color: blue;
+    color: #DCDEDD;
+    margin-left: 30px;
 }
 
-.ownerNameContainer {
-    margin-left: 5%;
-    margin-right: 7%;
-    padding-left: 1%;
-    margin-top: 5%;
-    background: #05ce78;
-    padding-top: 0.5%;
-    padding-bottom: 0.5%;
-    box-shadow: 5px 5px 10px;
-}
-
-.ownerNameContainer:hover {
-    box-shadow: inset 0 0 10px;
-}
-
-.ownerNameLabel {
-    font-size: 1.4em;
+.contributorHeader {
+    width: 80%;
+    margin: 0 10%;
+    font-size: 28px;
+    color: #282828;
+    font-family: 'Open Sans';
     font-weight: 800;
+    margin-top: 40px;
 }
 
-.ownerName {
-    text-decoration: none;
-    color:blue;
+.contributors {
+    width: 80%;
+    margin: 0 10%;
+    max-height: 500px;
+    overflow: auto;
+    margin-top: 20px;
 }
 
+.tableRow {
+    width: 100%;
+    height: 50px;
+    display: flex;
+}
+
+.lightRow {
+    background-color: #DCDEDD;
+}
+
+.darkRow {
+    background-color: #cccfcd;
+}
+
+.header {
+    border-bottom: 1px solid #656969;
+    background-color:#bebebe;
+}
+
+.header .item {
+    font-weight: 700;
+}
+
+.item {
+    width: 33%;
+    display: flex;
+    justify-content: flex-start;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 0px 10px;
+    align-items: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.border {
+    border-left: 1px solid #8f8f8f;
+}
 /* Profile page */
 
 .profileContainer {
-    margin-bottom: 10%;
 }
 
 .profileHeadingContainer h1 {
@@ -906,17 +950,8 @@ form {
     text-align: center;
 }
 
-.ongoingFundedProjectContainer {
-    margin-top: 7%;
-}
-
-.ongoingFundedProjectHeading {
-    position: relative;
-    margin-left: 4%;
-}
-
-.ongoingFundedProjectHeading h2 {
-    font-size: 2.5em;
+.projectsContainer {
+    margin-top: 80px;
 }
 
 /* Payment modal */
