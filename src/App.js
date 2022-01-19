@@ -8,6 +8,7 @@ import ConnectWallet from "./components/ConnectWallet";
 import DiscoverComponent from "./components/DiscoverComponent";
 import ProjectComponent from "./components/ProjectComponent";
 import ProfileComponent from "./components/ProfileComponent";
+import React from 'react';
 function App() {
   return (
     <div className="app">
@@ -16,7 +17,7 @@ function App() {
         <BrowserRouter>
         <NavbarComponent />
           <Routes>
-            <Route path="/" element={<ProfileComponent />} />
+            <Route path="/" element={<ProjectComponent />} />
             <Route path="create_project" element={<CreateProjectComponent />} />
             <Route path="discover" element={<DiscoverComponent/>} />
           </Routes>

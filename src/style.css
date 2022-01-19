@@ -919,4 +919,54 @@ form {
     font-size: 2.5em;
 }
 
+/* Payment modal */
 
+.modal {
+    display: block;
+    position: fixed;
+    height: 50%;
+    width: 50%;
+    left: 25%;
+    top: 25%;
+    z-index: 1;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: #fefefe;
+    animation-name: animatetop;
+    animation-duration: 0.5s;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+    border-radius: 25px;
+}
+
+.modalContent {
+    position: relative;
+    background-color: #fefefe;
+    border: 1px solid #888;
+    margin-left: 0%;
+    margin-top: 0%;
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+}
+
+.closeBtn {
+    float: right;
+    color: lightgray;
+    font-size: 24px;
+    font-weight: bold;
+    margin-right: 2%;
+    cursor: pointer;
+}
+
+.closeBtn:hover {
+    color: darkgray;
+}
+
+@-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0} 
+    to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:25%; opacity:1}
+}

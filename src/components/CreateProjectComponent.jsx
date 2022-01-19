@@ -20,6 +20,8 @@ function CreateProjectComponent(props) {
                 <textarea name="project-description" placeholder="Enter project description" cols="50" rows="5" required ref={submit} />
                 <label>Creator Name</label>
                 <input name="creator-name" placeholder="Enter Creator Name" required ref={submit} />
+                <label>Upload Project Image</label>
+                <input type="file" id="myFile" name="filename" accept="image/*" ref={submit} />
                 <label>Project Link</label>
                 <input type="url" name="project-link" placeholder="Enter link to the project" ref={submit} />
                 <label>Funding Goal (AVAX)</label>

@@ -1,6 +1,16 @@
+import PaymentModal from "./PaymentModal";
+import React from 'react';
 
 function ProjectComponent(props) {
+
+    const [modalShow, setModalShow] = React.useState(false);
+
+    function onClickPayment() {
+        setModalShow(true);
+    }
+
     return (
+        <>
         <div className="projectContainer">
             <div className="projectHeading">
                 <h1>Project Name</h1>
@@ -26,8 +36,9 @@ function ProjectComponent(props) {
                     </div>
                     <p className="afterRemainingDaysContainer">days to go</p>
                     <div className="supportButtonContainer">
-                        <button className="supportButton">Back this project</button>
+                        <button className="supportButton" onClick={() => onClickPayment()}>Back this project</button>
                     </div>
+                    {modalShow && <PaymentModal />}
                 </div>
             </div>
             <div className="projectBottomContainer">
@@ -57,6 +68,7 @@ function ProjectComponent(props) {
                 </div>
             </div>
         </div>
+    </>
     );
 }
 
