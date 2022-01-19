@@ -49,7 +49,7 @@ function App() {
     }
   }
   const checkConnected = (component) => {
-    return !myContract ? <ConnectWallet /> : component;
+    return !myContract ? <ConnectWallet connectMetamask={connect}/> : component;
   };
   return (
     <context.Provider value={{ contract: myContract }}>

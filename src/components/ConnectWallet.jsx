@@ -5,7 +5,7 @@ export default function ConnectWallet(props) {
                 <div className='typing'>DeFindstarter</div>
             </div>
             <div className="walletButtonContainer">
-                <button className='walletButton'>
+                <button className='walletButton' onClick={props.connectMetamask}>
                     Connect to Metamask
                 </button>
             </div>
