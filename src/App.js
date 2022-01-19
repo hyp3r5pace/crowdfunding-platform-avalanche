@@ -57,17 +57,11 @@ function App() {
         <BrowserRouter>
           {myContract && <NavbarComponent />}
           <Routes>
-<<<<<<< HEAD
-            <Route path="/" element={<ProjectComponent />} />
-            <Route path="create_project" element={<CreateProjectComponent />} />
-            <Route path="discover" element={<DiscoverComponent/>} />
-=======
             <Route path="/" element={checkConnected(<HomeComponent />)} />
             <Route path="create_project" element={checkConnected(<CreateProjectComponent />)} />
             <Route path="discover" element={checkConnected(<DiscoverComponent />)} />
             <Route path="profile" element={checkConnected(<ProfileComponent />)} />
             <Route path="project" element={checkConnected(<ProjectComponent />)} />
->>>>>>> 11296d36d4c7d91d885c93d1d68ca108ddf92d02
           </Routes>
           {myContract && <FooterComponent />}
         </BrowserRouter>
