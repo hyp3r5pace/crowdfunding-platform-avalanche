@@ -9,9 +9,6 @@ export default function NavbarComponent(props) {
         <div className="navItem" onClick={() => navigate('create_project')}>Start a project</div>
       </nav>
       <div className="centerNavbarContainer">DEFINDSTARTER</div>
-      <div className="rightNavbarContainer">
-        <div className="navItem">Connect to Metamask</div>
-      </div>
     </div>
   );
 }
