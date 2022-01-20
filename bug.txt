@@ -1,1 +1,2 @@
 1. The cross button in payment modal is not working as intended, i.e, it is not closing the modal on click
+2. Problems with CSS position of projectInformationContainer in project component

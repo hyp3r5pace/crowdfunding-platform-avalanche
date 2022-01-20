@@ -1,23 +1,18 @@
-import { useEffect } from 'react'
 
 function PaymentModal(props) {
     function closeModal() {
         var btn = document.getElementsByClassName("closeBtn");
         var modal = document.getElementsByClassName("modal");
     
-        btn.onClick = () => {
+        btn.onclick = () => {
             modal.style.display = "none";
         }
     }
 
-    useEffect(() => {
-        closeModal();
-    });
-
     return (
         <div className="modal">
             <div className="modalHeader">
-                <h1>Payment <span className="closeBtn">&times;</span></h1>
+                <h1>Payment <span className="closeBtn" onClick={() => closeModal()}>&times;</span></h1>
             </div>
             <div className="modalContent">
                 <form className="paymentForm">
