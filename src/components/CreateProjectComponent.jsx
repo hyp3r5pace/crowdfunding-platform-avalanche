@@ -1,39 +1,94 @@
-import { useForm } from "react-hook-form";
+import { useState } from 'react';
+import { create } from 'ipfs-http-client';
 
 function CreateProjectComponent(props) {
-    const { submit, errors, handleSubmit } = useForm();
+
+    const defaultValue = {
+        category: '',
+        projectName: '',
+        description: '',
+        creatorName: '',
+        image: '',
+        link: '',
+        goal: '',
+        duration: '',
+        refundPolicy: ''
+    }
+    const [formInput, setFormInput] = useState(defaultValue);
+
+    const [inputImage, setInputImage] = useState('');
+
+    function handleChange(e) {
+        let name = e.target.name;
+        let value = e.target.value;
+        formInput[name] = value;
+        setFormInput(formInput)
+    }
+
+    async function handleImageChange(e) {
+        // read the file content on change
+        const file = e.target.files[0];
+        try {
+            const reader = new window.FileReader();
+            reader.readAsArrayBuffer(file);
+            reader.onloadend = () => {
+                console.log('File read complete');
+                setInputImage(reader.result);
+            }
+        } catch(error) {
+            alert('Error reading file: ' + error);
+            console.log(error);
+        }
+    }
+
+    async function submitProjectData(e) {
+        const client = create({ host: "ipfs.infura.io", port: 5001, protocol: 'https' });
+        e.preventDefault();    
+        if (inputImage) {
+            try {
+                const added = await client.add(inputImage);
+                console.log(added.path);
+                formInput['image'] = `ipfs.io/ipfs/${added.path}`;
+                console.log(formInput['image']);
+            } catch(error) {
+                alert('Uploading file error: ' + error);
+                console.log(error); 
+            }
+        }
+    }
+
     return (
         // onSubmit function to do further operation with form data --> not defined yet
         <div className="create-form">
-            <form>
+            <form method="post" onSubmit={submitProjectData}>
                 <h1>Create Project</h1>
                 <label>Category</label>
-                <select name = "category" required ref={submit}>
+                <select name = "category" required onChange={handleChange}>
                     <option value="design and tech">Design and Tech</option>
                     <option value="film">Film</option>
                     <option value="arts">Arts</option>
                     <option value="games">Games</option>
                 </select>
                 <label>Project Name</label>
-                <input name="project-name" placeholder="Enter the project name" required ref={submit} />
+                <input name="projectName" placeholder="Enter the project name" required onChange={handleChange}/>
                 <label>Project Description</label>
-                <textarea name="project-description" placeholder="Enter project description" cols="50" rows="5" required ref={submit} />
+                <textarea name="description" placeholder="Enter project description" cols="50" rows="5" required  onChange={handleChange}/>
                 <label>Creator Name</label>
-                <input name="creator-name" placeholder="Enter Creator Name" required ref={submit} />
+                <input name="creatorName" placeholder="Enter Creator Name" required onChange={handleChange}/>
                 <label>Upload Project Image</label>
-                <input type="file" id="myFile" name="filename" accept="image/*" ref={submit} />
+                <input type="file" name="image" accept="image/*" onChange={handleImageChange}/>
                 <label>Project Link</label>
-                <input type="url" name="project-link" placeholder="Enter link to the project" ref={submit} />
+                <input type="url" name="link" placeholder="Enter link to the project" onChange={handleChange}/>
                 <label>Funding Goal (AVAX)</label>
-                <input type="number" step="0.00001" name="funding-goal" placeholder="Enter the funding goal" min="0.00001" required ref={submit} />
+                <input type="number" step="0.00001" name="goal" placeholder="Enter the funding goal" min="0.00001" required onChange={handleChange}/>
                 <label>Duration (Days)</label>
-                <input type="number" name="duration" placeholder="Enter the duration for the funding" min="1" required ref={submit} />
+                <input type="number" name="duration" placeholder="Enter the duration for the funding" min="1" required onChange={handleChange}/>
                 <label>Refund policy</label>
-                <select name="refund" required ref={submit}>
+                <select name="refundPolicy" required onChange={handleChange}>
                     <option value="refundable">Refundable</option>
                     <option value="non-refundable">Non-Refundable</option>
                 </select>
-                <input type="submit" className="submitButton"/>
+                <input type="submit" className="submitButton" value="Submit"/>
             </form>
         </div>
     );
