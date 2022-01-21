@@ -3,7 +3,7 @@ import { create } from 'ipfs-http-client';
 
 function CreateProjectComponent(props) {
 
-    const defaultValue = {
+    const [formInput, setFormInput] = useState({
         category: '',
         projectName: '',
         description: '',
@@ -13,8 +13,7 @@ function CreateProjectComponent(props) {
         goal: '',
         duration: '',
         refundPolicy: ''
-    }
-    const [formInput, setFormInput] = useState(defaultValue);
+    });
 
     const [inputImage, setInputImage] = useState('');
 
@@ -49,12 +48,12 @@ function CreateProjectComponent(props) {
                 const added = await client.add(inputImage);
                 console.log(added.path);
                 formInput['image'] = `ipfs.io/ipfs/${added.path}`;
-                console.log(formInput['image']);
             } catch(error) {
                 alert('Uploading file error: ' + error);
                 console.log(error); 
             }
         }
+        console.log(formInput);
     }
 
     return (
@@ -64,6 +63,7 @@ function CreateProjectComponent(props) {
                 <h1>Create Project</h1>
                 <label>Category</label>
                 <select name = "category" required onChange={handleChange}>
+                    <option value="" selected disabled hidden>Select category</option>
                     <option value="design and tech">Design and Tech</option>
                     <option value="film">Film</option>
                     <option value="arts">Arts</option>
@@ -85,6 +85,7 @@ function CreateProjectComponent(props) {
                 <input type="number" name="duration" placeholder="Enter the duration for the funding" min="1" required onChange={handleChange}/>
                 <label>Refund policy</label>
                 <select name="refundPolicy" required onChange={handleChange}>
+                    <option value="" selected disabled hidden>Select Refund type</option>
                     <option value="refundable">Refundable</option>
                     <option value="non-refundable">Non-Refundable</option>
                 </select>
