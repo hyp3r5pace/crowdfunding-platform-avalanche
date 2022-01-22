@@ -75,8 +75,15 @@ function CreateProjectComponent(props) {
             }
         }
 
-        formInput['category'] = getCategoryCode();
-        formInput['refundPolicy'] = getRefundPolicyCode();
+        // check for double submit (since the formInput['category']) is changed to integer on first submit
+        // if not checked, second submit gives undefined value since getCategoryCode() doesn't have any mapping for integer code.
+        if (!(Number.isInteger(formInput['category']))) {
+            formInput['category'] = getCategoryCode();
+        }
+        // same reason as above
+        if (!(Number.isInteger(formInput['refundPolicy']))) {
+            formInput['refundPolicy'] = getRefundPolicyCode();
+        }
 
         console.log(formInput);
 
