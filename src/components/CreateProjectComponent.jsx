@@ -79,16 +79,22 @@ function CreateProjectComponent(props) {
         formInput['refundPolicy'] = getRefundPolicyCode();
 
         // upload form data to contract
-        await props.contract.CreateNewProject(
-            formInput['projectName'],
-            formInput['description'],
-            formInput['creatorName'],
-            formInput['link'],
-            formInput['image'],
-            formInput['goal'],
-            formInput['duration'],
-            0,
-            1);
+        
+        try {
+            await props.contract.CreateNewProject(
+                formInput['projectName'],
+                formInput['description'],
+                formInput['creatorName'],
+                formInput['link'],
+                formInput['image'],
+                formInput['goal'],
+                formInput['duration'],
+                formInput['category'],
+                formInput['refundPolicy']);
+        } catch(error) {
+            alert('Error on calling function: ' + error);
+            console.log(error);
+        }
         
     }
 
