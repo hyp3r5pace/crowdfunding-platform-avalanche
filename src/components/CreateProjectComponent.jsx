@@ -78,10 +78,12 @@ function CreateProjectComponent(props) {
         formInput['category'] = getCategoryCode();
         formInput['refundPolicy'] = getRefundPolicyCode();
 
+        console.log(formInput);
+
         // upload form data to contract
-        
+        let txn;
         try {
-            await props.contract.CreateNewProject(
+            txn = await props.contract.CreateNewProject(
                 formInput['projectName'],
                 formInput['description'],
                 formInput['creatorName'],
@@ -95,6 +97,9 @@ function CreateProjectComponent(props) {
             alert('Error on calling function: ' + error);
             console.log(error);
         }
+
+        await txn.wait(txn);
+        alert('Project creation complete!!');
         
     }
 
