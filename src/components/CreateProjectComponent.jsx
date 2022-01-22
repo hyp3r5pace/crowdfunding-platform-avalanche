@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { create } from 'ipfs-http-client';
+import { ethers } from 'ethers';
 
 function CreateProjectComponent(props) {
 
@@ -40,7 +41,27 @@ function CreateProjectComponent(props) {
         }
     }
 
+    function getCategoryCode() {
+        let categoryCode = {
+            'design and tech': 0,
+            'film': 1,
+            'arts': 2,
+            'games': 3,
+        };
+        return categoryCode[formInput['category']];
+    }
+
+    function getRefundPolicyCode() {
+        let refundCode = {
+            'refundable': 0,
+            'non-refundable': 1
+        };
+        return refundCode[formInput['refundPolicy']];
+    }
+
+
     async function submitProjectData(e) {
+        // handle the submit action of the form
         const client = create({ host: "ipfs.infura.io", port: 5001, protocol: 'https' });
         e.preventDefault();    
         if (inputImage) {
@@ -53,7 +74,22 @@ function CreateProjectComponent(props) {
                 console.log(error); 
             }
         }
-        console.log(formInput);
+
+        formInput['category'] = getCategoryCode();
+        formInput['refundPolicy'] = getRefundPolicyCode();
+
+        // upload form data to contract
+        await props.contract.CreateNewProject(
+            formInput['projectName'],
+            formInput['description'],
+            formInput['creatorName'],
+            formInput['link'],
+            formInput['image'],
+            formInput['goal'],
+            formInput['duration'],
+            0,
+            1);
+        
     }
 
     return (

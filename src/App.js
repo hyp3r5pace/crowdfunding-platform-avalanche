@@ -90,10 +90,10 @@ function App() {
           {myContract && <NavbarComponent />}
           <Routes>
             <Route path="/" element={checkConnected(<HomeComponent />)} />
-            <Route path="create_project" element={checkConnected(<CreateProjectComponent />)} />
+            <Route path="create_project" element={checkConnected(<CreateProjectComponent contract={myContract}/>)} />
             <Route path="discover" element={checkConnected(<DiscoverComponent />)} />
             <Route path="profile" element={checkConnected(<ProfileComponent />)} />
-            <Route path="project" element={checkConnected(<ProjectComponent />)} />
+            <Route path="project" element={checkConnected(<ProjectComponent/>)} />
           </Routes>
           {myContract && <FooterComponent />}
         </BrowserRouter>
