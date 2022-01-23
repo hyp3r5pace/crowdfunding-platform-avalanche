@@ -22,7 +22,7 @@ function CreateProjectComponent(props) {
         let name = e.target.name;
         let value = e.target.value;
         formInput[name] = value;
-        setFormInput(formInput)
+        setFormInput(formInput);
     }
 
     async function handleImageChange(e) {

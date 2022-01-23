@@ -717,7 +717,6 @@ form {
 
 .projectImage {
     width: 45%;
-    min-width: 700px;
 }
 
 .projectImage img {
@@ -727,7 +726,6 @@ form {
 
 .projectInformationContainer {
     width: 50%;
-    min-width: 700px;
 }
 
 .projectInformationContainer progress {

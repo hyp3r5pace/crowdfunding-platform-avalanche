@@ -1,12 +1,7 @@
 
 function PaymentModal(props) {
     function closeModal() {
-        var btn = document.getElementsByClassName("closeBtn");
-        var modal = document.getElementsByClassName("modal");
-    
-        btn.onclick = () => {
-            modal.style.display = "none";
-        }
+        document.getElementsByClassName("modal")[0].style.display = "none";
     }
 
     return (
@@ -25,4 +20,4 @@ function PaymentModal(props) {
     );
 }
 
-export default PaymentModal
+export default PaymentModal;

@@ -9,7 +9,6 @@ import DiscoverComponent from "./components/DiscoverComponent";
 import ProjectComponent from "./components/ProjectComponent";
 import ProfileComponent from "./components/ProfileComponent";
 import { useState } from "react";
-import context from "./context";
 import { ethers } from "ethers";
 import { abi } from "./abi";
 const CONTRACT_ADDRESS = "0xF122C172c96E58fF971F975436Bdadc52A5A21c4";
@@ -84,7 +83,6 @@ function App() {
     return !myContract ? <ConnectWallet connectMetamask={connect}/> : component;
   };
   return (
-    <context.Provider value={{ contract: myContract }}>
       <div className="app">
         <BrowserRouter>
           {myContract && <NavbarComponent />}
@@ -98,7 +96,6 @@ function App() {
           {myContract && <FooterComponent />}
         </BrowserRouter>
       </div>
-    </context.Provider>
   );
 }
 
