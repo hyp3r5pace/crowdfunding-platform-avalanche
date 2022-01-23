@@ -99,7 +99,16 @@ html, body, #root {
 }
 
 /* HomeComponent Css */
-
+.noProjects{
+    height: 300px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    font-weight: 700;
+    font-family: 'Open Sans';
+}
 .siteStats {
     background: url(./assets/bg1.png) left no-repeat,
     url(./assets/bg2.png) right no-repeat;
@@ -185,8 +194,8 @@ html, body, #root {
 .featuredCardProjectImg {
     width: 100%;
     padding-top: 57%;
-    background-color: #DCDEDD;
-    background: url(./assets/pg1.jpg) no-repeat;
+    background-color: #f3f3f3;
+    background-repeat: no-repeat;
     background-size: contain;
 }
 .featuredProjectHeading {
@@ -256,11 +265,11 @@ html, body, #root {
 .rcmdCardImg {
     width: 200px;
     min-width: 200px;
-    background-color: #DCDEDD;
+    background-color: #f3f3f3;
     margin-right: 10px;
     height: 112.5px;
-    background: url(./assets/pg1.jpg);
     background-size: contain;
+    background-repeat: no-repeat;
 }
 .rcmdCardDetails {
     padding: 0px 10px;
@@ -363,8 +372,8 @@ html, body, #root {
     width: 100%;
     background-color: #DCDEDD;
     height: 169px;
-    background: url(./assets/pg1.jpg);
     background-size: contain;
+    background-repeat: no-repeat;
 }
 .cardDetail {
     width: 100%;

@@ -31,29 +31,29 @@ function App() {
       // switch network to avalanche
       try {
         await window.ethereum.request({
-          method: 'wallet_switchEthereumChain',
-          params: [{ chainId: '0xa869' }],
+          method: "wallet_switchEthereumChain",
+          params: [{ chainId: "0xa869" }],
         });
-      } catch(switchError) {
+      } catch (switchError) {
         // This error code indicates that the chain has not been added to MetaMask.
         if (switchError.code === 4902) {
           try {
             await window.ethereum.request({
-              method: 'wallet_addEthereumChain',
+              method: "wallet_addEthereumChain",
               params: [
                 {
-                  chainId: '0xa869',
-                  chainName: 'Avalanche Fuji Testnet',
+                  chainId: "0xa869",
+                  chainName: "Avalanche Fuji Testnet",
                   nativeCurrency: {
-                    name: 'Avalanche',
-                    symbol: 'AVAX',
+                    name: "Avalanche",
+                    symbol: "AVAX",
                     decimals: 18,
                   },
-                  rpcUrls: ['https://api.avax-test.network/ext/bc/C/rpc'],
+                  rpcUrls: ["https://api.avax-test.network/ext/bc/C/rpc"],
                 },
               ],
             });
-          } catch(addError) {
+          } catch (addError) {
             alert("Error in add avalanche FUJI testnet");
           }
         }
@@ -64,6 +64,7 @@ function App() {
         setMyContract(contract);
       } catch (err) {
         alert("CONTRACT_ADDRESS not set properly");
+        console.log(err);
       }
     } else {
       alert("Couldn't connect to Metamask");
@@ -80,22 +81,43 @@ function App() {
     }
   }
   const checkConnected = (component) => {
-    return !myContract ? <ConnectWallet connectMetamask={connect}/> : component;
+    return !myContract ? (
+      <ConnectWallet connectMetamask={connect} />
+    ) : (
+      component
+    );
   };
   return (
-      <div className="app">
-        <BrowserRouter>
-          {myContract && <NavbarComponent />}
-          <Routes>
-            <Route path="/" element={checkConnected(<HomeComponent />)} />
-            <Route path="create_project" element={checkConnected(<CreateProjectComponent contract={myContract}/>)} />
-            <Route path="discover" element={checkConnected(<DiscoverComponent />)} />
-            <Route path="profile" element={checkConnected(<ProfileComponent />)} />
-            <Route path="project" element={checkConnected(<ProjectComponent/>)} />
-          </Routes>
-          {myContract && <FooterComponent />}
-        </BrowserRouter>
-      </div>
+    <div className="app">
+      <BrowserRouter>
+        {myContract && <NavbarComponent address={address} />}
+        <Routes>
+          <Route
+            path="/"
+            element={checkConnected(<HomeComponent contract={myContract} />)}
+          />
+          <Route
+            path="create_project"
+            element={checkConnected(
+              <CreateProjectComponent contract={myContract} />
+            )}
+          />
+          <Route
+            path="discover"
+            element={checkConnected(<DiscoverComponent />)}
+          />
+          <Route
+            path="profile"
+            element={checkConnected(<ProfileComponent />)}
+          />
+          <Route
+            path="project"
+            element={checkConnected(<ProjectComponent />)}
+          />
+        </Routes>
+        {myContract && <FooterComponent />}
+      </BrowserRouter>
+    </div>
   );
 }
 

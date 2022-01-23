@@ -1,6 +1,85 @@
+import { useEffect, useState } from "react";
 import CategoryComponent from "./CategoryComponent";
 import ScrollShowbarComponent from "./ScrollShowbarComponent";
 export default function HomeComponent(props) {
+  const PRECISION = 10 ** 18;
+  const [stats, setStats] = useState({
+    projects: 0,
+    fundings: 0,
+    contributors: 0,
+  });
+  const [featuredRcmd, setFeaturedRcmd] = useState([]);
+  const [recentUploads, setRecentUploads] = useState([]);
+  const getAllProjects = async () => {
+    try {
+      let res = await props.contract.getAllProjectDetails().then((res) => {
+        let tmp = [];
+        let amount = 0,
+          contrib = 0;
+        for (const index in res) {
+          let {
+            amountRaised,
+            cid,
+            creatorName,
+            fundingGoal,
+            projectDescription,
+            projectName,
+            totalContributors,
+          } = { ...res[index] };
+          tmp.push({
+            amountRaised,
+            cid,
+            creatorName,
+            fundingGoal,
+            projectDescription,
+            projectName,
+            totalContributors,
+          });
+          amount += amountRaised;
+          contrib += totalContributors;
+        }
+        setStats({
+          projects: tmp.length,
+          fundings: amount / PRECISION,
+          contributors: contrib / PRECISION,
+        });
+        return tmp;
+      });
+      res.sort((a, b) => {
+        return b.totalContributors * 1 - a.totalContributors * 1;
+      });
+      setFeaturedRcmd(res.slice(0, 4));
+      setRecentUploads(res.slice(4, 24));
+    } catch (err) {
+      alert(err);
+    }
+  };
+
+  const renderRecommendations = (val) => {
+    console.log(val);
+    return val.map((project) => {
+      return (
+        <div className="recommendationCard">
+          <div
+            className="rcmdCardImg"
+            style={{ backgroundImage: `url(${"https://" + project.cid})` }}
+          ></div>
+          <div className="rcmdCardDetails">
+            <div className="rcmdCardHeading">{project.projectName}</div>
+            <div className="rcmdCardFundedPercentage">
+              {(project.amountRaised / project.fundingGoal) * 100 + "% Funded"}
+            </div>
+            <div className="rcmdCardAuthor">{"By " + project.creatorName}</div>
+          </div>
+        </div>
+      );
+    });
+  };
+
+  useEffect(() => {
+    getAllProjects();
+  }, []);
+
   return (
     <>
       <CategoryComponent />
@@ -11,82 +90,59 @@ export default function HomeComponent(props) {
           <br></br>
           Help fund it here.
         </div>
-        <div className="smallHeading">WITHIN THE LAST DAY</div>
+        <div className="smallHeading">TILL THIS DAY</div>
         <div className="stats">
           <div className="statItem">
-            <div className="statItemValue">28</div>
-            <div className="statItemTag">projects funded</div>
+            <div className="statItemValue">{stats.projects}</div>
+            <div className="statItemTag">projects </div>
           </div>
           <div className="statItem">
-            <div className="statItemValue">{"$" + "670,400"}</div>
+            <div className="statItemValue">{"AVAX " + stats.fundings}</div>
             <div className="statItemTag">towards creative work</div>
           </div>
           <div className="statItem">
-            <div className="statItemValue">6859</div>
+            <div className="statItemValue">{stats.contributors}</div>
             <div className="statItemTag">backings</div>
           </div>
         </div>
       </div>
 
-      <div className="suggestions">
-        <div className="suggLeftContainer">
-          <div className="featuredCard">
-            <div className="featuredHeading">FEATURED PROJECT</div>
-            <div className="featuredCardProjectImg"></div>
-            <div className="featuredProjectHeading">Birds</div>
-            <div className="featuredProjectDescription">
-              A truthful short film, inspired by real events, about motherhood
-              in prison A truthful short film, inspired by real events, about
-              motherhood in prison A truthful short film, inspired by real
-              events, about motherhood in prison A truthful short film, inspired
-              by real events, about motherhood in prison
-            </div>
-            <div className="featuredProjectAuthor">{"By " + "Sayan Kar"}</div>
-          </div>
-        </div>
-        <div className="suggRightContainer">
-          <div className="recommendationList">
-            <div className="recommendationHeading">RECOMMENDED FOR YOU</div>
-            
-            <div className="recommendationCard">
-              <div className="rcmdCardImg"></div>
-              <div className="rcmdCardDetails">
-                <div className="rcmdCardHeading">
-                  Discos : there us sue the tablethere us sue the tablethere us
-                  sue the tablethere us sue the table
-                </div>
-                <div className="rcmdCardFundedPercentage">100% Funded</div>
-                <div className="rcmdCardAuthor">By Soumyajit Deb</div>
+      {featuredRcmd.length !== 0 ? (
+        <div className="suggestions">
+          <div className="suggLeftContainer">
+            <div className="featuredCard">
+              <div className="featuredHeading">FEATURED PROJECT</div>
+              <div
+                className="featuredCardProjectImg"
+                style={{
+                  backgroundImage: `url(${"https://" + featuredRcmd[0].cid})`,
+                }}
+              ></div>
+              <div className="featuredProjectHeading">
+                {featuredRcmd[0].projectName}
               </div>
-            </div>
-            
-            <div className="recommendationCard">
-              <div className="rcmdCardImg"></div>
-              <div className="rcmdCardDetails">
-                <div className="rcmdCardHeading">
-                  Discos : there us sue the tablethere us sue the tablethere us
-                  sue the tablethere us sue the table
-                </div>
-                <div className="rcmdCardFundedPercentage">100% Funded</div>
-                <div className="rcmdCardAuthor">By Soumyajit Deb</div>
+              <div className="featuredProjectDescription">
+                {featuredRcmd[0].projectDescription}
               </div>
-            </div>
-            
-            <div className="recommendationCard">
-              <div className="rcmdCardImg" ></div>
-              <div className="rcmdCardDetails">
-                <div className="rcmdCardHeading">
-                  Discos : there us sue the tablethere us sue the tablethere us
-                  sue the tablethere us sue the table
-                </div>
-                <div className="rcmdCardFundedPercentage">100% Funded</div>
-                <div className="rcmdCardAuthor">By Soumyajit Deb</div>
+              <div className="featuredProjectAuthor">
+                {"By " + featuredRcmd[0].creatorName}
               </div>
             </div>
           </div>
+          <div className="suggRightContainer">
+            <div className="recommendationList">
+              <div className="recommendationHeading">RECOMMENDED FOR YOU</div>
+              {renderRecommendations(featuredRcmd.slice(1, 4))}
+            </div>
+          </div>
         </div>
-      </div>
-      <ScrollShowbarComponent />
+      ) : (
+        <div className="noProjects">No projects found</div>
+      )}
+      <ScrollShowbarComponent
+        recentUploads={recentUploads}
+        heading={"RECENT UPLOADS"}
+      />
     </>
   );
 }
