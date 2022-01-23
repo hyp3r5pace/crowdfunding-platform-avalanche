@@ -1,7 +1,7 @@
 
 function PaymentModal(props) {
     function closeModal() {
-        document.getElementsByClassName("modal")[0].style.display = "none";
+        props.setModalShow(false);
     }
 
     return (

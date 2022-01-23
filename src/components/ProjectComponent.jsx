@@ -38,7 +38,7 @@ function ProjectComponent(props) {
                     <div className="supportButtonContainer">
                         <button className="supportButton" onClick={() => onClickPayment()}>Back this project</button>
                     </div>
-                    {modalShow && <PaymentModal />}
+                    {modalShow && <PaymentModal setModalShow={setModalShow}/>}
                 </div>
             </div>
             <div className="projectBottomContainer">
