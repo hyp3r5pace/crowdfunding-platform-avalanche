@@ -112,7 +112,7 @@ function App() {
           />
           <Route
             path="project"
-            element={checkConnected(<ProjectComponent />)}
+            element={checkConnected(<ProjectComponent contract={myContract}/>)}
           />
         </Routes>
         {myContract && <FooterComponent />}

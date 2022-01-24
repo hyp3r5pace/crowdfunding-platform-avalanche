@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { create } from 'ipfs-http-client';
-import { ethers } from 'ethers';
 
 function CreateProjectComponent(props) {
 

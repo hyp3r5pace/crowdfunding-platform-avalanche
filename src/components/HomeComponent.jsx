@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import CategoryComponent from "./CategoryComponent";
 import ScrollShowbarComponent from "./ScrollShowbarComponent";
+import { Link } from 'react-router-dom';
 export default function HomeComponent(props) {
   const PRECISION = 10 ** 18;
   const [stats, setStats] = useState({
@@ -34,6 +35,7 @@ export default function HomeComponent(props) {
             projectDescription,
             projectName,
             totalContributors,
+            index,
           });
           amount += amountRaised;
           contrib += totalContributors;
@@ -119,7 +121,7 @@ export default function HomeComponent(props) {
                 }}
               ></div>
               <div className="featuredProjectHeading">
-                {featuredRcmd[0].projectName}
+                <Link to='/project' state={{ index: featuredRcmd[0].index }}>{featuredRcmd[0].projectName}</Link>
               </div>
               <div className="featuredProjectDescription">
                 {featuredRcmd[0].projectDescription}

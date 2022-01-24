@@ -1,0 +1,2 @@
+1. There is bug with the countdown timer in the projectComponent. If empty array is the dependecy of useEffect() for timer, the countdown
+timer is incremented, but if there is no dependecy, then it works fine.
