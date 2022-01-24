@@ -62,12 +62,16 @@ export default function HomeComponent(props) {
     return val.map((project) => {
       return (
         <div className="recommendationCard">
-          <div
-            className="rcmdCardImg"
-            style={{ backgroundImage: `url(${"https://" + project.cid})` }}
-          ></div>
+          <Link to="/project" state={{ index: project.index }}>
+            <div
+              className="rcmdCardImg"
+              style={{ backgroundImage: `url(${"https://" + project.cid})` }}
+            ></div>
+          </Link>
           <div className="rcmdCardDetails">
-            <div className="rcmdCardHeading">{project.projectName}</div>
+            <div className="rcmdCardHeading">
+              <Link to="/project" state={{ index: project.index }}>{project.projectName}</Link>
+            </div>
             <div className="rcmdCardFundedPercentage">
               {(project.amountRaised / project.fundingGoal) * 100 + "% Funded"}
             </div>
@@ -114,12 +118,14 @@ export default function HomeComponent(props) {
           <div className="suggLeftContainer">
             <div className="featuredCard">
               <div className="featuredHeading">FEATURED PROJECT</div>
-              <div
-                className="featuredCardProjectImg"
-                style={{
-                  backgroundImage: `url(${"https://" + featuredRcmd[0].cid})`,
-                }}
-              ></div>
+              <Link to="/project" state={{ index: featuredRcmd[0].index }}>
+                <div
+                  className="featuredCardProjectImg"
+                  style={{
+                    backgroundImage: `url(${"https://" + featuredRcmd[0].cid})`,
+                  }}
+                ></div>
+              </Link>
               <div className="featuredProjectHeading">
                 <Link to='/project' state={{ index: featuredRcmd[0].index }}>{featuredRcmd[0].projectName}</Link>
               </div>
