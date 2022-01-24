@@ -1,22 +1,24 @@
 import PaymentModal from "./PaymentModal";
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function ProjectComponent(props) {
 
     const [modalShow, setModalShow] = React.useState(false);
     const [projectDetails, setProjectDetails] = React.useState({
-        amountRaised: '',
+        amountRaised: 0,
         cid: '',
         creatorName: '',
-        fundingGoal: '',
+        fundingGoal: 0,
         projectDescription: '',
         projectName: '',
         contributors: [],
         creationTime: 0,
         duration: 0,
         projectLink: '',
-        amount: []
+        amount: [],
+        creatorAddress: ''
     });
     const [timerString, setTimerString] = useState('');
     const [isOver, setIsOver] = useState(false);
@@ -24,8 +26,16 @@ function ProjectComponent(props) {
     const { index } = location.state;
     const PRECISION = 10 ** 18;
 
+    // func to update the progress bar everytime getProjectDetails() executes.
+    function  updateProgressBar() {
+        let progressBar = document.getElementsByClassName('progressBar')[0];
+        progressBar.max = projectDetails.fundingGoal / PRECISION;
+        progressBar.value = projectDetails.amountRaised / PRECISION;
+    }
+
     async function getProjectDetails() {
         try {
+            // fetching project information from the contract
             let res = await props.contract.getProject(parseInt(index)).then((res) => {
                 let {
                     amountRaised,
@@ -39,21 +49,24 @@ function ProjectComponent(props) {
                     duration,
                     projectLink,
                     amount,
+                    creatorAddress,
                 } = { ...res };
 
                 setProjectDetails({
-                    amountRaised,
-                    cid,
-                    creatorName,
-                    fundingGoal,
-                    projectDescription,
-                    projectName,
-                    contributors,
-                    creationTime,
-                    duration,
-                    projectLink,
-                    amount
+                    amountRaised: amountRaised,
+                    cid: cid,
+                    creatorName: creatorName,
+                    fundingGoal: fundingGoal,
+                    projectDescription: projectDescription,
+                    projectName: projectName,
+                    contributors: contributors,
+                    creationTime: creationTime,
+                    duration: duration,
+                    projectLink: projectLink,
+                    amount: amount,
+                    creatorAddress: creatorAddress
                 });
+
             });
         } catch(error) {
             alert('Error fetching details: ' + error);
@@ -89,7 +102,11 @@ function ProjectComponent(props) {
             }
         };
 
-    });
+    }, [projectDetails.creationTime, projectDetails.duration]);
+
+    useEffect(() => {
+        updateProgressBar();
+    }, [projectDetails]);
 
     function onClickPayment() {
         setModalShow(true);
@@ -107,10 +124,10 @@ function ProjectComponent(props) {
                 </div>
                 <div className="projectInformationContainer">
                     <div className="progressBarContainer">
-                        <progress min="0" max="100" value="30"></progress>
+                        <progress min="0" max="100" value="30" className="progressBar"></progress>
                     </div>
                     <div className="fundingValue">
-                        <h2>{Number(projectDetails.amountRaised)} AVAX</h2>
+                        <h2>{projectDetails.amountRaised / PRECISION} AVAX</h2>
                     </div>
                     <p className="goalValueContainer">pledged of <span className="goalValue">{projectDetails.fundingGoal / PRECISION} AVAX</span> goal</p>
                     <div className="supporterContainer">
@@ -140,7 +157,7 @@ function ProjectComponent(props) {
                 </div>
                 <div className="projectLinkContainer">
                     <p className="projectLinkLabel">Owner: 
-                        <a className="projectLink" href="https://www.instagram.com/sayan.kar2000/">{projectDetails.creatorName}</a>
+                        <Link className="projectLinkLabel" to='/profile' state={{ address: projectDetails.creatorAddress }}>{" " + projectDetails.creatorName}</Link>
                     </p>
                 </div>
             </div>
@@ -155,7 +172,7 @@ function ProjectComponent(props) {
                 {projectDetails.contributors.map((contributor, idx) => (
                     <div className="tableRow darkRow">
                         <div className="item border">{contributor}</div>
-                        <div className="item border">{projectDetails.amount[idx]}</div>
+                        <div className="item border">{projectDetails.amount[idx] / PRECISION}</div>
                     </div>
                 ))}
             </div>
