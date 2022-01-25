@@ -70,7 +70,9 @@ function CreateProjectComponent(props) {
                 formInput['image'] = `ipfs.io/ipfs/${added.path}`;
             } catch(error) {
                 alert('Uploading file error: ' + error);
-                console.log(error); 
+                console.log(error);
+                // return since if selected image doesn't get uploaded to ipfs 
+                return;
             }
         }
 
@@ -102,14 +104,13 @@ function CreateProjectComponent(props) {
                 formInput['duration'],
                 formInput['category'],
                 formInput['refundPolicy']);
+            
+            await txn.wait(txn);
+            alert('Project creation complete!!');
         } catch(error) {
             alert('Error on calling function: ' + error);
             console.log(error);
         }
-
-        await txn.wait(txn);
-        alert('Project creation complete!!');
-        
     }
 
     return (

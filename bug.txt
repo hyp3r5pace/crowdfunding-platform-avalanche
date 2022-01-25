@@ -1,3 +1,2 @@
 1. The form submition gave error in payment modal.
-2. The submition process goes on even though ipfs upload fails
-3. Dummy pic not displayed in recent upload section of the home page (image render issue??)
+2. Dummy pic not displayed in recent upload section of the home page (image render issue??) (check later -- not so important)

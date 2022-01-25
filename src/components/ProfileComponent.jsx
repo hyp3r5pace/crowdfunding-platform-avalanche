@@ -8,6 +8,7 @@ function ProfileComponent(props) {
     async function getProjectList() {
         try {
             // fetch the project information from the contract for the address
+            
         } catch(error) {
             console.log(error);
             alert('Error Fetching data: ' + error);
