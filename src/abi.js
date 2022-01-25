@@ -133,7 +133,7 @@ export const abi = [
 						"type": "uint256"
 					}
 				],
-				"internalType": "struct crowdfunding.ProjectMinDetails[]",
+				"internalType": "struct crowdfunding.projectMetadata[]",
 				"name": "allProjects",
 				"type": "tuple[]"
 			}

@@ -10,8 +10,8 @@ function CreateProjectComponent(props) {
         creatorName: '',
         image: '',
         link: '',
-        goal: '',
-        duration: '',
+        goal: 0.00001,
+        duration: 1,
         refundPolicy: ''
     });
 
@@ -84,6 +84,9 @@ function CreateProjectComponent(props) {
             formInput['refundPolicy'] = getRefundPolicyCode();
         }
 
+        formInput['duration'] = parseFloat(formInput['duration']);
+        formInput['goal'] = parseFloat(formInput['goal']);
+
         console.log(formInput);
 
         // upload form data to contract
@@ -134,7 +137,7 @@ function CreateProjectComponent(props) {
                 <input type="url" name="link" placeholder="Enter link to the project" onChange={handleChange}/>
                 <label>Funding Goal (AVAX)</label>
                 <input type="number" step="0.00001" name="goal" placeholder="Enter the funding goal" min="0.00001" required onChange={handleChange}/>
-                <label>Duration (Days)</label>
+                <label>Duration (Minutes)</label>
                 <input type="number" name="duration" placeholder="Enter the duration for the funding" min="1" required onChange={handleChange}/>
                 <label>Refund policy</label>
                 <select name="refundPolicy" required onChange={handleChange}>

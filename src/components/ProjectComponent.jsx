@@ -82,7 +82,8 @@ function ProjectComponent(props) {
     React.useEffect(() => {
         const interval = setInterval(() => {
             const currentTime = ((new Date()).getTime() / 1000);
-            const remainingTime = currentTime - (projectDetails.creationTime + projectDetails.duration);
+            const remainingTime = (Number(projectDetails.creationTime) + Number(projectDetails.duration)) - currentTime;
+            console.log(remainingTime);
             const days = Math.floor(remainingTime / (60*60*24));
             const hours = Math.floor((remainingTime % (60*60*24)) / (60*60));
             const minutes = Math.floor((remainingTime % (60*60)) / 60);
@@ -92,7 +93,11 @@ function ProjectComponent(props) {
 
             if (remainingTime < 0) {
                 clearInterval(interval);
-                setIsOver(true);
+                // this condition is set because at initial render, creationTime and duration state are not set
+                // so remaining time turns out to be negative
+                if (projectDetails.creationTime > 0) {
+                    setIsOver(true);
+                }
             }
         }, 1000);
 
@@ -137,7 +142,7 @@ function ProjectComponent(props) {
                     <div className="remainingDaysContainer">
                         <h2>{!isOver ? timerString : 'Funding duration over!!'}</h2> 
                 </div>
-                    {!isOver && <p className="afterRemainingDaysContainer">days to go</p>}
+                    {!isOver && <p className="afterRemainingDaysContainer">time left for funding</p>}
                     {!isOver &&  
                         <div className="supportButtonContainer">
                             <button className="supportButton" onClick={() => onClickPayment()}>Back this project</button>
