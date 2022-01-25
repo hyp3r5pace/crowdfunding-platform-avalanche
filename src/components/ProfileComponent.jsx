@@ -1,5 +1,19 @@
 import ScrollShowbarComponent from "./ScrollShowbarComponent";
+import { useLocation } from 'react-router-dom';
+
 function ProfileComponent(props) {
+    const location = useLocation();
+    const { address } = location.state;
+
+    async function getProjectList() {
+        try {
+            // fetch the project information from the contract for the address
+        } catch(error) {
+            console.log(error);
+            alert('Error Fetching data: ' + error);
+        }
+    }
+
     return (
         <div className="profileContainer">
             <div className="profileHeadingContainer">

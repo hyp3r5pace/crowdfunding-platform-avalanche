@@ -2,6 +2,7 @@ import PaymentModal from "./PaymentModal";
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import dummyPic from '../assets/pg1.jpg';
 
 function ProjectComponent(props) {
 
@@ -125,7 +126,7 @@ function ProjectComponent(props) {
             </div>
             <div className="projectTopContainer">
                 <div className="projectImage">
-                    <img src={'https://' + projectDetails.cid} alt="test-pic" />
+                    <img src={(projectDetails.cid) ? 'https://' + projectDetails.cid : dummyPic} alt="test-pic" />
                 </div>
                 <div className="projectInformationContainer">
                     <div className="progressBarContainer">

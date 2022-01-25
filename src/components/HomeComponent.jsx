@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import CategoryComponent from "./CategoryComponent";
 import ScrollShowbarComponent from "./ScrollShowbarComponent";
 import { Link } from 'react-router-dom';
+import dummyPic from '../assets/pg1.jpg';
+
 export default function HomeComponent(props) {
   const PRECISION = 10 ** 18;
   const [stats, setStats] = useState({
@@ -65,7 +67,7 @@ export default function HomeComponent(props) {
           <Link to="/project" state={{ index: project.index }}>
             <div
               className="rcmdCardImg"
-              style={{ backgroundImage: `url(${"https://" + project.cid})` }}
+              style={{ backgroundImage: ((project.cid) ? `url(${"https://" + project.cid})` : dummyPic) }}
             ></div>
           </Link>
           <div className="rcmdCardDetails">
@@ -122,7 +124,7 @@ export default function HomeComponent(props) {
                 <div
                   className="featuredCardProjectImg"
                   style={{
-                    backgroundImage: `url(${"https://" + featuredRcmd[0].cid})`,
+                    backgroundImage: ((featuredRcmd[0].cid) ? `url(${"https://" + featuredRcmd[0].cid})` : dummyPic),
                   }}
                 ></div>
               </Link>
