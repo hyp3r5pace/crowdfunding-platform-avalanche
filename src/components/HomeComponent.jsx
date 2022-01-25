@@ -104,7 +104,7 @@ export default function HomeComponent(props) {
             <div className="statItemTag">projects </div>
           </div>
           <div className="statItem">
-            <div className="statItemValue">{"AVAX " + stats.fundings}</div>
+            <div className="statItemValue">{stats.fundings + " AVAX"}</div>
             <div className="statItemTag">towards creative work</div>
           </div>
           <div className="statItem">
