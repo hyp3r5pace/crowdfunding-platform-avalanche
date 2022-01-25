@@ -44,8 +44,8 @@ export default function HomeComponent(props) {
         }
         setStats({
           projects: tmp.length,
-          fundings: amount / PRECISION,
-          contributors: contrib / PRECISION,
+          fundings: parseFloat(amount / PRECISION),
+          contributors: parseInt(contrib),
         });
         return tmp;
       });
