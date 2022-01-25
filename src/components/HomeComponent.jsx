@@ -15,7 +15,7 @@ export default function HomeComponent(props) {
   const [recentUploads, setRecentUploads] = useState([]);
   const getAllProjects = async () => {
     try {
-      let res = await props.contract.getAllProjectDetails().then((res) => {
+      let res = await props.contract.getAllProjectsDetail().then((res) => {
         let tmp = [];
         let amount = 0,
           contrib = 0;

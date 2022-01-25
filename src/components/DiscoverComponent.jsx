@@ -1,4 +1,5 @@
 import CategoryComponent from "./CategoryComponent";
+import { useState } from "react";
 export default function DiscoverComponent(props) {
     const [filter, setFilter] = useState(-1);
     const [projects, setProjects] = useState(0);
