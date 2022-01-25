@@ -1,6 +1,6 @@
  [x] CreateProject page  
  [x] Home Page  
- [ ] Project Page  
+ [x] Project Page  
  [ ] Payment Modal  
  [ ] Discover page  
  [ ] Profile page
@@ -14,5 +14,5 @@
 
  # SPECIFIC TASK (Sayan Kar)
 
- [ ] Resolve the bug for payment modal and integrate it  
+ [x] Resolve the bug for payment modal and integrate it  
  [ ] Create internal support function in smart contract for getCreatorProjects()  

@@ -987,11 +987,15 @@ form {
     border-radius: 25px;
 }
 
+.modalHeader h1 {
+    font-size: 2.5em;
+}
+
 .modalContent {
     position: relative;
     background-color: #fefefe;
     margin-left: 0%;
-    margin-top: 0%;
+    margin-top: 8%;
     -webkit-animation-name: animatetop;
     -webkit-animation-duration: 0.4s;
 }
@@ -999,7 +1003,7 @@ form {
 .closeBtn {
     float: right;
     color: lightgray;
-    font-size: 24px;
+    font-size: 30px;
     font-weight: bold;
     margin-right: 2%;
     cursor: pointer;
@@ -1007,6 +1011,46 @@ form {
 
 .closeBtn:hover {
     color: darkgray;
+}
+
+.paymentLabel {
+    margin-left: 14%;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 1%;
+}
+
+.payment {
+    height: 30%;
+    width: 70%;
+    justify-content: center;
+    padding: 2%;
+    border-radius: 5px;
+    border: none;
+    background: #e0dede;
+    margin-left: 14%;
+    font-size: 1.3em;
+}
+
+.submit {
+    margin-left: 34%;
+    width: 30%;
+    font-size: 1.5em;
+    margin-top: 3%;
+    padding: 1%;
+    justify-content: center;
+    color: #fff;
+    background-color: #573b8a;
+    font-weight: bold;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    transition: .2s ease-in;
+}
+
+.submit:hover {
+    background: #6d44b8;
 }
 
 @-webkit-keyframes animatetop {

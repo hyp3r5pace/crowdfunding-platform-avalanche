@@ -41,11 +41,12 @@ function PaymentModal(props) {
       </div>
       <div className="modalContent">
         <div className="paymentForm">
-          <label>Amount (AVAX)</label>
+          <label className="paymentLabel">Amount (AVAX)</label>
           <input
             type="number"
             name="payment"
             id="payment"
+            className="payment"
             placeholder="Enter AVAX amount"
             min="1"
             step="1"

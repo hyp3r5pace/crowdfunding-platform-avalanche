@@ -1,2 +1,1 @@
-1. The form submition gave error in payment modal.
-2. Dummy pic not displayed in recent upload section of the home page (image render issue??) (check later -- not so important)
+1. Dummy pic not displayed in recent upload section of the home page (image render issue??) (check later -- not so important)
