@@ -60,7 +60,6 @@ export default function HomeComponent(props) {
   };
 
   const renderRecommendations = (val) => {
-    console.log(val);
     return val.map((project) => {
       return (
         <div className="recommendationCard">

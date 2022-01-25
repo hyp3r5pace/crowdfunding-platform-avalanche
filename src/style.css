@@ -157,6 +157,8 @@ html, body, #root {
 .statItemValue {
     color: #037362;
     font-size: 30px;
+    font-family: 'Open Sans';
+    font-weight: 600; 
 }
 .statItemTag {
     color: #656969;
@@ -197,6 +199,7 @@ html, body, #root {
     background-color: #f3f3f3;
     background-repeat: no-repeat;
     background-size: contain;
+    background-position: center;
 }
 .featuredProjectHeading {
     color: #282828;
@@ -270,6 +273,7 @@ html, body, #root {
     height: 112.5px;
     background-size: contain;
     background-repeat: no-repeat;
+    background-position: center;
 }
 .rcmdCardDetails {
     padding: 0px 10px;
@@ -370,10 +374,11 @@ html, body, #root {
 }
 .cardImg {
     width: 100%;
-    background-color: #DCDEDD;
+    background-color: #f3f3f3;
     height: 169px;
     background-size: contain;
     background-repeat: no-repeat;
+    background-position: center;
 }
 .cardDetail {
     width: 100%;
@@ -730,7 +735,8 @@ form {
 
 .projectImage img {
     width: 100%;
-    background-color: #DCDEDD;
+    background-color: #f3f3f3;
+    background-position: center;
 }
 
 .projectInformationContainer {

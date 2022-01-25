@@ -94,7 +94,7 @@ function CreateProjectComponent(props) {
         // upload form data to contract
         let txn;
         try {
-            txn = await props.contract.CreateNewProject(
+            txn = await props.contract.createNewProject(
                 formInput['projectName'],
                 formInput['description'],
                 formInput['creatorName'],

@@ -2,6 +2,32 @@ export const abi = [
 	{
 		"inputs": [
 			{
+				"internalType": "uint256",
+				"name": "_index",
+				"type": "uint256"
+			}
+		],
+		"name": "claimFund",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_index",
+				"type": "uint256"
+			}
+		],
+		"name": "claimRefund",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "string",
 				"name": "_name",
 				"type": "string"
@@ -47,33 +73,7 @@ export const abi = [
 				"type": "uint8"
 			}
 		],
-		"name": "CreateNewProject",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_index",
-				"type": "uint256"
-			}
-		],
-		"name": "claimFund",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_index",
-				"type": "uint256"
-			}
-		],
-		"name": "claimRefund",
+		"name": "createNewProject",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -93,7 +93,7 @@ export const abi = [
 	},
 	{
 		"inputs": [],
-		"name": "getAllProjectDetails",
+		"name": "getAllProjectsDetail",
 		"outputs": [
 			{
 				"components": [
@@ -131,9 +131,19 @@ export const abi = [
 						"internalType": "uint256",
 						"name": "totalContributors",
 						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "creationTime",
+						"type": "uint256"
+					},
+					{
+						"internalType": "enum crowdfunding.Category",
+						"name": "category",
+						"type": "uint8"
 					}
 				],
-				"internalType": "struct crowdfunding.projectMetadata[]",
+				"internalType": "struct crowdfunding.ProjectMetadata[]",
 				"name": "allProjects",
 				"type": "tuple[]"
 			}
@@ -256,6 +266,72 @@ export const abi = [
 				"internalType": "struct crowdfunding.Project",
 				"name": "project",
 				"type": "tuple"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256[]",
+				"name": "_indexList",
+				"type": "uint256[]"
+			}
+		],
+		"name": "getProjectsDetail",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "projectName",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "projectDescription",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "creatorName",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "cid",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "fundingGoal",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amountRaised",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "totalContributors",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "creationTime",
+						"type": "uint256"
+					},
+					{
+						"internalType": "enum crowdfunding.Category",
+						"name": "category",
+						"type": "uint8"
+					}
+				],
+				"internalType": "struct crowdfunding.ProjectMetadata[]",
+				"name": "projectsList",
+				"type": "tuple[]"
 			}
 		],
 		"stateMutability": "view",
