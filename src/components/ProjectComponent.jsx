@@ -83,7 +83,6 @@ function ProjectComponent(props) {
         const interval = setInterval(() => {
             const currentTime = ((new Date()).getTime() / 1000);
             const remainingTime = (Number(projectDetails.creationTime) + Number(projectDetails.duration)) - currentTime;
-            console.log(remainingTime);
             const days = Math.floor(remainingTime / (60*60*24));
             const hours = Math.floor((remainingTime % (60*60*24)) / (60*60));
             const minutes = Math.floor((remainingTime % (60*60)) / 60);
@@ -92,6 +91,7 @@ function ProjectComponent(props) {
             setTimerString(`${days}d ${hours}h ${minutes}m ${seconds}s`);
 
             if (remainingTime < 0) {
+                setTimerString('0d 0h 0m 0s');
                 clearInterval(interval);
                 // this condition is set because at initial render, creationTime and duration state are not set
                 // so remaining time turns out to be negative
@@ -148,7 +148,7 @@ function ProjectComponent(props) {
                             <button className="supportButton" onClick={() => onClickPayment()}>Back this project</button>
                         </div>
                     }
-                    {modalShow && <PaymentModal setModalShow={setModalShow}/>}
+                    {modalShow && <PaymentModal setModalShow={setModalShow} contract={props.contract} index={index}/>}
                 </div>
             </div>
             <div className="projectBottomContainer">

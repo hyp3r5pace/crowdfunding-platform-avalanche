@@ -1,1 +1,1 @@
-1. The form submition gave error when funding goal was in fraction (eg. 3.5).
+1. The form submition gave error in payment modal.
