@@ -3,6 +3,7 @@ import { ethers } from "ethers";
 
 function PaymentModal(props) {
   let [amount, setAmount] = useState(1);
+  const PRECISION = 10 ** 18;
 
   function closeModal() {
     props.setModalShow(false);
@@ -17,10 +18,26 @@ function PaymentModal(props) {
     try {
       let fund = {value: ethers.utils.parseEther(amount.toString())};
       let txn = await props.contract.fundProject(props.index, fund);
+      let tmp = (props.projectDetails['amountRaised'] / PRECISION) + amount;
       await txn.wait();
       alert(`${amount} AVAX Succesfully funded`);
       setAmount(1);
       closeModal();
+      // set the states so rerender occurs in parent component
+      props.setProjectDetails({
+        amountRaised: tmp * PRECISION,
+        cid: props.projectDetails['cid'],
+        creatorName: props.projectDetails['creatorName'],
+        fundingGoal: props.projectDetails['fundingGoal'],
+        projectDescription: props.projectDetails['projectDescription'],
+        projectName: props.projectDetails['projectName'],
+        contributors: props.projectDetails['contributors'],
+        creationTime: props.projectDetails['creationTime'],
+        duration: props.projectDetails['duration'],
+        projectLink: props.projectDetails['projectLink'],
+        amount: props.projectDetails['amount'],
+        creatorAddress: props.projectDetails['creatorAddress']
+      });
     } catch (error) {
       console.log("Funding error: ");
       console.log(error);
