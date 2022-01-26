@@ -163,7 +163,7 @@ function ProjectComponent(props) {
                 </div>
                 <div className="projectLinkContainer">
                     <p className="projectLinkLabel">Owner: 
-                        <Link className="projectLinkLabel" to='/profile' state={{ address: projectDetails.creatorAddress }}>{" " + projectDetails.creatorName}</Link>
+                        <Link className="projectLinkLabel" to='/profile' state={{ address: projectDetails.creatorAddress, name: projectDetails.creatorName }}>{" " + projectDetails.creatorName}</Link>
                     </p>
                 </div>
             </div>

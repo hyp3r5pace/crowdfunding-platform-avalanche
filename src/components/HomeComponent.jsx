@@ -151,6 +151,7 @@ export default function HomeComponent(props) {
       <ScrollShowbarComponent
         recentUploads={recentUploads}
         heading={"RECENT UPLOADS"}
+        emptyMessage={'No recent uploads'}
       />
     </>
   );

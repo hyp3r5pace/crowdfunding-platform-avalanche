@@ -1,41 +1,92 @@
 import ScrollShowbarComponent from "./ScrollShowbarComponent";
 import { useLocation } from 'react-router-dom';
+import { useState,useEffect } from 'react';
 
 function ProfileComponent(props) {
     const location = useLocation();
     const { address } = location.state;
+    const { name } = location.state;
+    const [ongoingProjects, setOngoingProjects] = useState([]);
+    const [completedProjects, setCompletedProjects] = useState([]);
 
     async function getProjectList() {
+        let res;
         try {
             // fetch the project information from the contract for the address
-            
+            let indexList = await props.contract.getCreatorProjects(address);
+            res = await props.contract.getProjectsDetail(indexList).then((res) => {
+                let tmp = [];
+                for (const index in res) {
+                    let {
+                        cid,
+                        creatorName,
+                        projectDescription,
+                        projectName,
+                        creationTime,
+                        duration
+                    } = {...res[index]};
+                    tmp.push({
+                        cid,
+                        creatorName,
+                        projectDescription,
+                        projectName,
+                        creationTime,
+                        duration,
+                        index: indexList[index]
+                    });   
+                }  
+                return tmp;
+            });
         } catch(error) {
             console.log(error);
             alert('Error Fetching data: ' + error);
         }
+
+        let currProjects = [];
+        let finishedProjects = [];
+
+        // separating the list of projects on the basis of competion status
+        for (const index in res) {
+            const currentTime = ((new Date()).getTime() / 1000);
+            const remainingTime = (Number(res[index].creationTime) + Number(res[index].duration)) - currentTime;
+            if (remainingTime < 0) {
+                finishedProjects.push(res[index]);
+            } else {
+                currProjects.push(res[index]);
+            }
+        }
+        setOngoingProjects(currProjects);
+        setCompletedProjects(finishedProjects);
     }
+
+    useEffect(() => {
+        getProjectList();
+    }, []);
 
     return (
         <div className="profileContainer">
             <div className="profileHeadingContainer">
-                <h1>User Name</h1>
+                <h1>{name}</h1>
             </div>
             <div className="profileAddressContainer">
-                <h2>0xAb5801a7D398351b8bE11C439e05C5B3259aeC9B</h2>
+                <h2>{address}</h2>
             </div>
             <div className="projectsContainer">
                 <div className="projectList">
-                    <ScrollShowbarComponent />
+                    <ScrollShowbarComponent 
+                        recentUploads={ongoingProjects}
+                        heading={'ONGOING PROJECTS'}
+                        emptyMessage={'No ongoing projects'}
+                    />
                 </div>
             </div>
             <div className="projectsContainer">
                 <div className="projectList">
-                    <ScrollShowbarComponent />
-                </div>
-            </div>
-            <div className="projectsContainer">
-                <div className="projectList">
-                    <ScrollShowbarComponent />
+                    <ScrollShowbarComponent 
+                        recentUploads={completedProjects}
+                        heading={'COMPLETED PROJECTS'}
+                        emptyMessage={'No completed projects'}
+                    />
                 </div>
             </div>
         </div>

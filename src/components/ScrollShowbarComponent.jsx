@@ -32,7 +32,8 @@ export default function ScrollShowbarComponent(props) {
     <div className="recentUploads">
       <div className="recentUploadsHeader">
         <div className="recentUploadsHeading">{props.heading}</div>
-        <div className="scrollButtons">
+        { props.recentUploads.length ?
+          <div className="scrollButtons">
           <BsArrowLeftCircle
             className="scrollNavBtn"
             onClick={() => scroll(-300)}
@@ -42,13 +43,14 @@ export default function ScrollShowbarComponent(props) {
             onClick={() => scroll(300)}
           />
         </div>
+        : ''} 
       </div>
 
       <div className="recentUploadsContainer">
         {props.recentUploads.length ? (
           renderCards()
         ) : (
-          <div className="noProjects">No recent uploads</div>
+          <div className="noProjects">{props.emptyMessage}</div>
         )}
       </div>
     </div>

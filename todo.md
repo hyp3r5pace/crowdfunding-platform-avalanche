@@ -1,18 +1,18 @@
  [x] CreateProject page  
  [x] Home Page  
  [x] Project Page  
- [ ] Payment Modal  
+ [x] Payment Modal  
  [ ] Discover page  
- [ ] Profile page
+ [x] Profile page
 
 
  # SPECIFIC TASK (Soumyajit Deb)
 
  [x] Add default image for project which doesn't have a image  
  [x] Return the function in the create project component when ipfs upload is unsuccessful.   
- [ ] Get the profile page done  
+ [x] Get the profile page done  
 
  # SPECIFIC TASK (Sayan Kar)
 
  [x] Resolve the bug for payment modal and integrate it  
- [ ] Create internal support function in smart contract for getCreatorProjects()  
+ [x] Create internal support function in smart contract for getCreatorProjects()  
