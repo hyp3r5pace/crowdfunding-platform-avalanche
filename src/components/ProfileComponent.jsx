@@ -8,6 +8,7 @@ function ProfileComponent(props) {
     const { name } = location.state;
     const [ongoingProjects, setOngoingProjects] = useState([]);
     const [completedProjects, setCompletedProjects] = useState([]);
+    const [userFundedProjects, setUserFundedProjects] = useState([]);
 
     async function getProjectList() {
         let res;
@@ -32,7 +33,7 @@ function ProfileComponent(props) {
                         projectName,
                         creationTime,
                         duration,
-                        index: indexList[index]
+                        index: Number(indexList[index])
                     });   
                 }  
                 return tmp;
@@ -59,8 +60,55 @@ function ProfileComponent(props) {
         setCompletedProjects(finishedProjects);
     }
 
+    async function getUserFundingList() {
+        // fetch project funding list of the user
+        let res;
+        try{
+            let fundingList = await props.contract.getUserFundings(props.userAddress).then((fundingList) => {
+                let tmp = [];
+                for (const index in fundingList) {
+                    tmp.push(fundingList[index].projectIndex);
+                }
+                return tmp
+            });
+
+            res = await props.contract.getProjectsDetail(fundingList).then((res) => {
+                let tmp = [];
+                for (const index in res) {
+                    let {
+                        cid,
+                        creatorName,
+                        projectDescription,
+                        projectName,
+                    } = {...res[index]};
+                    tmp.push({
+                        cid,
+                        creatorName,
+                        projectDescription,
+                        projectName,
+                        index: Number(fundingList[index])
+                    });
+                }
+                return tmp;
+            });
+
+        }catch(error) {
+            console.log(error);
+            alert('Error fetching user funding list: ' + error);
+        }
+
+        setUserFundedProjects(res);
+    }
+
     useEffect(() => {
         getProjectList();
+    }, []);
+
+    useEffect(() => {
+        if (props.userAddress === address) {
+            // only executing if visit own profile
+            getUserFundingList();
+        }
     }, []);
 
     return (
@@ -93,7 +141,7 @@ function ProfileComponent(props) {
             <div className="projectsContainer">
                 <div className="projectList">
                     <ScrollShowbarComponent
-                        recentUploads={completedProjects}
+                        recentUploads={userFundedProjects}
                         heading={'PROJECTS FUNDED'}
                         emptyMessage={'No projects funded yet'}
                     />
