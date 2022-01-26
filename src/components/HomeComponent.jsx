@@ -61,9 +61,9 @@ export default function HomeComponent(props) {
   };
 
   const renderRecommendations = (val) => {
-    return val.map((project) => {
+    return val.map((project, index) => {
       return (
-        <div className="recommendationCard">
+        <div className="recommendationCard" key={index}>
           <Link to="/project" state={{ index: project.index }}>
             <div
               className="rcmdCardImg"
@@ -90,7 +90,7 @@ export default function HomeComponent(props) {
 
   return (
     <>
-      <CategoryComponent />
+      <CategoryComponent isHome={true}/>
       {/* siteStats */}
       <div className="siteStats">
         <div className="tagLine">

@@ -8,9 +8,9 @@ export default function ScrollShowbarComponent(props) {
       val;
   };
   const renderCards = () => {
-    return props.recentUploads.map((project) => {
+    return props.recentUploads.map((project, index) => {
       return (
-        <div className="projectCard">
+        <div className="projectCard" key={index}>
           <Link to="/project" state={{ index: project.index }}>
             <div
               className="cardImg"

@@ -1,10 +1,11 @@
 import CategoryComponent from "./CategoryComponent";
 import { useEffect, useState } from "react";
 import dummyPic from '../assets/pg1.jpg';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 export default function DiscoverComponent(props) {
-  const [filter, setFilter] = useState(-1);
+  const location = useLocation();
+  const [filter, setFilter] = useState((location?.state?.selected >= 0 )? location.state.selected : -1);
   const [projects, setProjects] = useState([]);
   const changeFilter = (val) => {
       setFilter(val);
@@ -58,8 +59,8 @@ export default function DiscoverComponent(props) {
   const renderCards = () => {
     return projects.map((project, index) => {
       return (
-        <Link to='/project' state={{ index: project.index }}>
-          <div className="projectCardWrapper" key={index}>
+        <Link to='/project' state={{ index: project.index }} key={index}>
+          <div className="projectCardWrapper" >
             <div className="projectCard">
               <div className="cardImg" 
                 style={{ backgroundImage: ((project.cid) ? `url(${"https://" + project.cid})` : dummyPic) }}

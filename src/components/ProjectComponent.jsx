@@ -179,7 +179,7 @@ function ProjectComponent(props) {
                     <div className="item border">Amount</div>
                 </div>
                 {projectDetails.contributors.map((contributor, idx) => (
-                    <div className="tableRow darkRow">
+                    <div className="tableRow darkRow" key={idx}>
                         <div className="item border">{contributor}</div>
                         <div className="item border">{projectDetails.amount[idx] / PRECISION}</div>
                     </div>
