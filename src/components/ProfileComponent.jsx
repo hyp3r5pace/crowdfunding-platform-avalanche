@@ -119,35 +119,39 @@ function ProfileComponent(props) {
             <div className="profileAddressContainer">
                 <h2>{address}</h2>
             </div>
-            <div className="projectsContainer">
-                <div className="projectList">
-                    <ScrollShowbarComponent 
-                        recentUploads={ongoingProjects}
-                        heading={'ONGOING PROJECTS'}
-                        emptyMessage={'No ongoing projects'}
-                    />
+            {ongoingProjects.length ?
+                <div className="projectsContainer">
+                    <div className="projectList">
+                        <ScrollShowbarComponent 
+                            recentUploads={ongoingProjects}
+                            heading={'ONGOING PROJECTS'}
+                            emptyMessage={'No ongoing projects'}
+                        />
+                    </div>
                 </div>
-            </div>
-            <div className="projectsContainer">
-                <div className="projectList">
-                    <ScrollShowbarComponent 
-                        recentUploads={completedProjects}
-                        heading={'COMPLETED PROJECTS'}
-                        emptyMessage={'No completed projects'}
-                    />
+             : ""}
+            {completedProjects.length ?
+                <div className="projectsContainer">
+                    <div className="projectList">
+                        <ScrollShowbarComponent 
+                            recentUploads={completedProjects}
+                            heading={'COMPLETED PROJECTS'}
+                            emptyMessage={'No completed projects'}
+                        />
+                    </div>
                 </div>
-            </div>
-            { (address === props.userAddress) &&
-            <div className="projectsContainer">
-                <div className="projectList">
-                    <ScrollShowbarComponent
-                        recentUploads={userFundedProjects}
-                        heading={'PROJECTS FUNDED'}
-                        emptyMessage={'No projects funded yet'}
-                    />
+             : '' }
+            { ((address === props.userAddress) && (userFundedProjects.length)) ?
+                <div className="projectsContainer">
+                    <div className="projectList">
+                        <ScrollShowbarComponent
+                            recentUploads={userFundedProjects}
+                            heading={'PROJECTS FUNDED'}
+                            emptyMessage={'No projects funded yet'}
+                        />
+                    </div>
                 </div>
-            </div>
-            }
+             : ''}
         </div>
     );
 }
