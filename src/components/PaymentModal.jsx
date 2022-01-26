@@ -18,9 +18,20 @@ function PaymentModal(props) {
     try {
       let fund = {value: ethers.utils.parseEther(amount.toString())};
       let txn = await props.contract.fundProject(props.index, fund);
-      let tmp = (props.projectDetails['amountRaised'] / PRECISION) + amount;
       await txn.wait();
       alert(`${amount} AVAX Succesfully funded`);
+
+      let tmp = (props.projectDetails['amountRaised'] / PRECISION) + amount;
+      let idx = props.projectDetails.contributors.indexOf(props.userAddress);
+      let contributorsCopy = [...props.projectDetails.contributors];
+      let amountCopy = [...props.projectDetails.amount];
+      if (idx < 0) {
+        contributorsCopy.push(props.userAddress);
+        amountCopy.push(amount);
+      } else {
+        amountCopy[idx] = ((amountCopy[idx] / PRECISION) + amount) * PRECISION;
+      }
+      
       setAmount(1);
       closeModal();
       // set the states so rerender occurs in parent component
@@ -31,11 +42,11 @@ function PaymentModal(props) {
         fundingGoal: props.projectDetails['fundingGoal'],
         projectDescription: props.projectDetails['projectDescription'],
         projectName: props.projectDetails['projectName'],
-        contributors: props.projectDetails['contributors'],
+        contributors: contributorsCopy,
         creationTime: props.projectDetails['creationTime'],
         duration: props.projectDetails['duration'],
         projectLink: props.projectDetails['projectLink'],
-        amount: props.projectDetails['amount'],
+        amount: amountCopy,
         creatorAddress: props.projectDetails['creatorAddress']
       });
     } catch (error) {

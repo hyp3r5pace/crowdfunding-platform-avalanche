@@ -149,7 +149,10 @@ function ProjectComponent(props) {
                             <button className="supportButton" onClick={() => onClickPayment()}>Back this project</button>
                         </div>
                     }
-                    {modalShow && <PaymentModal setModalShow={setModalShow} contract={props.contract} index={index} projectDetails={projectDetails} setProjectDetails={setProjectDetails}/>}
+                    {modalShow && <PaymentModal setModalShow={setModalShow} 
+                        contract={props.contract} index={index} projectDetails={projectDetails} 
+                        setProjectDetails={setProjectDetails} userAddress={props.userAddress} />
+                    }
                 </div>
             </div>
             <div className="projectBottomContainer">
