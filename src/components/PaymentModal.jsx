@@ -16,12 +16,12 @@ function PaymentModal(props) {
   async function sendFund() {
     console.log("Sending fund...");
     try {
-      let fund = {value: ethers.utils.parseEther(amount.toString())};
+      let fund = { value: ethers.utils.parseEther(amount.toString()) };
       let txn = await props.contract.fundProject(props.index, fund);
       await txn.wait();
       alert(`${amount} AVAX Succesfully funded`);
 
-      let tmp = (props.projectDetails['amountRaised'] / PRECISION) + amount;
+      let tmp = props.projectDetails["amountRaised"] / PRECISION + amount;
       let idx = props.projectDetails.contributors.indexOf(props.userAddress);
       let contributorsCopy = [...props.projectDetails.contributors];
       let amountCopy = [...props.projectDetails.amount];
@@ -29,26 +29,26 @@ function PaymentModal(props) {
         contributorsCopy.push(props.userAddress);
         amountCopy.push(amount * PRECISION);
       } else {
-        amountCopy[idx] = ((amountCopy[idx] / PRECISION) + amount) * PRECISION;
+        amountCopy[idx] = (amountCopy[idx] / PRECISION + amount) * PRECISION;
         console.log(amountCopy[idx]);
       }
-      
+
       setAmount(1);
       closeModal();
       // set the states so rerender occurs in parent component
       props.setProjectDetails({
         amountRaised: tmp * PRECISION,
-        cid: props.projectDetails['cid'],
-        creatorName: props.projectDetails['creatorName'],
-        fundingGoal: props.projectDetails['fundingGoal'],
-        projectDescription: props.projectDetails['projectDescription'],
-        projectName: props.projectDetails['projectName'],
+        cid: props.projectDetails["cid"],
+        creatorName: props.projectDetails["creatorName"],
+        fundingGoal: props.projectDetails["fundingGoal"],
+        projectDescription: props.projectDetails["projectDescription"],
+        projectName: props.projectDetails["projectName"],
         contributors: contributorsCopy,
-        creationTime: props.projectDetails['creationTime'],
-        duration: props.projectDetails['duration'],
-        projectLink: props.projectDetails['projectLink'],
+        creationTime: props.projectDetails["creationTime"],
+        duration: props.projectDetails["duration"],
+        projectLink: props.projectDetails["projectLink"],
         amount: amountCopy,
-        creatorAddress: props.projectDetails['creatorAddress']
+        creatorAddress: props.projectDetails["creatorAddress"],
       });
     } catch (error) {
       console.log("Funding error: ");

@@ -11,9 +11,11 @@ export default function CategoryComponent(props) {
         document.getElementsByClassName("categoryItem")[val].blur();
       }
     } else {
-      navigate("discover",{state:{
-        selected: val
-      }});
+      navigate("discover", {
+        state: {
+          selected: val,
+        },
+      });
     }
   };
   const setSelectedFocus = () => {

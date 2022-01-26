@@ -1,4 +1,4 @@
-import { useNavigate,Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 export default function NavbarComponent(props) {
   const navigate = useNavigate();
@@ -18,7 +18,9 @@ export default function NavbarComponent(props) {
       <div className="centerNavbarContainer">DEFINDSTARTER</div>
       <div className="rightNavbarContainer">
         <div className="navItem">
-          <Link to="/profile" state={{ address: props.address }}>{props.address}</Link>
+          <Link to="/profile" state={{ address: props.address }}>
+            {props.address}
+          </Link>
         </div>
       </div>
     </div>
