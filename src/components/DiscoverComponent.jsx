@@ -6,6 +6,9 @@ import { Link } from 'react-router-dom';
 export default function DiscoverComponent(props) {
   const [filter, setFilter] = useState(-1);
   const [projects, setProjects] = useState([]);
+  const changeFilter = (val) => {
+      setFilter(val);
+  }
   const getAllProjects = async () => {
     try {
       let res = await props.contract.getAllProjectsDetail().then((res) => {
@@ -77,14 +80,16 @@ export default function DiscoverComponent(props) {
 
   useEffect(() => {
     getAllProjects();
-  }, []);
+  }, [filter]);
 
   return (
     <>
-      <CategoryComponent />
+      <CategoryComponent filter={filter} changeCategory={(val) => changeFilter(val)}/>
       <div className="discoverHeading">Discover</div>
       <div className="discoverContainer">
-        {renderCards()}
+        {projects.length !== 0 ? renderCards():
+            <div className="noProjects">No projects found</div>
+        }
       </div>
     </>
   );
