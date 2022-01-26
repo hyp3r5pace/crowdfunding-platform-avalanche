@@ -42,7 +42,9 @@ contract crowdfunding{
         uint256 amountRaised;
         uint256 totalContributors;
         uint256 creationTime;
+        uint256 duration;
         Category category;
+        RefundPolicy refundPolicy;
     }
 
     struct Funded{
@@ -109,7 +111,9 @@ contract crowdfunding{
                 projects[i].amountRaised,
                 projects[i].contributors.length,
                 projects[i].creationTime,
-                projects[i].category
+                projects[i].duration,
+                projects[i].category,
+                projects[i].refundPolicy
             );
         }
         return newList;
@@ -129,7 +133,9 @@ contract crowdfunding{
                     projects[i].amountRaised,
                     projects[i].contributors.length,
                     projects[i].creationTime,
-                    projects[i].category
+                    projects[i].duration,
+                    projects[i].category,
+                    projects[i].refundPolicy
                 );
             } else {
                 newList[index] = ProjectMetadata(
@@ -141,7 +147,9 @@ contract crowdfunding{
                     0,
                     0,
                     0,
-                    Category.DESIGNANDTECH
+                    0,
+                    Category.DESIGNANDTECH,
+                    RefundPolicy.NONREFUNDABLE
                 );
             }
 
