@@ -39,13 +39,13 @@ export default function HomeComponent(props) {
             totalContributors,
             index,
           });
-          amount += amountRaised;
-          contrib += totalContributors;
+          amount += Number(amountRaised / PRECISION);
+          contrib += Number(totalContributors);
         }
         setStats({
           projects: tmp.length,
-          fundings: parseFloat(amount / PRECISION),
-          contributors: parseInt(contrib),
+          fundings: amount,
+          contributors: contrib,
         });
         return tmp;
       });
