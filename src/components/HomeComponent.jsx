@@ -74,7 +74,7 @@ export default function HomeComponent(props) {
               <Link to="/project" state={{ index: project.index }}>{project.projectName}</Link>
             </div>
             <div className="rcmdCardFundedPercentage">
-              {(project.amountRaised / project.fundingGoal) * 100 + "% Funded"}
+              {((project.amountRaised / project.fundingGoal) * 100).toFixed(2) + "% Funded"}
             </div>
             <div className="rcmdCardAuthor">{"By " + project.creatorName}</div>
           </div>
