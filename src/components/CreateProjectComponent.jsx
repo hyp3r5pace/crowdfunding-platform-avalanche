@@ -107,6 +107,8 @@ function CreateProjectComponent(props) {
             
             await txn.wait(txn);
             alert('Project creation complete!!');
+            document.getElementsByName('projectForm')[0].reset();
+            return false;
         } catch(error) {
             alert('Error on calling function: ' + error);
             console.log(error);
@@ -116,7 +118,7 @@ function CreateProjectComponent(props) {
     return (
         // onSubmit function to do further operation with form data --> not defined yet
         <div className="create-form">
-            <form method="post" onSubmit={submitProjectData}>
+            <form method="post" onSubmit={submitProjectData} name='projectForm'>
                 <h1>Create Project</h1>
                 <label>Category</label>
                 <select name = "category" required onChange={handleChange}>
