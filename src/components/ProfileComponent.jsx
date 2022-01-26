@@ -89,6 +89,17 @@ function ProfileComponent(props) {
                     />
                 </div>
             </div>
+            { (address === props.userAddress) &&
+            <div className="projectsContainer">
+                <div className="projectList">
+                    <ScrollShowbarComponent
+                        recentUploads={completedProjects}
+                        heading={'PROJECTS FUNDED'}
+                        emptyMessage={'No projects funded yet'}
+                    />
+                </div>
+            </div>
+            }
         </div>
     );
 }

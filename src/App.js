@@ -108,7 +108,7 @@ function App() {
           />
           <Route
             path="profile"
-            element={checkConnected(<ProfileComponent contract={myContract}/>)}
+            element={checkConnected(<ProfileComponent contract={myContract} userAddress={address}/>)}
           />
           <Route
             path="project"
