@@ -19,7 +19,8 @@ function ProjectComponent(props) {
         duration: 0,
         projectLink: '',
         amount: [],
-        creatorAddress: ''
+        creatorAddress: '',
+        category: ''
     });
     const [timerString, setTimerString] = useState('');
     const [isOver, setIsOver] = useState(false);
@@ -51,7 +52,8 @@ function ProjectComponent(props) {
                     projectLink,
                     amount,
                     creatorAddress,
-                    refundPolicy
+                    refundPolicy,
+                    category
                 } = { ...res };
 
                 setProjectDetails({
@@ -62,12 +64,13 @@ function ProjectComponent(props) {
                     projectDescription: projectDescription,
                     projectName: projectName,
                     contributors: contributors,
-                    creationTime: creationTime,
+                    creationTime: creationTime * 1,
                     duration: duration,
                     projectLink: projectLink,
                     amount: amount,
                     creatorAddress: creatorAddress,
-                    refundPolicy: refundPolicy
+                    refundPolicy: refundPolicy,
+                    category: category
                 });
 
             });
@@ -119,7 +122,22 @@ function ProjectComponent(props) {
     function onClickPayment() {
         setModalShow(true);
     }
+    
+    function getCategoryFromCode(val) {
+        let categoryCode = [
+            'Design & Tech',
+            'Film',
+            'Arts',
+            'Games'
+        ];
+        if(val >= 0 && val < 4)
+        return categoryCode[val];
+    }
 
+    function displayDate(val) {
+        let date = new Date(val * 1000);
+        return date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear();
+    }
     return (
         <>
         <div className="projectContainer">
@@ -162,6 +180,7 @@ function ProjectComponent(props) {
                     <h1 className="about">About</h1>
                     <p className="description">{projectDetails.projectDescription}</p>
                 </div>
+                <div className="projectLinkContainerWrapper">
                 <div className="projectLinkContainer">
                     <p className="projectLinkLabel">Refund Policy: {projectDetails.refundPolicy ? 'Non-Refundable ' : 'Refundable'}</p>
                 </div>
@@ -174,6 +193,13 @@ function ProjectComponent(props) {
                         <Link className="projectLinkLabel" to='/profile' state={{ address: projectDetails.creatorAddress, name: projectDetails.creatorName }}>{" " + projectDetails.creatorName}</Link>
                     </p>
                 </div>
+                <div className="projectLinkContainer">
+                    <p className="projectLinkLabel">Category: {getCategoryFromCode(projectDetails.category)}</p>
+                </div>
+                <div className="projectLinkContainer">
+                    <p className="projectLinkLabel">Creation Time: {displayDate(projectDetails.creationTime)}</p>
+                </div>
+                </div>
             </div>
             <div className="contributorHeader">
                 Contributors
@@ -183,12 +209,15 @@ function ProjectComponent(props) {
                     <div className="item border">Address</div>
                     <div className="item border">Amount</div>
                 </div>
-                {projectDetails.contributors.map((contributor, idx) => (
-                    <div className="tableRow darkRow" key={idx}>
+                {projectDetails.contributors.length > 0 ?
+                projectDetails.contributors.map((contributor, idx) => (
+                    <div className={"tableRow " + (idx%2 === 0 ? "darkRow" : "lightRow" )} key={idx}>
                         <div className="item border">{contributor}</div>
                         <div className="item border">{projectDetails.amount[idx] / PRECISION}</div>
                     </div>
-                ))}
+                )):
+                    <div className="noProjects">No contributors yet</div>
+                }
             </div>
         </div>
     </>
