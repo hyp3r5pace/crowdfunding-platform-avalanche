@@ -51,6 +51,7 @@ function ProjectComponent(props) {
                     projectLink,
                     amount,
                     creatorAddress,
+                    refundPolicy
                 } = { ...res };
 
                 setProjectDetails({
@@ -65,7 +66,8 @@ function ProjectComponent(props) {
                     duration: duration,
                     projectLink: projectLink,
                     amount: amount,
-                    creatorAddress: creatorAddress
+                    creatorAddress: creatorAddress,
+                    refundPolicy: refundPolicy
                 });
 
             });
@@ -159,6 +161,9 @@ function ProjectComponent(props) {
                 <div className="aboutContainer">
                     <h1 className="about">About</h1>
                     <p className="description">{projectDetails.projectDescription}</p>
+                </div>
+                <div className="projectLinkContainer">
+                    <p className="projectLinkLabel">Refund Policy: {projectDetails.refundPolicy ? 'Non-Refundable ' : 'Refundable'}</p>
                 </div>
                 <div className="projectLinkContainer">
                     <p className="projectLinkLabel">Project link:    
