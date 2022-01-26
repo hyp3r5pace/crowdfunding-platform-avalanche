@@ -104,7 +104,7 @@ function App() {
           />
           <Route
             path="discover"
-            element={checkConnected(<DiscoverComponent />)}
+            element={checkConnected(<DiscoverComponent contract={myContract}/>)}
           />
           <Route
             path="profile"

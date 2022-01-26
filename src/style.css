@@ -7,6 +7,11 @@ html, body, #root {
     margin: 0px;
     padding: 0px;
 }
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
 .app {
     width: 100%;
     height: 100%;
@@ -77,7 +82,8 @@ html, body, #root {
     cursor: pointer;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
-.categoryItem:hover {
+.categoryItem:hover,
+.categoryItem:focus {
     color: #034752;
 }
 .categoryItem::after {
