@@ -4,6 +4,8 @@
  [x] Payment Modal  
  [ ] Discover page  
  [x] Profile page  
+ [ ] Refund button and logic for funder
+ [ ] Claim button and logic for the project creator  
 
 
  # SPECIFIC TASK (Soumyajit Deb)

@@ -56,6 +56,7 @@ export default function HomeComponent(props) {
       setRecentUploads(res.slice(4, 24));
     } catch (err) {
       alert(err);
+      console.log(err);
     }
   };
 

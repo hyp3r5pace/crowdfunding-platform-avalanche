@@ -1,1 +1,2 @@
 1. Dummy pic not displayed in recent upload section of the home page (image render issue??) (check later -- not so important)
+2. UI bug for carousel (slider) --> they are not horizontally in the same level

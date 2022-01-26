@@ -27,9 +27,10 @@ function PaymentModal(props) {
       let amountCopy = [...props.projectDetails.amount];
       if (idx < 0) {
         contributorsCopy.push(props.userAddress);
-        amountCopy.push(amount);
+        amountCopy.push(amount * PRECISION);
       } else {
         amountCopy[idx] = ((amountCopy[idx] / PRECISION) + amount) * PRECISION;
+        console.log(amountCopy[idx]);
       }
       
       setAmount(1);

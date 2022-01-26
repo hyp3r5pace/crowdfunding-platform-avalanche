@@ -138,6 +138,11 @@ export const abi = [
 						"type": "uint256"
 					},
 					{
+						"internalType": "uint256",
+						"name": "duration",
+						"type": "uint256"
+					},
+					{
 						"internalType": "enum crowdfunding.Category",
 						"name": "category",
 						"type": "uint8"
@@ -321,6 +326,11 @@ export const abi = [
 					{
 						"internalType": "uint256",
 						"name": "creationTime",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "duration",
 						"type": "uint256"
 					},
 					{

@@ -83,7 +83,7 @@ a {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 .categoryItem:hover,
-.categoryItem:focus {
+.categoryItem:focus  {
     color: #034752;
 }
 .categoryItem::after {

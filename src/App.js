@@ -11,7 +11,7 @@ import ProfileComponent from "./components/ProfileComponent";
 import { useState } from "react";
 import { ethers } from "ethers";
 import { abi } from "./abi";
-const CONTRACT_ADDRESS = "0x13A720627C047C0fa1eB43BE12facaDF8B6bcBbd";
+const CONTRACT_ADDRESS = "0x4A405d16E59C3a1A02Df757272521455DA3fdC2e";
 
 function App() {
   const [myContract, setMyContract] = useState(null);
