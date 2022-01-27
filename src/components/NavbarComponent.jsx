@@ -19,7 +19,7 @@ export default function NavbarComponent(props) {
       <div className="rightNavbarContainer">
         <div className="navItem">
           <Link to="/profile" state={{ address: props.address }}>
-            {props.address}
+            {props.address.slice(0,5) + "..." + props.address.slice(props.address.length - 4, props.address.length)}
           </Link>
         </div>
       </div>
