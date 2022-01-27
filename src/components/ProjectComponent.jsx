@@ -148,6 +148,39 @@ function ProjectComponent(props) {
     return (projectDetails.refundPolicy ? (projectDetails.amountRaised / PRECISION) : (projectDetails.amountRaised >= projectDetails.fundingGoal));
   }
 
+
+  async function claimFund() {
+      let txn;
+      try {
+        txn = await props.contract.claimFund(parseInt(index));
+        await txn.wait(txn);
+        alert('Fund succesfully claimed');
+
+        setProjectDetails({
+            amountRaised: projectDetails.amountRaised,
+            cid: projectDetails.cid,
+            creatorName: projectDetails.creatorName,
+            fundingGoal: projectDetails.fundingGoal,
+            projectDescription: projectDetails.projectDescription,
+            projectName: projectDetails.projectName,
+            contributors: projectDetails.contributors,
+            creationTime: projectDetails.creationTime * 1,
+            duration: projectDetails.duration,
+            projectLink: projectDetails.projectLink,
+            amount: projectDetails.amount,
+            creatorAddress: projectDetails.creatorAddress,
+            refundPolicy: projectDetails.refundPolicy,
+            category: projectDetails.category,
+            refundClaimed: projectDetails.refundClaimed,
+            claimedAmount: true
+          });
+
+      }catch(error) {
+        alert('Error on calling functio: ' + error);
+        console.log(error);
+      }    
+  }
+
   return (
     <>
       <div className="projectContainer">
@@ -207,12 +240,12 @@ function ProjectComponent(props) {
               <div className="supportButtonContainer">
                 <button
                   className="supportButton"
-                  onClick={() => onClickPayment()}
+                  onClick={() => claimFund()}
                 >
                   Claim Fund
                 </button>
               </div>
-            ) : '') : (
+            ) : (projectDetails.claimedAmount ? (<h2 style={ { color: 'red' } }>Fund claimed!</h2>) : '')) : (
               <div className="supportButtonContainer">
                 <button
                   className="supportButton"

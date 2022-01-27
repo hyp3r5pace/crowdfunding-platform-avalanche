@@ -6,7 +6,9 @@
  [x] Profile page  
  [ ] Refund button and logic for funder  
  [ ] Claim button and logic for the project creator  
- [ ] Put a check in contract to prevent the project owner to fund it's own project    
+ [ ] Put a check in contract to prevent the project owner to fund it's own project  
+ [ ] In claimFund function in project component, txn.wait() is not possible (check it more thoroughly)  
+ [ ] Show time along with date of creation in project page  
 
 
  # SPECIFIC TASK (Soumyajit Deb)
