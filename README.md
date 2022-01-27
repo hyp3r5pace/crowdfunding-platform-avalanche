@@ -33,7 +33,8 @@ Fund your address from the given [faucet](https://faucet.avax-test.network/).
 Open [Remix](https://remix.ethereum.org/) --> Select Solidity  
   
 ![Picture of Remix site](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/create-an-amm-on-avalanche_remix.png)  
-  
+
+    
 Create a `crowdfunding.sol` file in the remix file explorer and paste the following code:  
   
 ```solidity
@@ -285,7 +286,24 @@ Navigate to deploy tab and open the "ENVIRONMENT" drop-down. Select "Injected We
   
 Approve the transaction on Metamask pop-up interface. Once our contract is deployed successfully, make note of the deployed `contract address`.  
     
-# Creating a frontend in React
+# Creating a frontend in React  
+  
+Now, we are going to create a react app and set up the frontend of the application.  
+Open a terminal and navigate to the directory where we will create the application.  
+  
+```bash
+cd /path/to/directory
+```
+  
+Now, clone the github repository, move into the newly `crowdfunding-platform-avalanche` directory and install all dependencies.  
+  
+```bash
+git clone https://github.com/hyp3r5pace/crowdfunding-platform-avalanche.git
+cd crowdfunding-platform-avalanche
+npm install
+```
+  
+
   
   
 # Walkthrough
