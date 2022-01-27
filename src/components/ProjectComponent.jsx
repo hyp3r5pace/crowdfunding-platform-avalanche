@@ -203,7 +203,7 @@ function ProjectComponent(props) {
                   Back this project
                 </button>
               </div>
-            )) : isOwner() ? (claimFundCheck() ? (
+            )) : isOwner() ? ((claimFundCheck() && !projectDetails.claimedAmount) ? (
               <div className="supportButtonContainer">
                 <button
                   className="supportButton"
