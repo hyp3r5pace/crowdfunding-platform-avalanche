@@ -1,5 +1,5 @@
 # Introduction  
-In this tutorial, we will learn how to build a decentralized crowdfunding dApp having features namely create project, fund a project, withdraw fund, get refund etc. We will build the smart contract in Solidity and the frontend of our application with the help of ReactJS.  
+In this tutorial, we will learn how to build a decentralized crowdfunding dApp having features namely create project, fund a project, withdraw fund, get refund if funding isn't successful etc. We will build the smart contract in Solidity and the frontend of our application with the help of ReactJS.  
 
 # Prerequisites
 - Basic familiarity with ReactJS and Solidity.  

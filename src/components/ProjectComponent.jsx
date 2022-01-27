@@ -363,7 +363,7 @@ function ProjectComponent(props) {
             </div>
             <div className="projectLinkContainer">
               <p className="projectLinkLabel">
-                Creation Time: {displayDate(projectDetails.creationTime)}
+                Creation date: {displayDate(projectDetails.creationTime)}
               </p>
             </div>
           </div>
