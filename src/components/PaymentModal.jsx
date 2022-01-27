@@ -1,11 +1,9 @@
 import { useState } from "react";
 import { ethers } from "ethers";
-import { useNavigate } from 'react-router-dom';
 
 function PaymentModal(props) {
   let [amount, setAmount] = useState(1);
   const PRECISION = 10 ** 18;
-  const navigate = useNavigate();
 
   function closeModal() {
     props.setModalShow(false);
@@ -17,26 +15,23 @@ function PaymentModal(props) {
 
   async function sendFund() {
     console.log("Sending fund...");
+    if (amount <= 0) {
+      alert('Amount is less than or equal to 0');
+      return;
+    }
     try {
       let fund = { value: ethers.utils.parseEther(amount.toString()) };
       let txn = await props.contract.fundProject(props.index, fund);
       await txn.wait();
       alert(`${amount} AVAX Succesfully funded`);
-  
+
       setAmount(1);
       closeModal();
-      // use navigate to render project component
-      navigate('/project', {
-        state : {
-          index: props.index
-        }
-      });
-
     } catch (error) {
       console.log("Funding error: ");
       console.log(error);
       console.log("................");
-      alert("Error Sending AVAX: " + error);
+      alert("Error Sending AVAX");
     }
   }
 

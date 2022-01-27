@@ -22,4 +22,6 @@
 
  [x] Resolve the bug for payment modal and integrate it  
  [x] Create internal support function in smart contract for getCreatorProjects()  
- [x] Discover page and access to projects from category tags
+ [x] Discover page and access to projects from category tags  
+ [x] Sorting of contributor list  
+ [x] Resolve bug of 0 AVAX in payment modal  

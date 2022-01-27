@@ -1,12 +1,12 @@
 import PaymentModal from "./PaymentModal";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import dummyPic from "../assets/pg1.jpg";
 
 function ProjectComponent(props) {
-  const [modalShow, setModalShow] = React.useState(false);
-  const [projectDetails, setProjectDetails] = React.useState({
+  const [modalShow, setModalShow] = useState(false);
+  const [projectDetails, setProjectDetails] = useState({
     amountRaised: 0,
     cid: "",
     creatorName: "",
@@ -55,7 +55,27 @@ function ProjectComponent(props) {
           category,
           refundClaimed,
           claimedAmount,
-        } = { ...res };
+        } = { ...res };        
+
+        let tmp = [];
+        for (const index in contributors) {
+          tmp.push({
+            contributor: contributors[index],
+            amount: amount[index],
+            refundClaimed: refundClaimed[index]
+          });
+        }
+
+        tmp.sort((a, b) => {return (b.amount - a.amount)});
+        
+        let contributorsCopy = [];
+        let amountCopy = [];
+        let refundClaimedCopy = [];
+        for (const index in tmp) {
+          contributorsCopy.push(tmp[index].contributor);
+          amountCopy.push(tmp[index].amount);
+          refundClaimedCopy.push(tmp[index].refundClaimed);
+        }
 
         setProjectDetails({
           amountRaised: amountRaised,
@@ -64,30 +84,34 @@ function ProjectComponent(props) {
           fundingGoal: fundingGoal,
           projectDescription: projectDescription,
           projectName: projectName,
-          contributors: contributors,
+          contributors: contributorsCopy,
           creationTime: creationTime * 1,
           duration: duration,
           projectLink: projectLink,
-          amount: amount,
+          amount: amountCopy,
           creatorAddress: creatorAddress,
           refundPolicy: refundPolicy,
           category: category,
-          refundClaimed: refundClaimed,
+          refundClaimed: refundClaimedCopy,
           claimedAmount: claimedAmount,
         });
       });
     } catch (error) {
-      alert("Error fetching details: " + error);
+      alert("Error fetching details");
       console.log(error);
     }
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
     getProjectDetails();
   }, []);
 
+  useEffect(() => {
+    getProjectDetails();
+  }, [modalShow]);
+
   // useEffect hook to handle the countdown timer
-  React.useEffect(() => {
+  useEffect(() => {
     const interval = setInterval(() => {
       const currentTime = new Date().getTime() / 1000;
       const remainingTime =
