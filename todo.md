@@ -4,7 +4,7 @@
  [x] Payment Modal  
  [ ] Discover page  
  [x] Profile page  
- [ ] Refund button and logic for funder
+ [ ] Refund button and logic for funder  
  [ ] Claim button and logic for the project creator  
 
 
@@ -12,7 +12,8 @@
 
  [x] Add default image for project which doesn't have a image  
  [x] Return the function in the create project component when ipfs upload is unsuccessful.   
- [x] Get the profile page done  
+ [x] Get the profile page done   
+ [ ] Remove the refundPolicy from projectMetadata in contract if not required   
 
  # SPECIFIC TASK (Sayan Kar)
 
