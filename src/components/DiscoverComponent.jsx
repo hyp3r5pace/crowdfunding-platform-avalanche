@@ -1,14 +1,17 @@
 import CategoryComponent from "./CategoryComponent";
 import { useEffect, useState } from "react";
-import dummyPic from '../assets/pg1.jpg';
-import { Link } from 'react-router-dom';
+import dummyPic from "../assets/pg1.jpg";
+import { Link, useLocation } from "react-router-dom";
 
 export default function DiscoverComponent(props) {
-  const [filter, setFilter] = useState(-1);
+  const location = useLocation();
+  const [filter, setFilter] = useState(
+    location?.state?.selected >= 0 ? location.state.selected : -1
+  );
   const [projects, setProjects] = useState([]);
   const changeFilter = (val) => {
-      setFilter(val);
-  }
+    setFilter(val);
+  };
   const getAllProjects = async () => {
     try {
       let res = await props.contract.getAllProjectsDetail().then((res) => {
@@ -58,17 +61,20 @@ export default function DiscoverComponent(props) {
   const renderCards = () => {
     return projects.map((project, index) => {
       return (
-        <Link to='/project' state={{ index: project.index }}>
-          <div className="projectCardWrapper" key={index}>
+        <Link to="/project" state={{ index: project.index }} key={index}>
+          <div className="projectCardWrapper">
             <div className="projectCard">
-              <div className="cardImg" 
-                style={{ backgroundImage: ((project.cid) ? `url(${"https://" + project.cid})` : dummyPic) }}
+              <div
+                className="cardImg"
+                style={{
+                  backgroundImage: project.cid
+                    ? `url(${"https://" + project.cid})`
+                    : dummyPic,
+                }}
               ></div>
               <div className="cardDetail">
                 <div className="cardTitle">{project.projectName}</div>
-                <div className="cardDesc">
-                  {project.projectDescription}
-                </div>
+                <div className="cardDesc">{project.projectDescription}</div>
                 <div className="cardAuthor">{project.creatorName}</div>
               </div>
             </div>
@@ -84,12 +90,17 @@ export default function DiscoverComponent(props) {
 
   return (
     <>
-      <CategoryComponent filter={filter} changeCategory={(val) => changeFilter(val)}/>
+      <CategoryComponent
+        filter={filter}
+        changeCategory={(val) => changeFilter(val)}
+      />
       <div className="discoverHeading">Discover</div>
       <div className="discoverContainer">
-        {projects.length !== 0 ? renderCards():
-            <div className="noProjects">No projects found</div>
-        }
+        {projects.length !== 0 ? (
+          renderCards()
+        ) : (
+          <div className="noProjects">No projects found</div>
+        )}
       </div>
     </>
   );

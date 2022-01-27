@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import CategoryComponent from "./CategoryComponent";
 import ScrollShowbarComponent from "./ScrollShowbarComponent";
-import { Link } from 'react-router-dom';
-import dummyPic from '../assets/pg1.jpg';
+import { Link } from "react-router-dom";
+import dummyPic from "../assets/pg1.jpg";
 
 export default function HomeComponent(props) {
   const PRECISION = 10 ** 18;
@@ -61,21 +61,28 @@ export default function HomeComponent(props) {
   };
 
   const renderRecommendations = (val) => {
-    return val.map((project) => {
+    return val.map((project, index) => {
       return (
-        <div className="recommendationCard">
+        <div className="recommendationCard" key={index}>
           <Link to="/project" state={{ index: project.index }}>
             <div
               className="rcmdCardImg"
-              style={{ backgroundImage: ((project.cid) ? `url(${"https://" + project.cid})` : dummyPic) }}
+              style={{
+                backgroundImage: project.cid
+                  ? `url(${"https://" + project.cid})`
+                  : dummyPic,
+              }}
             ></div>
           </Link>
           <div className="rcmdCardDetails">
             <div className="rcmdCardHeading">
-              <Link to="/project" state={{ index: project.index }}>{project.projectName}</Link>
+              <Link to="/project" state={{ index: project.index }}>
+                {project.projectName}
+              </Link>
             </div>
             <div className="rcmdCardFundedPercentage">
-              {((project.amountRaised / project.fundingGoal) * 100).toFixed(2) + "% Funded"}
+              {((project.amountRaised / project.fundingGoal) * 100).toFixed(2) +
+                "% Funded"}
             </div>
             <div className="rcmdCardAuthor">{"By " + project.creatorName}</div>
           </div>
@@ -90,7 +97,7 @@ export default function HomeComponent(props) {
 
   return (
     <>
-      <CategoryComponent />
+      <CategoryComponent isHome={true} />
       {/* siteStats */}
       <div className="siteStats">
         <div className="tagLine">
@@ -124,12 +131,16 @@ export default function HomeComponent(props) {
                 <div
                   className="featuredCardProjectImg"
                   style={{
-                    backgroundImage: ((featuredRcmd[0].cid) ? `url(${"https://" + featuredRcmd[0].cid})` : dummyPic),
+                    backgroundImage: featuredRcmd[0].cid
+                      ? `url(${"https://" + featuredRcmd[0].cid})`
+                      : dummyPic,
                   }}
                 ></div>
               </Link>
               <div className="featuredProjectHeading">
-                <Link to='/project' state={{ index: featuredRcmd[0].index }}>{featuredRcmd[0].projectName}</Link>
+                <Link to="/project" state={{ index: featuredRcmd[0].index }}>
+                  {featuredRcmd[0].projectName}
+                </Link>
               </div>
               <div className="featuredProjectDescription">
                 {featuredRcmd[0].projectDescription}
@@ -152,7 +163,7 @@ export default function HomeComponent(props) {
       <ScrollShowbarComponent
         recentUploads={recentUploads}
         heading={"RECENT UPLOADS"}
-        emptyMessage={'No recent uploads'}
+        emptyMessage={"No recent uploads"}
       />
     </>
   );

@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import { BsArrowLeftCircle, BsArrowRightCircle } from "react-icons/bs";
-import dummyPic from '../assets/pg1.jpg';
+import dummyPic from "../assets/pg1.jpg";
 
 export default function ScrollShowbarComponent(props) {
   const scroll = (val) => {
@@ -8,18 +8,24 @@ export default function ScrollShowbarComponent(props) {
       val;
   };
   const renderCards = () => {
-    return props.recentUploads.map((project) => {
+    return props.recentUploads.map((project, index) => {
       return (
-        <div className="projectCard">
+        <div className="projectCard" key={index}>
           <Link to="/project" state={{ index: project.index }}>
             <div
               className="cardImg"
-              style={{ backgroundImage: ((project.cid) ? `url(${"https://" + project.cid})` : dummyPic) }}
+              style={{
+                backgroundImage: project.cid
+                  ? `url(${"https://" + project.cid})`
+                  : dummyPic,
+              }}
             ></div>
           </Link>
           <div className="cardDetail">
             <div className="cardTitle">
-              <Link to="/project" state={{ index: project.index }}>{project.projectName}</Link>
+              <Link to="/project" state={{ index: project.index }}>
+                {project.projectName}
+              </Link>
             </div>
             <div className="cardDesc">{project.projectDescription}</div>
             <div className="cardAuthor">{"By " + project.creatorName}</div>
@@ -32,18 +38,20 @@ export default function ScrollShowbarComponent(props) {
     <div className="recentUploads">
       <div className="recentUploadsHeader">
         <div className="recentUploadsHeading">{props.heading}</div>
-        { props.recentUploads.length ?
+        {props.recentUploads.length ? (
           <div className="scrollButtons">
-          <BsArrowLeftCircle
-            className="scrollNavBtn"
-            onClick={() => scroll(-300)}
-          />
-          <BsArrowRightCircle
-            className="scrollNavBtn"
-            onClick={() => scroll(300)}
-          />
-        </div>
-        : ''} 
+            <BsArrowLeftCircle
+              className="scrollNavBtn"
+              onClick={() => scroll(-300)}
+            />
+            <BsArrowRightCircle
+              className="scrollNavBtn"
+              onClick={() => scroll(300)}
+            />
+          </div>
+        ) : (
+          ""
+        )}
       </div>
 
       <div className="recentUploadsContainer">

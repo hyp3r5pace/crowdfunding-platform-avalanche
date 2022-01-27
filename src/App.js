@@ -104,15 +104,21 @@ function App() {
           />
           <Route
             path="discover"
-            element={checkConnected(<DiscoverComponent contract={myContract}/>)}
+            element={checkConnected(
+              <DiscoverComponent contract={myContract} />
+            )}
           />
           <Route
             path="profile"
-            element={checkConnected(<ProfileComponent contract={myContract} userAddress={address}/>)}
+            element={checkConnected(
+              <ProfileComponent contract={myContract} userAddress={address} />
+            )}
           />
           <Route
             path="project"
-            element={checkConnected(<ProjectComponent contract={myContract} userAddress={address}/>)}
+            element={checkConnected(
+              <ProjectComponent contract={myContract} userAddress={address} />
+            )}
           />
         </Routes>
         {myContract && <FooterComponent />}
