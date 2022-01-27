@@ -14,6 +14,21 @@ In this tutorial, we will learn how to build a decentralized crowdfunding dApp h
   
 # Deploying the smart contract
   
+## Setting up Metamask
+Log in to Metamask -> Click the Network drop-down -> Select custom RPC  
+![image of metamask](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/create-an-amm-on-avalanche_metamask.png)  
+###### FUJI Tesnet Settings:  
+ - **Network name:** Avalanche FUJI C-Chain  
+ - **New RPC URL:** [ https://api.avax-test.network/ext/bc/C/rpc]( https://api.avax-test.network/ext/bc/C/rpc)  
+ - **ChainID:** 43113  
+ - **Symbol:** C-AVAX  
+ - **Explorer:** [https://cchain.explorer.avax-test.network]( https://cchain.explorer.avax-test.network)  
+  
+Fund your address from the given [faucet](https://faucet.avax-test.network/).  
+
+
+
+
   
 # Creating a frontend in React
   
