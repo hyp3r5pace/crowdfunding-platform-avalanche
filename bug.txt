@@ -1,3 +1,4 @@
 1. Dummy pic not displayed in recent upload section of the home page (image render issue??) (check later -- not so important)
 2. UI bug for carousel (slider) --> they are not horizontally in the same level
 3. The refund logic for contributors in project page is not much optimized (not scalable).
+4. The logic for rerender of project component after payment is not very good (very random due to state update and unoptimized).
