@@ -176,9 +176,58 @@ function ProjectComponent(props) {
           });
 
       }catch(error) {
-        alert('Error on calling functio: ' + error);
+        alert('Error claiming fund: ' + error);
         console.log(error);
       }    
+  }
+
+
+  function checkIfContributor() {
+      let idx = getContributorIndex();
+      return ((idx < 0) ? false : true);
+  }
+
+  function getContributorIndex() {
+      let idx = projectDetails.contributors.indexOf(props.userAddress);
+      return idx;
+  }
+
+  function claimRefundCheck() {
+      return (projectDetails.refundPolicy ? false : (projectDetails.amountRaised < projectDetails.fundingGoal));
+  }
+
+  async function claimRefund() {
+      let txn;
+      try {
+        txn = await props.contract.claimRefund(parseInt(index));
+        await txn.wait(txn);
+        alert('Refund claimed succesfully');
+        let refundClaimedCopy = [...projectDetails.refundClaimed];
+        refundClaimedCopy[getContributorIndex()] = true;
+
+        setProjectDetails({
+            amountRaised: projectDetails.amountRaised,
+            cid: projectDetails.cid,
+            creatorName: projectDetails.creatorName,
+            fundingGoal: projectDetails.fundingGoal,
+            projectDescription: projectDetails.projectDescription,
+            projectName: projectDetails.projectName,
+            contributors: projectDetails.contributors,
+            creationTime: projectDetails.creationTime * 1,
+            duration: projectDetails.duration,
+            projectLink: projectDetails.projectLink,
+            amount: projectDetails.amount,
+            creatorAddress: projectDetails.creatorAddress,
+            refundPolicy: projectDetails.refundPolicy,
+            category: projectDetails.category,
+            refundClaimed: refundClaimedCopy,
+            claimedAmount: true
+          });
+
+      }catch(error) {
+          alert('Error claiming refund: ' + error);
+          console.log(error);
+      }
   }
 
   return (
@@ -246,15 +295,16 @@ function ProjectComponent(props) {
                 </button>
               </div>
             ) : (projectDetails.claimedAmount ? (<h2 style={ { color: 'red' } }>Fund claimed!</h2>) : '')) : (
-              <div className="supportButtonContainer">
+                (checkIfContributor() && claimRefundCheck() && !projectDetails.refundClaimed[getContributorIndex()]) ?
+                (<div className="supportButtonContainer">
                 <button
                   className="supportButton"
-                  onClick={() => onClickPayment()}
+                  onClick={() => claimRefund()}
                 >
                   Claim Refund
                 </button>
               </div>
-            )}
+            ) : (projectDetails.refundClaimed[getContributorIndex()] ? (<h2 style={{ color: 'red' }}>Refund Claimed!</h2>) : ''))}
             {modalShow && (
               <PaymentModal
                 setModalShow={setModalShow}
