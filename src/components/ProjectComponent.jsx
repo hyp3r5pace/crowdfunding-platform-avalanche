@@ -144,6 +144,10 @@ function ProjectComponent(props) {
       return (props.userAddress === projectDetails.creatorAddress);
   }
 
+  function claimFundCheck() {
+    return (projectDetails.refundPolicy ? (projectDetails.amountRaised / PRECISION) : (projectDetails.amountRaised >= projectDetails.fundingGoal));
+  }
+
   return (
     <>
       <div className="projectContainer">
@@ -199,7 +203,7 @@ function ProjectComponent(props) {
                   Back this project
                 </button>
               </div>
-            )) : isOwner() ? (
+            )) : isOwner() ? (claimFundCheck() ? (
               <div className="supportButtonContainer">
                 <button
                   className="supportButton"
@@ -208,7 +212,7 @@ function ProjectComponent(props) {
                   Claim Fund
                 </button>
               </div>
-            ) : (
+            ) : '') : (
               <div className="supportButtonContainer">
                 <button
                   className="supportButton"
