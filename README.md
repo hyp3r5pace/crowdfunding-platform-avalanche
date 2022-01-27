@@ -2,7 +2,7 @@
 In this tutorial, we will learn how to build a decentralized crowdfunding dApp having features namely create project, fund a project, withdraw fund, get refund if funding isn't successful etc. We will build the smart contract in Solidity and the frontend of our application with the help of ReactJS.  
 
 # Prerequisites
-- Basic familiarity with ReactJS and Solidity.  
+- Familiarity with ReactJS and Solidity.  
 - Should've completed [Deploy a Smart Contract on Avalanche using Remix and MetaMask](https://learn.figment.io/tutorials/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask) tutorial  
   
 # Requirements
@@ -15,14 +15,15 @@ In this tutorial, we will learn how to build a decentralized crowdfunding dApp h
 # Deploying the smart contract
   
 ## Setting up Metamask
+  
 Log in to Metamask -> Click the Network drop-down -> Select custom RPC  
     
 ![image of metamask](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/create-an-amm-on-avalanche_metamask.png)  
 #### FUJI Tesnet Settings:  
  - **Network name:** Avalanche FUJI C-Chain  
  - **New RPC URL:** [ https://api.avax-test.network/ext/bc/C/rpc]( https://api.avax-test.network/ext/bc/C/rpc)  
- - **ChainID:** 43113  
- - **Symbol:** C-AVAX  
+ - **ChainID:** `43113`  
+ - **Symbol:** `C-AVAX`  
  - **Explorer:** [https://cchain.explorer.avax-test.network]( https://cchain.explorer.avax-test.network)  
   
 Fund your address from the given [faucet](https://faucet.avax-test.network/).  
@@ -277,11 +278,13 @@ contract crowdfunding{
     }
 }
 ```
-
-
-
-
   
+Now, navigate to the solidity contract compiler tab on the left side navigation bar and click the blue button to compile `crowdfunding.sol` contract. Also, note down the `ABI` after compilation is completed.  
+
+Navigate to deploy tab and open the "ENVIRONMENT" drop-down. Select "Injected Web3" (make sure metamask is loaded) and click the "deploy" button.  
+  
+Approve the transaction on Metamask pop-up interface. Once our contract is deployed successfully, make note of the deployed `contract address`.  
+    
 # Creating a frontend in React
   
   
