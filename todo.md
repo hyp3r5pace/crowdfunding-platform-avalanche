@@ -7,7 +7,8 @@
  [x] Refund button and logic for funder  
  [x] Claim button and logic for the project creator  
  [x] Put a check in contract to prevent the project owner to fund it's own project  
- [ ] Show time along with date of creation in project page  
+ [ ] Show time along with date of creation in project page   
+ [ ] Tutorial 
 
 
  # SPECIFIC TASK (Soumyajit Deb)
