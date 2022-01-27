@@ -371,6 +371,7 @@ function ProjectComponent(props) {
         <div className="contributorHeader">Contributors</div>
         <div className="contributors">
           <div className="tableRow header">
+            <div className="item border" style={{width: "80px"}}>Sno.</div>
             <div className="item border">Address</div>
             <div className="item border">Amount</div>
           </div>
@@ -382,6 +383,7 @@ function ProjectComponent(props) {
                 }
                 key={idx}
               >
+                <div className="item border" style={{width: "80px"}}>{idx + 1 + "."}</div>
                 <div className="item border">{contributor}</div>
                 <div className="item border">
                   {projectDetails.amount[idx] / PRECISION}
