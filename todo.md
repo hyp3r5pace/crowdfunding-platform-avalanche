@@ -6,6 +6,7 @@
  [x] Profile page  
  [ ] Refund button and logic for funder  
  [ ] Claim button and logic for the project creator  
+ [ ] Put a check in contract to prevent the project owner to fund it's own project    
 
 
  # SPECIFIC TASK (Soumyajit Deb)

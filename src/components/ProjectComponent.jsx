@@ -53,6 +53,8 @@ function ProjectComponent(props) {
           creatorAddress,
           refundPolicy,
           category,
+          refundClaimed,
+          claimedAmount,
         } = { ...res };
 
         setProjectDetails({
@@ -70,6 +72,8 @@ function ProjectComponent(props) {
           creatorAddress: creatorAddress,
           refundPolicy: refundPolicy,
           category: category,
+          refundClaimed: refundClaimed,
+          claimedAmount: claimedAmount,
         });
       });
     } catch (error) {
@@ -134,6 +138,12 @@ function ProjectComponent(props) {
       date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear()
     );
   }
+
+
+  function isOwner() {
+      return (props.userAddress === projectDetails.creatorAddress);
+  }
+
   return (
     <>
       <div className="projectContainer">
@@ -180,13 +190,31 @@ function ProjectComponent(props) {
                 time left for funding
               </p>
             )}
-            {!isOver && (
+            {!isOver ? (!isOwner() && (
               <div className="supportButtonContainer">
                 <button
                   className="supportButton"
                   onClick={() => onClickPayment()}
                 >
                   Back this project
+                </button>
+              </div>
+            )) : isOwner() ? (
+              <div className="supportButtonContainer">
+                <button
+                  className="supportButton"
+                  onClick={() => onClickPayment()}
+                >
+                  Claim Fund
+                </button>
+              </div>
+            ) : (
+              <div className="supportButtonContainer">
+                <button
+                  className="supportButton"
+                  onClick={() => onClickPayment()}
+                >
+                  Claim Refund
                 </button>
               </div>
             )}
