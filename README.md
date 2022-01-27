@@ -295,7 +295,7 @@ Open a terminal and navigate to the directory where we will create the applicati
 cd /path/to/directory
 ```
   
-Now, clone the github repository, move into the newly `crowdfunding-platform-avalanche` directory and install all dependencies.  
+Now, clone the github repository, move into the newly created `crowdfunding-platform-avalanche` directory and install all dependencies.  
   
 ```bash
 git clone https://github.com/hyp3r5pace/crowdfunding-platform-avalanche.git
