@@ -968,12 +968,21 @@ form {
 .projectLinkLabel {
   font-size: 1.4em;
   font-weight: 800;
+  display: contents;
+  max-width: 75%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .projectLink {
   text-decoration: none;
   color: #dcdedd;
   margin-left: 30px;
+  width: 50%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .contributorHeader {
