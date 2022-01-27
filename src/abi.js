@@ -146,11 +146,6 @@ export const abi = [
 						"internalType": "enum crowdfunding.Category",
 						"name": "category",
 						"type": "uint8"
-					},
-					{
-						"internalType": "enum crowdfunding.RefundPolicy",
-						"name": "refundPolicy",
-						"type": "uint8"
 					}
 				],
 				"internalType": "struct crowdfunding.ProjectMetadata[]",
@@ -341,11 +336,6 @@ export const abi = [
 					{
 						"internalType": "enum crowdfunding.Category",
 						"name": "category",
-						"type": "uint8"
-					},
-					{
-						"internalType": "enum crowdfunding.RefundPolicy",
-						"name": "refundPolicy",
 						"type": "uint8"
 					}
 				],
