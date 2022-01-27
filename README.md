@@ -84,7 +84,6 @@ contract crowdfunding{
         uint256 creationTime;
         uint256 duration;
         Category category;
-        RefundPolicy refundPolicy;
     }
 
     struct Funded{
@@ -152,8 +151,7 @@ contract crowdfunding{
                 projects[i].contributors.length,
                 projects[i].creationTime,
                 projects[i].duration,
-                projects[i].category,
-                projects[i].refundPolicy
+                projects[i].category
             );
         }
         return newList;
@@ -174,8 +172,7 @@ contract crowdfunding{
                     projects[i].contributors.length,
                     projects[i].creationTime,
                     projects[i].duration,
-                    projects[i].category,
-                    projects[i].refundPolicy
+                    projects[i].category
                 );
             } else {
                 newList[index] = ProjectMetadata(
@@ -188,8 +185,7 @@ contract crowdfunding{
                     0,
                     0,
                     0,
-                    Category.DESIGNANDTECH,
-                    RefundPolicy.NONREFUNDABLE
+                    Category.DESIGNANDTECH
                 );
             }
 
@@ -237,6 +233,7 @@ contract crowdfunding{
     }
 
     function fundProject(uint256 _index) payable external validIndex(_index)  {
+        require(projects[_index].creatorAddress != msg.sender, "You are the project owner");
         require(projects[_index].duration + projects[_index].creationTime >= block.timestamp, "Project Funding Time Expired");
         addContribution(_index);
         projects[_index].amountRaised += msg.value;
