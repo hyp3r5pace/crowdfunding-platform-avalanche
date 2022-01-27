@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { ethers } from "ethers";
+import { useNavigate } from 'react-router-dom';
 
 function PaymentModal(props) {
   let [amount, setAmount] = useState(1);
   const PRECISION = 10 ** 18;
+  const navigate = useNavigate();
 
   function closeModal() {
     props.setModalShow(false);
@@ -20,36 +22,16 @@ function PaymentModal(props) {
       let txn = await props.contract.fundProject(props.index, fund);
       await txn.wait();
       alert(`${amount} AVAX Succesfully funded`);
-
-      let tmp = props.projectDetails["amountRaised"] / PRECISION + amount;
-      let idx = props.projectDetails.contributors.indexOf(props.userAddress);
-      let contributorsCopy = [...props.projectDetails.contributors];
-      let amountCopy = [...props.projectDetails.amount];
-      if (idx < 0) {
-        contributorsCopy.push(props.userAddress);
-        amountCopy.push(amount * PRECISION);
-      } else {
-        amountCopy[idx] = (amountCopy[idx] / PRECISION + amount) * PRECISION;
-        console.log(amountCopy[idx]);
-      }
-
+  
       setAmount(1);
       closeModal();
-      // set the states so rerender occurs in parent component
-      props.setProjectDetails({
-        amountRaised: tmp * PRECISION,
-        cid: props.projectDetails["cid"],
-        creatorName: props.projectDetails["creatorName"],
-        fundingGoal: props.projectDetails["fundingGoal"],
-        projectDescription: props.projectDetails["projectDescription"],
-        projectName: props.projectDetails["projectName"],
-        contributors: contributorsCopy,
-        creationTime: props.projectDetails["creationTime"],
-        duration: props.projectDetails["duration"],
-        projectLink: props.projectDetails["projectLink"],
-        amount: amountCopy,
-        creatorAddress: props.projectDetails["creatorAddress"],
+      // use navigate to render project component
+      navigate('/project', {
+        state : {
+          index: props.index
+        }
       });
+
     } catch (error) {
       console.log("Funding error: ");
       console.log(error);

@@ -300,7 +300,10 @@ cd crowdfunding-platform-avalanche
 npm install
 ```
   
-
+In our react application we keep all the react components in the `src/components` directory.  
+  
+### HomeComponent  
+It renders the home page of the dApp. The home page displays 
   
   
 # Walkthrough
