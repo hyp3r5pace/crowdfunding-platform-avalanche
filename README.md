@@ -351,7 +351,14 @@ Cogratulations! We have succesfully developed a working decentralized kickstarte
     
 # Troubleshooting  
 ### Transaction Failure  
+- Check if your account has sufficient balance at [fuji block-explorer](https://cchain.explorer.avax-test.network/). You ca fund your address from the given [faucet](https://faucet.avax-test.network/).  
   
+![metamask wallet image with 0 AVAX](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/create-an-amm-on-avalanche_zero_balance.jpeg)  
+  
+- Make sure that you have selected the correct account on Metamask if you have more than one account connected to the site.  
+  
+![metamask wallet with multiple account display](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/create-an-amm-on-avalanche_multiple_accounts.jpeg)  
+      
 # About the author(s)
 This tutorial was created by [Soumyajit Deb](https://github.com/hyp3r5pace) and [Sayan Kar](https://github.com/SayanKar). You can reach out to them on [Figment Forum](https://community.figment.io/u/debsoumyajit100/) for any query regarding the tutorial.
   
