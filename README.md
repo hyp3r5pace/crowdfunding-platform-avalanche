@@ -341,20 +341,16 @@ This component renders the first page of the site. It contains a `Connect to met
   
 ### ScrollShowbarComponent  
 This component renders a carousel which is used by various other components to display a list of projects.  
-  
-
-
-
-  
-  
+      
+    
 # Walkthrough
   
   
-# Conclusion
-  
-  
-# Troubleshooting
-  
+# Conclusion  
+Cogratulations! We have succesfully developed a working decentralized kickstarter where users can create projects, fund various projects and even claim refunds if possible. As a next step, you can try adding new features to the dApp such as royalties for the dApp owner or providing NFTs to the top contributors of a project.  
+    
+# Troubleshooting  
+### Transaction Failure  
   
 # About the author(s)
 This tutorial was created by [Soumyajit Deb](https://github.com/hyp3r5pace) and [Sayan Kar](https://github.com/SayanKar). You can reach out to them on [Figment Forum](https://community.figment.io/u/debsoumyajit100/) for any query regarding the tutorial.
