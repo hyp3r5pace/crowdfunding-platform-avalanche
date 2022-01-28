@@ -25,3 +25,4 @@
  [x] Discover page and access to projects from category tags  
  [x] Sorting of contributor list  
  [x] Resolve bug of 0 AVAX in payment modal  
+ [ ] Add comment to Home Component, discover component and category component  
