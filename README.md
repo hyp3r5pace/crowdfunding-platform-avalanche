@@ -1,5 +1,5 @@
 # Introduction  
-In this tutorial, we will learn how to build a decentralized crowdfunding dApp having features namely create project, fund a project, withdraw fund, get refund if funding isn't successful etc. We will build the smart contract in Solidity and the frontend of our application with the help of ReactJS.  
+In this tutorial, we will learn how to build a decentralized kickstarter dApp having features namely create project, fund a project, withdraw fund, get refund if funding isn't successful etc. We will build the smart contract in Solidity and the frontend of our application with the help of ReactJS.  
 
 # Prerequisites
 - Familiarity with ReactJS and Solidity.  
@@ -348,7 +348,7 @@ This component renders a carousel which is used by various other components to d
   
 # Conclusion  
 Cogratulations! We have succesfully developed a working decentralized kickstarter where users can create projects, fund various projects and even claim refunds if possible. As a next step, you can try adding new features to the dApp such as royalties for the dApp owner or providing NFTs to the top contributors of a project.  
-    
+      
 # Troubleshooting  
 ### Transaction Failure  
 - Check if your account has sufficient balance at [fuji block-explorer](https://cchain.explorer.avax-test.network/). You ca fund your address from the given [faucet](https://faucet.avax-test.network/).  
