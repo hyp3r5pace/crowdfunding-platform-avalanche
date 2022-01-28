@@ -327,6 +327,15 @@ It renders a form for creating new project. The form has various inputs, require
 The project component renders all the details about a individual project. At the top, it displays the project name and image, then the total funding it recieved till now, number of unique people who funded the project and a button for user to fund the project with AVAX. After that, it displays the project description and other project information such as project owner name, project link, refund policy, project category and creation date. At the bottom, a table is rendered listing all the contributors who contributed to the project till date and the amount they contributed, sorted in the descending order of amount contributed.  
 
 ### PaymentModal  
+This component renders the modal for payment upon clicking the `back this project` button. The modal has input for the amount of AVAX you want to fund and a `fund` button to send the fund to contract. The modal automatically closes once the transfer of AVAX token is successful.  
+
+### ProfileComponent  
+This component renders the profile information of a user. This component has three sections, namely `Ongoing projects` section, `Completed projects` section and `Projects funded` section. The `Ongoing projects` section displays all the projects that the user has created and the funding period for which hasn't ended yet. The `Completed projects` section displays all the projects that the user has created and the funding period for which is over. `Projects funded` section displays all the projects to which the user has provided some funding. The `Projects funded` section isn't rendered if you visit some other user's profile.  
+To visit your own profile, click the account address displayed on the right end of the navbar.  
+
+### DiscoverComponent  
+
+
 
   
   
