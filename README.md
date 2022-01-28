@@ -334,6 +334,14 @@ This component renders the profile information of a user. This component has thr
 To visit your own profile, click the account address displayed on the right end of the navbar.  
 
 ### DiscoverComponent  
+This component renders list of projects posted on the site based on the project category selected. There are four categories, namely Design & tech, Film, Arts and Games.  
+  
+### ConnectWallet  
+This component renders the first page of the site. It contains a `Connect to metamask` button, which allows you to connect your metamask account to the dApp.  
+  
+### ScrollShowbarComponent  
+This component renders a carousel which is used by various other components to display a list of projects.  
+  
 
 
 
