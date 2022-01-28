@@ -303,7 +303,16 @@ npm install
 In our react application we keep all the react components in the `src/components` directory.  
   
 ### HomeComponent  
-It renders the home page of the dApp. The home page displays 
+It renders the home page of the dApp. The home page displays various projects which are being posted on the dApp for funding. The home page has three sections, mainly a featured project section, a recommended project section, and a recent upload section. The recommended project section recommends some project for you to check out. The recent upload section displays projects which were uploaded recently for funding. Also, at the top of the home page, the total number of projects posted on the site is displayed along with total amount of AVAX funded till date and also number of unique users who funded the projects.
+
+### CreateProjectComponent  
+It renders a form for creating new project. The form has various inputs, required to create a new project such as project category, project name, project description, creator name, image, project site link, funding goal, duration of the funding, refund policy. The project details are sent to the smart contract upon submission of the form. The image provided in the form is then uploaded to IPFS before sending the project details to the smart contract. Thus, the smart contract doesn't contain the image itself, but a IPFS link to the image.
+
+### ProjectComponent  
+The project component renders all the details about a individual project. At the top, it displays the project name and image, then the total funding it recieved till now, number of unique people who funded the project and a button for user to fund the project with AVAX. After that, it displays the project description and other project information such as project owner name, project link, refund policy, project category and creation date. At the bottom, a table is rendered listing all the contributors who contributed to the project till date and the amount they contributed, sorted in the descending order of amount contributed.  
+
+### PaymentModal  
+
   
   
 # Walkthrough
