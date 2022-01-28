@@ -54,6 +54,7 @@ contract crowdfunding{
         NONREFUNDABLE
     }
 
+    // Structure of each project in our dApp 
     struct Project{
         string projectName;
         string projectDescription;
@@ -73,6 +74,7 @@ contract crowdfunding{
         bool claimedAmount;
     }
 
+    // Structure used to return metadata of each project
     struct ProjectMetadata{
         string projectName;
         string projectDescription;
@@ -86,6 +88,7 @@ contract crowdfunding{
         Category category;
     }
 
+    // Each user funding gets recorded in Funded structure
     struct Funded{
 		uint256 projectIndex;
 		uint256 totalAmount;
@@ -94,17 +97,19 @@ contract crowdfunding{
     // Stores all the projects 
     Project[] projects;
 
-    // Stores the indexes of projects created on projects list
+    // Stores the indexes of projects created on projects list by an address
     mapping(address => uint256[]) addressProjectsList;
 
-    // Stores the list of fundings  
+    // Stores the list of fundings  by an address
     mapping(address => Funded[]) addressFundingList;
 
+    // Checks if an index is a valid index in projects array
     modifier validIndex(uint256 _index) {
         require(_index < projects.length, "Invalid Project Id");
         _;
     }
 
+    // Create a new project and updates the addressProjectsList and projects array
     function createNewProject(
         string memory _name,
         string memory _desc,
@@ -137,7 +142,7 @@ contract crowdfunding{
         addressProjectsList[msg.sender].push(projects.length - 1);
     }
 
-    // Returns the contents of projects list
+    // Returns the project metadata of all entries in projects
     function getAllProjectsDetail() external view returns(ProjectMetadata[] memory allProjects) {
         ProjectMetadata[] memory newList = new ProjectMetadata[](projects.length);
         for(uint256 i = 0; i < projects.length; i++){
@@ -157,6 +162,8 @@ contract crowdfunding{
         return newList;
     }
 
+    // Takes array of indexes as parameter
+    // Returns array of metadata of project at respective indexes 
     function getProjectsDetail(uint256[] memory _indexList) external view returns(ProjectMetadata[] memory projectsList) {
         ProjectMetadata[] memory newList = new ProjectMetadata[](_indexList.length);
         for(uint256 index = 0; index < _indexList.length; index++) {
@@ -193,19 +200,22 @@ contract crowdfunding{
         return newList;
     }
 
-    // Returns the project at the index
+    // Returns the project at the given index
     function getProject(uint256 _index) external view validIndex(_index) returns(Project memory project) {
         return projects[_index];
     }
 
+    // Returns array of indexes of projects created by creator
     function getCreatorProjects(address creator) external view returns(uint256[] memory createdProjects) {
         return addressProjectsList[creator];
     }
 
+    // Returns array of details of fundings by the contributor
     function getUserFundings(address contributor) external view returns(Funded[] memory fundedProjects) {
         return addressFundingList[contributor];
     }
 
+    // Helper function adds details of Funding to addressFundingList
     function addToFundingList(uint256 _index) internal validIndex(_index) {
         for(uint256 i = 0; i < addressFundingList[msg.sender].length; i++) {
             if(addressFundingList[msg.sender][i].projectIndex == _index) {
@@ -215,7 +225,8 @@ contract crowdfunding{
         }
         addressFundingList[msg.sender].push(Funded(_index, msg.value));
     }
-    
+
+    // Helper fundtion adds details of funding to the project in projects array
     function addContribution(uint256 _index) internal validIndex(_index)  {
         for(uint256 i = 0; i < projects[_index].contributors.length; i++) {
             if(projects[_index].contributors[i] == msg.sender) {
@@ -232,6 +243,7 @@ contract crowdfunding{
         addToFundingList(_index);
     }
 
+    // Funds the projects at given index
     function fundProject(uint256 _index) payable external validIndex(_index)  {
         require(projects[_index].creatorAddress != msg.sender, "You are the project owner");
         require(projects[_index].duration + projects[_index].creationTime >= block.timestamp, "Project Funding Time Expired");
@@ -239,6 +251,7 @@ contract crowdfunding{
         projects[_index].amountRaised += msg.value;
     }
 
+    // Helps project creator to transfer the raised funds to his address
     function claimFund(uint256 _index) validIndex(_index) external {
         require(projects[_index].creatorAddress == msg.sender, "You are not Project Owner");
         require(projects[_index].duration + projects[_index].creationTime < block.timestamp, "Project Funding Time Not Expired");
@@ -249,6 +262,7 @@ contract crowdfunding{
         payable(msg.sender).transfer(projects[_index].amountRaised);
     }
 
+    // Helper function to get the contributor index 
     function getContributorIndex(uint256 _index) validIndex(_index) internal view returns(int256) {
         int256 contributorIndex = -1;
         for(uint256 i = 0; i < projects[_index].contributors.length; i++) {
@@ -260,6 +274,7 @@ contract crowdfunding{
         return contributorIndex;
     }
 
+    // Enables the contributors to claim refund when refundable project doesn't reach its goal
     function claimRefund(uint256 _index) validIndex(_index) external {
         require(projects[_index].duration + projects[_index].creationTime < block.timestamp, "Project Funding Time Not Expired");
         require(projects[_index].refundPolicy == RefundPolicy.REFUNDABLE 
