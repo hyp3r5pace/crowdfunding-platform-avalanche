@@ -16,48 +16,50 @@ const CONTRACT_ADDRESS = "0xad7C61FC480E5EEBA7886Fc62A789F9921caC9d7";
 function App() {
   const [myContract, setMyContract] = useState(null);
   const [address, setAddress] = useState();
-
   let provider, signer, add;
+
+  async function changeNetwork() {
+    // switch network to avalanche
+    try {
+      await window.ethereum.request({
+        method: "wallet_switchEthereumChain",
+        params: [{ chainId: "0xa869" }],
+      });
+    } catch (switchError) {
+      // This error code indicates that the chain has not been added to MetaMask.
+      if (switchError.code === 4902) {
+        try {
+          await window.ethereum.request({
+            method: "wallet_addEthereumChain",
+            params: [
+              {
+                chainId: "0xa869",
+                chainName: "Avalanche Fuji Testnet",
+                nativeCurrency: {
+                  name: "Avalanche",
+                  symbol: "AVAX",
+                  decimals: 18,
+                },
+                rpcUrls: ["https://api.avax-test.network/ext/bc/C/rpc"],
+              },
+            ],
+          });
+        } catch (addError) {
+          alert("Error in add avalanche FUJI testnet");
+        }
+      }
+    }
+  }
 
   // Connects to Metamask and sets the myContract state with a new instance of the contract
   async function connect() {
     let res = await connectToMetamask();
     if (res === true) {
+      await changeNetwork();
       provider = new ethers.providers.Web3Provider(window.ethereum);
       signer = provider.getSigner();
       add = await signer.getAddress();
       setAddress(add);
-
-      // switch network to avalanche
-      try {
-        await window.ethereum.request({
-          method: "wallet_switchEthereumChain",
-          params: [{ chainId: "0xa869" }],
-        });
-      } catch (switchError) {
-        // This error code indicates that the chain has not been added to MetaMask.
-        if (switchError.code === 4902) {
-          try {
-            await window.ethereum.request({
-              method: "wallet_addEthereumChain",
-              params: [
-                {
-                  chainId: "0xa869",
-                  chainName: "Avalanche Fuji Testnet",
-                  nativeCurrency: {
-                    name: "Avalanche",
-                    symbol: "AVAX",
-                    decimals: 18,
-                  },
-                  rpcUrls: ["https://api.avax-test.network/ext/bc/C/rpc"],
-                },
-              ],
-            });
-          } catch (addError) {
-            alert("Error in add avalanche FUJI testnet");
-          }
-        }
-      }
 
       try {
         const contract = new ethers.Contract(CONTRACT_ADDRESS, abi, signer);
