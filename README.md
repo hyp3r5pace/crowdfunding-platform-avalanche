@@ -144,8 +144,8 @@ function createNewProject(
 }
 ```
 
-We will now create three functions to retrieve the projects. **getAllProjectsDetail** function helps to retrieve all the project's metadata.
-**getProjectsDetail** accepts a array of project indexes and returns the metadata of all the project's whose index are present in the array. **getProject** accepts an index and retrieve the project details at that index of **projects** array.
+We will now create three functions to retrieve the projects. `getAllProjectsDetail` function helps to retrieve all the project's metadata.
+Next, `getProjectsDetail` accepts a array of project indexes and returns the metadata of all the project's whose index are present in the array.`getProject` accepts an index and retrieve the project details at that index of **projects** array.
 
 ```solidity
 // Returns the project metadata of all entries in projects
@@ -211,7 +211,7 @@ function getProject(uint256 _index) external view validIndex(_index) returns(Pro
 }
 ```
 
-Now we create two functions **getCreatorProjects** and **getUserFundings**.
+Now we create two functions `getCreatorProjects` and `getUserFundings`.
 
 ```solidity
 // Returns array of indexes of projects created by creator
@@ -223,7 +223,94 @@ function getCreatorProjects(address creator) external view returns(uint256[] mem
 function getUserFundings(address contributor) external view returns(Funded[] memory fundedProjects) {
     return addressFundingList[contributor];
 }
-```  
+```
+
+Time to implement the function to fund a project. The functions `addContribution` and `addToFundingList` are helper functions for `fundProject` function. `addContribution` checks if contributor already exists and updates the amount, if not then adds the contribution amount and contributor to the project. Similarly `addToFundingList` checks if there is a previous contribution and then updates the amount, if not found then adds a new struct Funded to keep the contribution details in the mapping **addressFundingList**. 
+
+```solidity
+// Helper function adds details of Funding to addressFundingList
+function addToFundingList(uint256 _index) internal validIndex(_index) {
+    for(uint256 i = 0; i < addressFundingList[msg.sender].length; i++) {
+        if(addressFundingList[msg.sender][i].projectIndex == _index) {
+            addressFundingList[msg.sender][i].totalAmount += msg.value;
+            return;
+        }
+    }
+    addressFundingList[msg.sender].push(Funded(_index, msg.value));
+}
+
+// Helper fundtion adds details of funding to the project in projects array
+function addContribution(uint256 _index) internal validIndex(_index)  {
+    for(uint256 i = 0; i < projects[_index].contributors.length; i++) {
+        if(projects[_index].contributors[i] == msg.sender) {
+            projects[_index].amount[i] += msg.value;
+            addToFundingList(_index);
+            return;
+        }
+    }
+    projects[_index].contributors.push(msg.sender);
+    projects[_index].amount.push(msg.value);
+    if(projects[_index].refundPolicy == RefundPolicy.REFUNDABLE) {
+        projects[_index].refundClaimed.push(false);
+    }
+    addToFundingList(_index);
+}
+
+// Funds the projects at given index
+function fundProject(uint256 _index) payable external validIndex(_index)  {
+    require(projects[_index].creatorAddress != msg.sender, "You are the project owner");
+    require(projects[_index].duration + projects[_index].creationTime >= block.timestamp, "Project Funding Time Expired");
+    addContribution(_index);
+    projects[_index].amountRaised += msg.value;
+}
+```
+
+The `claimFund` function transfers the amount raised to the project creator only when the project duration expires and incase the refund policy is **REFUNDABLE**, the raised amount is greater than equal to the funding goal. 
+
+```solidity
+// Helps project creator to transfer the raised funds to his address
+function claimFund(uint256 _index) validIndex(_index) external {
+    require(projects[_index].creatorAddress == msg.sender, "You are not Project Owner");
+    require(projects[_index].duration + projects[_index].creationTime < block.timestamp, "Project Funding Time Not Expired");
+    require(projects[_index].refundPolicy == RefundPolicy.NONREFUNDABLE 
+                || projects[_index].amountRaised >= projects[_index].fundingGoal, "Funding goal not reached");
+    require(!projects[_index].claimedAmount, "Already claimed raised funds");
+    projects[_index].claimedAmount = true;
+    payable(msg.sender).transfer(projects[_index].amountRaised);
+}
+```
+
+When **REFUNDABLE** project is not able to achieve it's funding goal, the contributors can get their refund with the help of `claimRefund` function. `getContributorIndex` is a helper function to retrieve the `msg.sender` index in contributors array if he/she has contributed otherwise returns -1.
+
+```solidity
+// Helper function to get the contributor index in the projects' contributor's array
+function getContributorIndex(uint256 _index) validIndex(_index) internal view returns(int256) {
+    int256 contributorIndex = -1;
+    for(uint256 i = 0; i < projects[_index].contributors.length; i++) {
+        if(msg.sender == projects[_index].contributors[i]) {
+            contributorIndex = int256(i);
+            break;
+        }
+    }
+    return contributorIndex;
+}
+
+// Enables the contributors to claim refund when refundable project doesn't reach its goal
+function claimRefund(uint256 _index) validIndex(_index) external {
+    require(projects[_index].duration + projects[_index].creationTime < block.timestamp, "Project Funding Time Not Expired");
+    require(projects[_index].refundPolicy == RefundPolicy.REFUNDABLE 
+                && projects[_index].amountRaised < projects[_index].fundingGoal, "Funding goal not reached");
+    
+    int256 index = getContributorIndex(_index);
+    require(index != -1, "You did not contribute to this project");
+    
+    uint256 contributorIndex = uint256(index);
+    require(!projects[_index].refundClaimed[contributorIndex], "Already claimed refund amount");
+    
+    projects[_index].refundClaimed[contributorIndex] = true;
+    payable(msg.sender).transfer(projects[_index].amount[contributorIndex]);
+}
+```
 ## Setting up Metamask
   
 Log in to Metamask -> Click the Network drop-down -> Select custom RPC  

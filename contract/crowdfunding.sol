@@ -222,7 +222,7 @@ contract crowdfunding{
         payable(msg.sender).transfer(projects[_index].amountRaised);
     }
 
-    // Helper function to get the contributor index 
+    // Helper function to get the contributor index in the projects' contributor's array
     function getContributorIndex(uint256 _index) validIndex(_index) internal view returns(int256) {
         int256 contributorIndex = -1;
         for(uint256 i = 0; i < projects[_index].contributors.length; i++) {
