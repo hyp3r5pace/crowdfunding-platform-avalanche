@@ -58,8 +58,8 @@ struct Project{
     Category category;              // Stores the project category  
     RefundPolicy refundPolicy;      // Stores the refund policy
     address[] contributors;         // Stores the contributors of this project
-    uint256[] amount;               // Stores the amount contributed by conrtibutors at corresponding index
-    bool[] refundClaimed;           // Keeps record if the contributors claimed refund at cooresponding index
+    uint256[] amount;               // Stores the amount contributed by conrtibutors at corresponding index at contributors array
+    bool[] refundClaimed;           // Keeps record if the contributors claimed refund at cooresponding index at contributors array
     bool claimedAmount;             // Keeps record if creator claimed raised funds
 }
 
@@ -107,8 +107,123 @@ modifier validIndex(uint256 _index) {
 }
 ```
 
+Now we will define a function which will create a new project.
 
-  
+```solidity
+// Create a new project and updates the addressProjectsList and projects array
+function createNewProject(
+    string memory _name,
+    string memory _desc,
+    string memory _creatorName,
+    string memory _projectLink,
+    string memory _cid,
+    uint256 _fundingGoal,
+    uint256 _duration,
+    Category _category,
+    RefundPolicy _refundPolicy
+) external {
+    projects.push(Project({
+        creatorAddress: msg.sender,
+        projectName: _name,
+        projectDescription: _desc,
+        creatorName: _creatorName,
+        projectLink: _projectLink,
+        cid: _cid,
+        fundingGoal: _fundingGoal * 10**18,
+        duration: _duration * (1 minutes),
+        creationTime: block.timestamp,
+        category: _category,
+        refundPolicy: _refundPolicy,
+        amountRaised: 0,
+        contributors: new address[](0),
+        amount: new uint256[](0),
+        claimedAmount: false,
+        refundClaimed: new bool[](0)
+    }));
+    addressProjectsList[msg.sender].push(projects.length - 1);
+}
+```
+
+We will now create three functions to retrieve the projects. **getAllProjectsDetail** function helps to retrieve all the project's metadata.
+**getProjectsDetail** accepts a array of project indexes and returns the metadata of all the project's whose index are present in the array. **getProject** accepts an index and retrieve the project details at that index of **projects** array.
+
+```solidity
+// Returns the project metadata of all entries in projects
+function getAllProjectsDetail() external view returns(ProjectMetadata[] memory allProjects) {
+    ProjectMetadata[] memory newList = new ProjectMetadata[](projects.length);
+    for(uint256 i = 0; i < projects.length; i++){
+        newList[i] = ProjectMetadata(
+            projects[i].projectName,
+            projects[i].projectDescription,
+            projects[i].creatorName,
+            projects[i].cid,
+            projects[i].fundingGoal,
+            projects[i].amountRaised,
+            projects[i].contributors.length,
+            projects[i].creationTime,
+            projects[i].duration,
+            projects[i].category
+        );
+    }
+    return newList;
+}
+
+// Takes array of indexes as parameter
+// Returns array of metadata of project at respective indexes 
+function getProjectsDetail(uint256[] memory _indexList) external view returns(ProjectMetadata[] memory projectsList) {
+    ProjectMetadata[] memory newList = new ProjectMetadata[](_indexList.length);
+    for(uint256 index = 0; index < _indexList.length; index++) {
+        if(_indexList[index] < projects.length) {
+            uint256 i = _indexList[index]; 
+            newList[index] = ProjectMetadata(
+                projects[i].projectName,
+                projects[i].projectDescription,
+                projects[i].creatorName,
+                projects[i].cid,
+                projects[i].fundingGoal,
+                projects[i].amountRaised,
+                projects[i].contributors.length,
+                projects[i].creationTime,
+                projects[i].duration,
+                projects[i].category
+            );
+        } else {
+            newList[index] = ProjectMetadata(
+                "Invalid Project",
+                "Invalid Project",
+                "Invalid Project",
+                "Invalid Project",
+                0,
+                0,
+                0,
+                0,
+                0,
+                Category.DESIGNANDTECH
+            );
+        }
+    }
+    return newList;
+}
+
+// Returns the project at the given index
+function getProject(uint256 _index) external view validIndex(_index) returns(Project memory project) {
+    return projects[_index];
+}
+```
+
+Now we create two functions **getCreatorProjects** and **getUserFundings**.
+
+```solidity
+// Returns array of indexes of projects created by creator
+function getCreatorProjects(address creator) external view returns(uint256[] memory createdProjects) {
+    return addressProjectsList[creator];
+}
+
+// Returns array of details of fundings by the contributor
+function getUserFundings(address contributor) external view returns(Funded[] memory fundedProjects) {
+    return addressFundingList[contributor];
+}
+```  
 ## Setting up Metamask
   
 Log in to Metamask -> Click the Network drop-down -> Select custom RPC  
@@ -442,7 +557,7 @@ This component renders a carousel which is used by various other components to d
   
   
 # Conclusion  
-Cogratulations! We have succesfully developed a working decentralized kickstarter where users can create projects, fund various projects and even claim refunds if possible. As a next step, you can try adding new features to the dApp such as royalties for the dApp owner or providing NFTs to the top contributors of a project.  
+Congratulations! We have succesfully developed a working decentralized kickstarter where users can create projects, fund various projects and even claim refunds if possible. As a next step, you can try adding new features to the dApp such as royalties for the dApp owner or providing NFTs to the top contributors of a project.  
       
 # Troubleshooting  
 ### Transaction Failure  
