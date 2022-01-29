@@ -34,6 +34,7 @@ function ProjectComponent(props) {
     progressBar.value = projectDetails.amountRaised / PRECISION;
   }
 
+  // fetch the project details from the smart contract
   async function getProjectDetails() {
     try {
       // fetching project information from the contract
@@ -147,15 +148,18 @@ function ProjectComponent(props) {
     updateProgressBar();
   }, [projectDetails]);
 
+  // sets the condition true for payment modal to render 
   function onClickPayment() {
     setModalShow(true);
   }
 
+  // return category code
   function getCategoryFromCode(val) {
     let categoryCode = ["Design & Tech", "Film", "Arts", "Games"];
     if (val >= 0 && val < 4) return categoryCode[val];
   }
 
+  // convert epoch time format to dd/mm/yyyy format
   function displayDate(val) {
     let date = new Date(val * 1000);
     return (
@@ -164,15 +168,18 @@ function ProjectComponent(props) {
   }
 
 
+  // check if user is the project owner
   function isOwner() {
       return (props.userAddress === projectDetails.creatorAddress);
   }
 
+  // check if claiming fund is possible for the project owner
   function claimFundCheck() {
     return (projectDetails.refundPolicy ? (projectDetails.amountRaised / PRECISION) : (projectDetails.amountRaised >= projectDetails.fundingGoal));
   }
 
 
+  // claim fund by calling function in the smart contract
   async function claimFund() {
       let txn;
       try {
@@ -205,21 +212,24 @@ function ProjectComponent(props) {
       }    
   }
 
-
+  // check if the user is a contributor to the project
   function checkIfContributor() {
       let idx = getContributorIndex();
       return ((idx < 0) ? false : true);
   }
 
+  // get the contributor index of the user in the contributor[]
   function getContributorIndex() {
       let idx = projectDetails.contributors.indexOf(props.userAddress);
       return idx;
   }
 
+  // check if claiming refund is possible for the user
   function claimRefundCheck() {
       return (projectDetails.refundPolicy ? false : (projectDetails.amountRaised < projectDetails.fundingGoal));
   }
 
+  // claim refund by calling the function in the smart contract
   async function claimRefund() {
       let txn;
       try {

@@ -10,6 +10,7 @@ function ProfileComponent(props) {
   const [completedProjects, setCompletedProjects] = useState([]);
   const [userFundedProjects, setUserFundedProjects] = useState([]);
 
+  // fetch the projects created by the address passed as parameter
   async function getProjectList() {
     let res;
     try {
@@ -63,8 +64,8 @@ function ProfileComponent(props) {
     setCompletedProjects(finishedProjects);
   }
 
+  // fetch the list of projects, the user has funded
   async function getUserFundingList() {
-    // fetch project funding list of the user
     let res;
     try {
       let fundingList = await props.contract

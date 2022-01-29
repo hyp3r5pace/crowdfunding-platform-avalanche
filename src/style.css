@@ -450,14 +450,14 @@ a {
   font-size: 19px;
   font-weight: 500;
   color: #282828;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .cardTitle:hover {
   color: #037362;
   text-decoration: underline;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .cardDesc {

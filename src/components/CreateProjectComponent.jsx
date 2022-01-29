@@ -16,6 +16,7 @@ function CreateProjectComponent(props) {
 
   const [inputImage, setInputImage] = useState("");
 
+  // set the form input state if input changes
   function handleChange(e) {
     let name = e.target.name;
     let value = e.target.value;
@@ -23,6 +24,7 @@ function CreateProjectComponent(props) {
     setFormInput(formInput);
   }
 
+  // read the input image file provided and set its corresponding state
   async function handleImageChange(e) {
     // read the file content on change
     const file = e.target.files[0];
@@ -39,6 +41,7 @@ function CreateProjectComponent(props) {
     }
   }
 
+  // return category code
   function getCategoryCode() {
     let categoryCode = {
       "design and tech": 0,
@@ -49,6 +52,7 @@ function CreateProjectComponent(props) {
     return categoryCode[formInput["category"]];
   }
 
+  // return refund policy code
   function getRefundPolicyCode() {
     let refundCode = {
       refundable: 0,
@@ -57,6 +61,7 @@ function CreateProjectComponent(props) {
     return refundCode[formInput["refundPolicy"]];
   }
 
+  // submit the form input data to smart contract
   async function submitProjectData(e) {
     // handle the submit action of the form
     const client = create({

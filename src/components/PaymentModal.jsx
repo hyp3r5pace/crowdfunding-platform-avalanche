@@ -5,14 +5,18 @@ function PaymentModal(props) {
   let [amount, setAmount] = useState(1);
   const PRECISION = 10 ** 18;
 
+  // sets the modalShow state to false to disable rendering of modal
   function closeModal() {
     props.setModalShow(false);
   }
 
+  // set the value of input element to state variable upon change
   function handleChange(e) {
     setAmount(e.target.value);
   }
 
+  // call function in the smart contract to send AVAX token
+  // to fund the project
   async function sendFund() {
     console.log("Sending fund...");
     if (amount <= 0) {
