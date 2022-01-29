@@ -311,6 +311,11 @@ function claimRefund(uint256 _index) validIndex(_index) external {
     payable(msg.sender).transfer(projects[_index].amount[contributorIndex]);
 }
 ```
+
+We have now completed the smart contract implementation. Now let's move to contract deployment.
+
+# Deploying the smart contract
+
 ## Setting up Metamask
   
 Log in to Metamask -> Click the Network drop-down -> Select custom RPC  
