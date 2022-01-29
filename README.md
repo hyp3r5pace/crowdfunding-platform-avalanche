@@ -225,7 +225,7 @@ function getUserFundings(address contributor) external view returns(Funded[] mem
 }
 ```
 
-Time to implement the function to fund a project. The functions `addContribution` and `addToFundingList` are helper functions for `fundProject` function. `addContribution` checks if contributor already exists and updates the amount, if not then adds the contribution amount and contributor to the project. Similarly `addToFundingList` checks if there is a previous contribution and then updates the amount, if not found then adds a new struct Funded to keep the contribution details in the mapping **addressFundingList**. 
+Time to implement the function to fund a project. The functions `addContribution` and `addToFundingList` are helper functions for `fundProject` function. `addContribution` checks if contributor already exists and then updates the amount, if not then it adds the contribution amount and contributor to the project. Similarly `addToFundingList` checks if there is a previous contribution and then updates the amount, if not found then adds a new struct Funded to keep the contribution details in the mapping **addressFundingList**. 
 
 ```solidity
 // Helper function adds details of Funding to addressFundingList
@@ -265,7 +265,9 @@ function fundProject(uint256 _index) payable external validIndex(_index)  {
 }
 ```
 
-The `claimFund` function transfers the amount raised to the project creator only when the project duration expires and incase the refund policy is **REFUNDABLE**, the raised amount is greater than equal to the funding goal. 
+The `claimFund` function transfers the amount raised to the project creator in two cases.  
+ - The project funding duration is over and the amount raised is more than the funding goal.  
+ - The project funding duration is over and the amount raised is not more than the funding goal, but the project refund policy is **NON-REFUNDABLE**.  
 
 ```solidity
 // Helps project creator to transfer the raised funds to his address
