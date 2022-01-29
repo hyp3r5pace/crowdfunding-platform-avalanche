@@ -10,9 +10,104 @@ In this tutorial, we will learn how to build a decentralized crowdfunding dApp h
 - [Metamask extension](https://metamask.io/download/) on your browser  
   
 # Implementing the smart contract
-  
-  
-# Deploying the smart contract
+
+Now we will build the smart contract of our application. Let's start by making a contract named **crowdfunding**.
+
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity >=0.8.0 <0.9.0;
+
+contract crowdfunding {
+
+}
+``` 
+
+Let's define the structures and enums that will be required to define states. We will make two enums **Category**, which can have four values representing the category to which the project belongs, and the other enum **RefundPolicy**, it can have two values:
+* *REFUNDABLE*:- This type represent that on failing to achieve the goal amount within the specified duration, all the raised funds will be returned to contributors.      
+* *NONREFUNDABLE*:- For this type of project, creator can claim the amount even if the goal is not achieved.
+
+Next, we declare our structures, we will create three  **Project**, **ProjectMetadata** and **Funded**. 
+
+```solidity
+// The category values
+enum Category{
+    DESIGNANDTECH,
+    FILM,
+    ARTS,
+    GAMES
+}
+
+// Refund policies 
+enum RefundPolicy{
+    REFUNDABLE,
+    NONREFUNDABLE
+}
+
+// Structure of each project in our dApp 
+struct Project{
+    string projectName;             // Stores the project's name
+    string projectDescription;      // Stores the project's description
+    string creatorName;             // Stores the project creator name
+    string projectLink;             // Stores project link if any
+    string cid;                     // Stores the ipfs link to project's image
+    uint256 fundingGoal;            // Stores the funding goal
+    uint256 duration;               // Stores the duration of project in minutes
+    uint256 creationTime;           // Stores the project creation time
+    uint256 amountRaised;           // Stores the amount contributed to this project
+    address creatorAddress;         // Stores the creator's address
+    Category category;              // Stores the project category  
+    RefundPolicy refundPolicy;      // Stores the refund policy
+    address[] contributors;         // Stores the contributors of this project
+    uint256[] amount;               // Stores the amount contributed by conrtibutors at corresponding index
+    bool[] refundClaimed;           // Keeps record if the contributors claimed refund at cooresponding index
+    bool claimedAmount;             // Keeps record if creator claimed raised funds
+}
+
+// Structure used to return metadata of each project
+struct ProjectMetadata{
+    string projectName;             // Stores the project's name
+    string projectDescription;      // Stores the project's description
+    string creatorName;             // Stores the project creator name
+    string cid;                     // Stores Ipfs link to project's image
+    uint256 fundingGoal;            // Stores the goal amount
+    uint256 amountRaised;           // Stores raised funds
+    uint256 totalContributors;      // Stores the length of contributors array
+    uint256 creationTime;           // Stores the creation time
+    uint256 duration;               // Stores duration for which project can be funded  
+    Category category;              // Stores the project category
+}
+
+// Each user funding gets recorded in Funded structure
+struct Funded{
+	uint256 projectIndex;           // Stores the project index of project that's funded
+	uint256 totalAmount;            // Stores the amount funded
+}
+```
+
+We now define the state variables. 
+
+```solidity
+// Stores all the projects 
+Project[] projects;
+
+// Stores the indexes of projects created on projects list by an address
+mapping(address => uint256[]) addressProjectsList;
+
+// Stores the list of fundings  by an address
+mapping(address => Funded[]) addressFundingList;
+```
+
+Now, we define a modifier which will be used to check if the parameter passed is a valid index in projects array.
+
+```solidity
+// Checks if an index is a valid index in projects array
+modifier validIndex(uint256 _index) {
+    require(_index < projects.length, "Invalid Project Id");
+    _;
+}
+```
+
+
   
 ## Setting up Metamask
   
