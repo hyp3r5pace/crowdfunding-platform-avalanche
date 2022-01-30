@@ -1,6 +1,7 @@
 # Introduction  
-In this tutorial, we will learn how to build a decentralized kickstarter dApp having features namely create project, fund a project, withdraw fund, get refund if funding isn't successful etc. We will build the smart contract in Solidity and the frontend of our application with the help of ReactJS.  
-
+Avalanche is a low cost, high-speed blockchain network on which we can deploy smart contracts written in solidity. Due to its low gas fees and a high number of transactions per second, Avalanche is a good platform for deploying dApps on it.     
+In this tutorial, we will learn how to build a decentralized Kickstarter dApp having features namely create a project, fund a project, withdraw fund, get refund if funding isn't successful etc. We will build the smart contract in Solidity and the frontend of our application with the help of ReactJS.    
+  
 # Prerequisites
 - Familiarity with ReactJS and Solidity.  
 - Should've completed [Deploy a Smart Contract on Avalanche using Remix and MetaMask](https://learn.figment.io/tutorials/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask) tutorial  
@@ -264,7 +265,9 @@ function fundProject(uint256 _index) payable external validIndex(_index)  {
 }
 ```
 
-The `claimFund` function transfers the amount raised to the project creator only when the project duration expires and in case the refund policy is **REFUNDABLE**, the amount raised is greater than equal to the funding goal. 
+The `claimFund` function transfers the amount raised to the project creator in two cases.  
+ - The project funding duration is over and the amount raised is more than the funding goal.  
+ - The project funding duration is over and the amount raised is not more than the funding goal, but the project refund policy is **NON-REFUNDABLE**.  
 
 ```solidity
 // Helps project creator to transfer the raised funds to his address
@@ -618,40 +621,52 @@ npm install
   
 In our react application we keep all the react components in the `src/components` directory.  
   
-### HomeComponent  
-It renders the home page of the dApp. The home page displays various projects which are being posted on the dApp for funding. The home page has three sections, mainly a featured project section, a recommended project section, and a recent upload section. The recommended project section recommends some project for you to check out. The recent upload section displays projects which were uploaded recently for funding. Also, at the top of the home page, the total number of projects posted on the site is displayed along with total amount of AVAX funded till date and also number of unique users who funded the projects.
-
-### CreateProjectComponent  
-It renders a form for creating new project. The form has various inputs, required to create a new project such as project category, project name, project description, creator name, image, project site link, funding goal, duration of the funding, refund policy. The project details are sent to the smart contract upon submission of the form. The image provided in the form is then uploaded to IPFS before sending the project details to the smart contract. Thus, the smart contract doesn't contain the image itself, but a IPFS link to the image.
-
-### ProjectComponent  
-The project component renders all the details about a individual project. At the top, it displays the project name and image, then the total funding it recieved till now, number of unique people who funded the project and a button for user to fund the project with AVAX. After that, it displays the project description and other project information such as project owner name, project link, refund policy, project category and creation date. At the bottom, a table is rendered listing all the contributors who contributed to the project till date and the amount they contributed, sorted in the descending order of amount contributed.  
-
-### PaymentModal  
-This component renders the modal for payment upon clicking the `back this project` button. The modal has input for the amount of AVAX you want to fund and a `fund` button to send the fund to contract. The modal automatically closes once the transfer of AVAX token is successful.  
-
-### ProfileComponent  
-This component renders the profile information of a user. This component has three sections, namely `Ongoing projects` section, `Completed projects` section and `Projects funded` section. The `Ongoing projects` section displays all the projects that the user has created and the funding period for which hasn't ended yet. The `Completed projects` section displays all the projects that the user has created and the funding period for which is over. `Projects funded` section displays all the projects to which the user has provided some funding. The `Projects funded` section isn't rendered if you visit some other user's profile.  
-To visit your own profile, click the account address displayed on the right end of the navbar.  
-
-### DiscoverComponent  
-This component renders list of projects posted on the site based on the project category selected. There are four categories, namely Design & tech, Film, Arts and Games.  
+## HomeComponent  
+It renders the home page of the dApp. The home page displays various projects which are being posted on the dApp for funding. The home page has three sections, mainly a featured project section, a recommended project section, and a recent upload section. The recommended project section recommends some projects for you to check out. The recent upload section displays projects which were uploaded recently for funding. Also, at the top of the home page, the total number of projects posted on the site is displayed along with the total amount of AVAX funded to date and also the number of unique users who funded the projects.  
   
-### ConnectWallet  
+## CreateProjectComponent  
+It renders a form for creating a new project. The form has various inputs, required to create a new project such as project category, project name, project description, creator name, image, project site link, funding goal, duration of the funding, refund policy. The project details are sent to the smart contract upon submission of the form. The image provided in the form is then uploaded to IPFS before sending the project details to the smart contract. Thus, the smart contract doesn't contain the image itself, but an IPFS link to the image.  
+  
+## ProjectComponent  
+The project component renders all the details about an individual project. At the top, it displays the project name and image, then the total funding it received till now, the number of unique people who funded the project and a button for a user to fund the project with AVAX. After that, it displays the project description and other project information such as project owner name, project link, refund policy, project category and creation date. At the bottom, a table is rendered, listing all the contributors who contributed to the project to date and the amount they contributed, sorted in the descending order of amount contributed.  
+  
+## PaymentModal  
+This component renders the modal for payment upon clicking the `back this project` button. The modal has an input for the amount of AVAX you want to fund and a `fund` button to send the fund to the contract. The modal automatically closes once the transfer of the AVAX token is successful.   
+  
+## ProfileComponent  
+This component renders the profile information of a user. This component has three sections, namely `Ongoing projects` section, `Completed projects` section and `Projects funded` section. The `Ongoing projects` section displays all the projects that the user has created and the funding period for which hasn't ended yet. The `Completed projects` section displays all the projects that the user has created and the funding period for which is over. `Projects funded` section displays all the projects to which the user has provided some funding. The `Projects funded` section isn't rendered if you visit some other user's profile.    
+To visit your profile, click the account address displayed on the right end of the navbar.  
+  
+## DiscoverComponent  
+This component renders a list of projects posted on the site, based on the project category selected. There are four categories, namely Design & tech, Film, Arts and Games.  
+    
+## ConnectWallet  
 This component renders the first page of the site. It contains a `Connect to metamask` button, which allows you to connect your metamask account to the dApp.  
   
-### ScrollShowbarComponent  
+## ScrollShowbarComponent  
 This component renders a carousel which is used by various other components to display a list of projects.  
       
     
-# Walkthrough
+# Walkthrough  
+  
+## Create Project  
+![gif displaying the process of creating a project](https://github.com/hyp3r5pace/crowdfunding-platform-avalanche/blob/main/src/assets/createProject.gif)  
+  
+## Fund Project  
+![gif displaying the process of funding a project](https://github.com/hyp3r5pace/crowdfunding-platform-avalanche/blob/main/src/assets/fundProject.gif)  
+  
+## Claim Fund  
+![gif displaying the process of claiming refund](https://github.com/hyp3r5pace/crowdfunding-platform-avalanche/blob/main/src/assets/Claim%20Fund.gif)  
+  
+## Claim Refund  
+![gif displaying the process of claiming refund](https://github.com/hyp3r5pace/crowdfunding-platform-avalanche/blob/main/src/assets/Claim%20Refund.gif)  
   
   
 # Conclusion  
-Congratulations! We have succesfully developed a working decentralized kickstarter where users can create projects, fund various projects and even claim refunds if possible. As a next step, you can try adding new features to the dApp such as royalties for the dApp owner or providing NFTs to the top contributors of a project.  
-      
+Congratulations! We have successfully developed a working decentralized Kickstarter where users can create projects, fund various projects and even claim refunds if possible. As a next step, you can try adding new features to the dApp, such as royalties for the dApp owner or providing NFTs to the top contributors of a project.  
+        
 # Troubleshooting  
-### Transaction Failure  
+## Transaction Failure  
 - Check if your account has sufficient balance at [fuji block-explorer](https://cchain.explorer.avax-test.network/). You ca fund your address from the given [faucet](https://faucet.avax-test.network/).  
   
 ![metamask wallet image with 0 AVAX](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/create-an-amm-on-avalanche_zero_balance.jpeg)  
