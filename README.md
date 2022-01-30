@@ -651,7 +651,9 @@ This component renders a carousel which is used by various other components to d
 # Walkthrough  
   
 ## Create Project  
-![gif displaying the process of creating project]()
+![gif displaying the process of creating project](https://github.com/hyp3r5pace/crowdfunding-platform-avalanche/blob/main/src/assets/createProject.gif)  
+  
+## Fund Project  
   
   
 # Conclusion  
