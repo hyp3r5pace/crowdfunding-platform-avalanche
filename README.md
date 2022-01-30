@@ -622,29 +622,29 @@ npm install
   
 In our react application we keep all the react components in the `src/components` directory.  
   
-### HomeComponent  
+## HomeComponent  
 It renders the home page of the dApp. The home page displays various projects which are being posted on the dApp for funding. The home page has three sections, mainly a featured project section, a recommended project section, and a recent upload section. The recommended project section recommends some projects for you to check out. The recent upload section displays projects which were uploaded recently for funding. Also, at the top of the home page, the total number of projects posted on the site is displayed along with the total amount of AVAX funded to date and also the number of unique users who funded the projects.  
   
-### CreateProjectComponent  
+## CreateProjectComponent  
 It renders a form for creating a new project. The form has various inputs, required to create a new project such as project category, project name, project description, creator name, image, project site link, funding goal, duration of the funding, refund policy. The project details are sent to the smart contract upon submission of the form. The image provided in the form is then uploaded to IPFS before sending the project details to the smart contract. Thus, the smart contract doesn't contain the image itself, but an IPFS link to the image.  
   
-### ProjectComponent  
+## ProjectComponent  
 The project component renders all the details about an individual project. At the top, it displays the project name and image, then the total funding it received till now, the number of unique people who funded the project and a button for a user to fund the project with AVAX. After that, it displays the project description and other project information such as project owner name, project link, refund policy, project category and creation date. At the bottom, a table is rendered, listing all the contributors who contributed to the project to date and the amount they contributed, sorted in the descending order of amount contributed.  
   
-### PaymentModal  
+## PaymentModal  
 This component renders the modal for payment upon clicking the `back this project` button. The modal has an input for the amount of AVAX you want to fund and a `fund` button to send the fund to the contract. The modal automatically closes once the transfer of the AVAX token is successful.   
   
-### ProfileComponent  
+## ProfileComponent  
 This component renders the profile information of a user. This component has three sections, namely `Ongoing projects` section, `Completed projects` section and `Projects funded` section. The `Ongoing projects` section displays all the projects that the user has created and the funding period for which hasn't ended yet. The `Completed projects` section displays all the projects that the user has created and the funding period for which is over. `Projects funded` section displays all the projects to which the user has provided some funding. The `Projects funded` section isn't rendered if you visit some other user's profile.    
 To visit your profile, click the account address displayed on the right end of the navbar.  
   
-### DiscoverComponent  
+## DiscoverComponent  
 This component renders a list of projects posted on the site, based on the project category selected. There are four categories, namely Design & tech, Film, Arts and Games.  
     
-### ConnectWallet  
+## ConnectWallet  
 This component renders the first page of the site. It contains a `Connect to metamask` button, which allows you to connect your metamask account to the dApp.  
   
-### ScrollShowbarComponent  
+## ScrollShowbarComponent  
 This component renders a carousel which is used by various other components to display a list of projects.  
       
     
@@ -655,7 +655,7 @@ This component renders a carousel which is used by various other components to d
 Congratulations! We have successfully developed a working decentralized Kickstarter where users can create projects, fund various projects and even claim refunds if possible. As a next step, you can try adding new features to the dApp, such as royalties for the dApp owner or providing NFTs to the top contributors of a project.  
         
 # Troubleshooting  
-### Transaction Failure  
+## Transaction Failure  
 - Check if your account has sufficient balance at [fuji block-explorer](https://cchain.explorer.avax-test.network/). You ca fund your address from the given [faucet](https://faucet.avax-test.network/).  
   
 ![metamask wallet image with 0 AVAX](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/create-an-amm-on-avalanche_zero_balance.jpeg)  
