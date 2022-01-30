@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/crowdfunding-platform-avalanche/static/css/main.8df9a4ce.css",
-    "main.js": "/crowdfunding-platform-avalanche/static/js/main.28b2630a.js",
+    "main.js": "/crowdfunding-platform-avalanche/static/js/main.1d91dbb5.js",
     "static/media/bg2.png": "/crowdfunding-platform-avalanche/static/media/bg2.64821d6003bf099f6883.png",
     "static/media/pg1.jpg": "/crowdfunding-platform-avalanche/static/media/pg1.b8319b9930127852a029.jpg",
     "static/media/bg1.png": "/crowdfunding-platform-avalanche/static/media/bg1.3360404cf8ce61bc7b69.png",
     "index.html": "/crowdfunding-platform-avalanche/index.html",
     "main.8df9a4ce.css.map": "/crowdfunding-platform-avalanche/static/css/main.8df9a4ce.css.map",
-    "main.28b2630a.js.map": "/crowdfunding-platform-avalanche/static/js/main.28b2630a.js.map"
+    "main.1d91dbb5.js.map": "/crowdfunding-platform-avalanche/static/js/main.1d91dbb5.js.map"
   },
   "entrypoints": [
     "static/css/main.8df9a4ce.css",
-    "static/js/main.28b2630a.js"
+    "static/js/main.1d91dbb5.js"
   ]
 }
