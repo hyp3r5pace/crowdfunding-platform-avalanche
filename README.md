@@ -648,7 +648,10 @@ This component renders the first page of the site. It contains a `Connect to met
 This component renders a carousel which is used by various other components to display a list of projects.  
       
     
-# Walkthrough
+# Walkthrough  
+  
+## Create Project  
+![gif displaying the process of creating project]()
   
   
 # Conclusion  
