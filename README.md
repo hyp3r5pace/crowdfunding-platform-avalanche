@@ -18,15 +18,14 @@ Now we will build the smart contract of our application. Let's start by making a
 pragma solidity >=0.8.0 <0.9.0;
 
 contract crowdfunding {
-
 }
 ``` 
 
-Let's define the structures and enums that will be required to define states. We will make two enums **Category**, which can have four values representing the category to which the project belongs, and the other enum **RefundPolicy**, it can have two values:
-* *REFUNDABLE*:- This type represent that on failing to achieve the goal amount within the specified duration, all the raised funds will be returned to contributors.      
-* *NONREFUNDABLE*:- For this type of project, creator can claim the amount even if the goal is not achieved.
+Let's define the structures and enums that are required to define states. We will make two enums **Category**, which can have four values representing the category to which the project belongs, and the other enum **RefundPolicy**, it can have two values:
+* *REFUNDABLE*:- This type of project returns the amount funded by the contributor when the project fails to achieve the goal amount within the duration.    
+* *NONREFUNDABLE*:- For this type of project, the creator can claim the amount even if it doesn't achieve the funding goal.
 
-Next, we declare our structures, we will create three  **Project**, **ProjectMetadata** and **Funded**. 
+Next, we declare our structures, we will create three  **Project**, **ProjectMetadata**, and **Funded**. 
 
 ```solidity
 // The category values
@@ -97,7 +96,7 @@ mapping(address => uint256[]) addressProjectsList;
 mapping(address => Funded[]) addressFundingList;
 ```
 
-Now, we define a modifier which will be used to check if the parameter passed is a valid index in projects array.
+Now, we define a modifier that will help to check if the parameter passed is a valid index in the project's array.
 
 ```solidity
 // Checks if an index is a valid index in projects array
@@ -107,7 +106,7 @@ modifier validIndex(uint256 _index) {
 }
 ```
 
-Now we will define a function which will create a new project.
+Now we will define a function that will create a new project.
 
 ```solidity
 // Create a new project and updates the addressProjectsList and projects array
@@ -144,8 +143,8 @@ function createNewProject(
 }
 ```
 
-We will now create three functions to retrieve the projects. `getAllProjectsDetail` function helps to retrieve all the project's metadata.
-Next, `getProjectsDetail` accepts a array of project indexes and returns the metadata of all the project's whose index are present in the array.`getProject` accepts an index and retrieve the project details at that index of **projects** array.
+We will now create three functions to retrieve the project details. `getAllProjectsDetail` function helps to retrieve all the project's metadata.
+Next, `getProjectsDetail` accepts an array of project indexes and returns the metadata of all the projects whose indexes are present in the array.`getProject` accepts an index and retrieves the project details at that index of **projects** array.
 
 ```solidity
 // Returns the project metadata of all entries in projects
@@ -225,7 +224,7 @@ function getUserFundings(address contributor) external view returns(Funded[] mem
 }
 ```
 
-Time to implement the function to fund a project. The functions `addContribution` and `addToFundingList` are helper functions for `fundProject` function. `addContribution` checks if contributor already exists and updates the amount, if not then adds the contribution amount and contributor to the project. Similarly `addToFundingList` checks if there is a previous contribution and then updates the amount, if not found then adds a new struct Funded to keep the contribution details in the mapping **addressFundingList**. 
+Time to implement the function to fund a project. The functions `addContribution` and `addToFundingList` are helper functions for `fundProject` function. `addContribution` checks if the contributor already exists and updates the amount, if not then adds the contribution amount and contributor to the project. Similarly `addToFundingList` checks if there is a previous contribution and then updates the amount, if not found then add a new struct Funded to keep the contribution details in the mapping **addressFundingList**. 
 
 ```solidity
 // Helper function adds details of Funding to addressFundingList
@@ -265,7 +264,7 @@ function fundProject(uint256 _index) payable external validIndex(_index)  {
 }
 ```
 
-The `claimFund` function transfers the amount raised to the project creator only when the project duration expires and incase the refund policy is **REFUNDABLE**, the raised amount is greater than equal to the funding goal. 
+The `claimFund` function transfers the amount raised to the project creator only when the project duration expires and in case the refund policy is **REFUNDABLE**, the amount raised is greater than equal to the funding goal. 
 
 ```solidity
 // Helps project creator to transfer the raised funds to his address
@@ -280,7 +279,7 @@ function claimFund(uint256 _index) validIndex(_index) external {
 }
 ```
 
-When **REFUNDABLE** project is not able to achieve it's funding goal, the contributors can get their refund with the help of `claimRefund` function. `getContributorIndex` is a helper function to retrieve the `msg.sender` index in contributors array if he/she has contributed otherwise returns -1.
+When **REFUNDABLE** project is not able to achieve its funding goal, the contributors can get their refund with the help of `claimRefund` function. `getContributorIndex` is a helper function to retrieve the `msg.sender` index in the **contributors** array if he/she has contributed otherwise returns -1.
 
 ```solidity
 // Helper function to get the contributor index in the projects' contributor's array
