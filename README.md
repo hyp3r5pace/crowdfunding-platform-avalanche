@@ -651,9 +651,16 @@ This component renders a carousel which is used by various other components to d
 # Walkthrough  
   
 ## Create Project  
-![gif displaying the process of creating project](https://github.com/hyp3r5pace/crowdfunding-platform-avalanche/blob/main/src/assets/createProject.gif)  
+![gif displaying the process of creating a project](https://github.com/hyp3r5pace/crowdfunding-platform-avalanche/blob/main/src/assets/createProject.gif)  
   
 ## Fund Project  
+![gif displaying the process of funding a project](https://github.com/hyp3r5pace/crowdfunding-platform-avalanche/blob/main/src/assets/fundProject.gif)  
+  
+## Claim Fund  
+![gif displaying the process of claiming refund](https://github.com/hyp3r5pace/crowdfunding-platform-avalanche/blob/main/src/assets/Claim%20Fund.gif)  
+  
+## Claim Refund  
+![gif displaying the process of claiming refund](https://github.com/hyp3r5pace/crowdfunding-platform-avalanche/blob/main/src/assets/Claim%20Refund.gif)  
   
   
 # Conclusion  
