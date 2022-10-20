@@ -91,7 +91,7 @@ function App() {
   };
   return (
     <div className="app">
-      <BrowserRouter>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         {myContract && <NavbarComponent address={address} />}
         <Routes>
           <Route
